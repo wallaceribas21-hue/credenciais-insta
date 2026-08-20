@@ -166,7 +166,24 @@ def run(imagens, legenda, dry_run=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Publica um carrossel no Instagram.")
     parser.add_argument("--images", nargs="+", required=True, help="2 a 10 imagens .png/.jpg")
-    parser.add_argument("--caption", required=True, help="legenda do post")
+    grupo = parser.add_mutually_exclusive_group(required=True)
+    grupo.add_argument("--caption", help="legenda do post")
+    grupo.add_argument("--caption-file", help="arquivo .txt com a legenda (evita problema de aspas)")
     parser.add_argument("--dry-run", action="store_true", help="valida sem publicar")
     args = parser.parse_args()
-    run(expandir(args.images), args.caption, args.dry_run)
+
+    if args.caption_file:
+        arquivo = Path(args.caption_file)
+        if not arquivo.is_file():
+            print(f"ERRO: arquivo de legenda nao encontrado: {args.caption_file}")
+            sys.exit(1)
+        legenda = arquivo.read_text(encoding="utf-8").strip()
+    else:
+        legenda = args.caption
+
+    # A Meta corta a legenda em 2200 caracteres.
+    if len(legenda) > 2200:
+        print(f"ERRO: legenda com {len(legenda)} caracteres. O limite do Instagram e 2200.")
+        sys.exit(1)
+
+    run(expandir(args.images), legenda, args.dry_run)
