@@ -30,11 +30,11 @@ ENV_PATH, TOKEN, IG_ID, FLUXO, BASE_URL = api.carregar_credenciais()
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36"
 
 
-def _catbox(arquivo, tipo):
+def _catbox(nome, dados, tipo):
     resp = requests.post(
         "https://catbox.moe/user/api.php",
         data={"reqtype": "fileupload"},
-        files={"fileToUpload": (arquivo.name, arquivo.open("rb"), tipo)},
+        files={"fileToUpload": (nome, dados, tipo)},
         headers={"User-Agent": UA},
         timeout=120,
     )
@@ -42,11 +42,11 @@ def _catbox(arquivo, tipo):
     return url if url.startswith("https://") else None
 
 
-def _litterbox(arquivo, tipo):
+def _litterbox(nome, dados, tipo):
     resp = requests.post(
         "https://litterbox.catbox.moe/resources/internals/api.php",
         data={"reqtype": "fileupload", "time": "1h"},
-        files={"fileToUpload": (arquivo.name, arquivo.open("rb"), tipo)},
+        files={"fileToUpload": (nome, dados, tipo)},
         headers={"User-Agent": UA},
         timeout=120,
     )
@@ -54,10 +54,10 @@ def _litterbox(arquivo, tipo):
     return url if url.startswith("https://") else None
 
 
-def _tmpfiles(arquivo, tipo):
+def _tmpfiles(nome, dados, tipo):
     resp = requests.post(
         "https://tmpfiles.org/api/v1/upload",
-        files={"file": (arquivo.name, arquivo.open("rb"), tipo)},
+        files={"file": (nome, dados, tipo)},
         headers={"User-Agent": UA},
         timeout=120,
     )
@@ -66,10 +66,10 @@ def _tmpfiles(arquivo, tipo):
     return url.replace("tmpfiles.org/", "tmpfiles.org/dl/", 1) if url.startswith("http") else None
 
 
-def _zerox(arquivo, tipo):
+def _zerox(nome, dados, tipo):
     resp = requests.post(
         "https://0x0.st",
-        files={"file": (arquivo.name, arquivo.open("rb"), tipo)},
+        files={"file": (nome, dados, tipo)},
         headers={"User-Agent": UA},
         timeout=120,
     )
@@ -111,19 +111,25 @@ def hospedar_imagem(caminho):
         raise ValueError(f"Formato nao suportado: {Path(caminho).suffix} (use .png ou .jpg)")
 
     arquivo, temporario = preparar_jpeg(caminho)
-    tipo = "image/jpeg"
     try:
-        return _tentar_hosts(arquivo, tipo)
+        # Le uma vez e reusa: cada host tentado receberia o mesmo arquivo.
+        dados = arquivo.read_bytes()
+        nome = arquivo.name
     finally:
         if temporario:
-            arquivo.unlink(missing_ok=True)
+            # Limpeza nunca pode derrubar a publicacao.
+            try:
+                arquivo.unlink()
+            except OSError:
+                pass
+    return _tentar_hosts(nome, dados, "image/jpeg")
 
 
-def _tentar_hosts(arquivo, tipo):
+def _tentar_hosts(nome, dados, tipo):
     problemas = []
     for nome, enviar in HOSTS:
         try:
-            url = enviar(arquivo, tipo)
+            url = enviar(nome, dados, tipo)
         except requests.RequestException as e:
             problemas.append(f"{nome}: {type(e).__name__}")
             print(f"    {nome} falhou, tentando o proximo...")
@@ -135,7 +141,7 @@ def _tentar_hosts(arquivo, tipo):
         print(f"    {nome} recusou, tentando o proximo...")
 
     raise RuntimeError(
-        f"nenhum host aceitou {arquivo.name}. Tentativas: {'; '.join(problemas)}"
+        f"nenhum host aceitou {nome}. Tentativas: {'; '.join(problemas)}"
     )
 
 
