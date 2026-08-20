@@ -1,0 +1,22 @@
+# Credenciais — NUNCA versionar
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credenciais.json
+secrets.json
+token*.json
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Dependências / build
+node_modules/
+__pycache__/
+*.pyc
+venv/
+.venv/
+dist/
+build/
