@@ -60,54 +60,59 @@ Logo abaixo, no campo **"User or Page"**, selecione **sua Página do Facebook**.
 
 ---
 
-## Passo 4 — Descobrir o ID do Instagram
-
-No seu computador, com o token em mãos:
-
-```bash
-curl "https://graph.facebook.com/v19.0/me/accounts?fields=id,name,instagram_business_account&access_token=SEU_TOKEN"
-```
-
-A resposta traz suas Páginas. Procure a que tem `instagram_business_account`:
-
-```json
-{
-  "name": "Minha Página",
-  "id": "1234567890",                          <- FACEBOOK_PAGE_ID
-  "instagram_business_account": {
-    "id": "17841400000000000"                  <- INSTAGRAM_BUSINESS_ID
-  }
-}
-```
-
----
-
-## Passo 5 — Salvar as credenciais
-
-Copie o modelo e preencha:
-
-```bash
-cp instagram/.env.example instagram/.env
-```
-
-Abra o `instagram/.env` e preencha os 3 valores:
-
-```
-INSTAGRAM_BUSINESS_ID=17841400000000000
-FACEBOOK_PAGE_ID=1234567890
-INSTAGRAM_ACCESS_TOKEN=EAA...
-META_API_VERSION=v19.0
-```
-
-> O `.env` já está no `.gitignore`. Ele **nunca** vai pro GitHub.
-
----
-
-## Passo 6 — Instalar as dependências
+## Passo 4 — Instalar as dependências
 
 ```bash
 pip install -r instagram/requirements.txt
 ```
+
+---
+
+## Passo 5 — Descobrir o ID e salvar as credenciais
+
+Um comando faz tudo — descobre o `INSTAGRAM_BUSINESS_ID` e escreve o `.env`:
+
+```bash
+python instagram/scripts/descobrir_id.py
+```
+
+Ele vai pedir o token (digitação oculta — não aparece na tela nem fica no
+histórico do terminal), listar suas contas com o `@usuario` de cada uma e
+deixar você escolher:
+
+```
+Contas disponiveis:
+
+  [1] @wallaceribas_              Pagina: WR 03- Wallace  <- Pagina WR 03- Wallace
+      INSTAGRAM_BUSINESS_ID=17841...
+  [2] @outraconta                 Pagina: Outra Página
+      INSTAGRAM_BUSINESS_ID=17841...
+
+Qual usar? (1-2)
+```
+
+Escolha a `@wallaceribas_` e pronto — o `.env` é criado com permissão `600`
+(só você lê).
+
+> O `.env` já está no `.gitignore`. Ele **nunca** vai pro GitHub.
+
+<details>
+<summary>Prefere fazer na mão?</summary>
+
+```bash
+cp instagram/.env.example instagram/.env
+curl "https://graph.facebook.com/v19.0/me/accounts?fields=id,name,instagram_business_account&access_token=SEU_TOKEN"
+```
+
+Na resposta, procure a Página com `instagram_business_account` e preencha o `.env`:
+
+```
+INSTAGRAM_BUSINESS_ID=17841400000000000    <- instagram_business_account.id
+FACEBOOK_PAGE_ID=512007262005431           <- Página "WR 03- Wallace"
+INSTAGRAM_ACCESS_TOKEN=EAA...
+META_API_VERSION=v19.0
+```
+</details>
 
 ---
 
