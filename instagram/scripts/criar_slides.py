@@ -33,19 +33,23 @@ import sys
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
-TEMPLATE = AQUI / "template.html"
+TEMPLATES = {"wind": AQUI / "template.html", "poster": AQUI / "template-poster.html"}
 FONTES = AQUI.parent / "fontes"
 
 # Titulo curto pode ser grande; titulo longo precisa encolher para caber.
-FAIXAS = [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)]
+FAIXAS = {
+    "wind":   [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)],
+    "poster": [(24, 118), (48, 96), (78, 80), (115, 66), (999, 56)],
+}
 
 
-def tamanho_titulo(texto):
+def tamanho_titulo(texto, estilo):
     limpo = re.sub(r"[*_]", "", texto)
-    for limite, tam in FAIXAS:
+    faixas = FAIXAS[estilo]
+    for limite, tam in faixas:
         if len(limpo) <= limite:
             return tam
-    return FAIXAS[-1][1]
+    return faixas[-1][1]
 
 
 def marcar(texto):
@@ -104,19 +108,24 @@ def foto_embutida(caminho):
     return f"url('data:{tipo};base64,{dados}')"
 
 
-def montar_html(slide, numero, total, marca, foto_css):
-    modelo = TEMPLATE.read_text(encoding="utf-8")
+def montar_html(slide, numero, total, marca, foto_css, estilo):
+    modelo = TEMPLATES[estilo].read_text(encoding="utf-8")
     corpo = "".join(f"<p>{marcar(l)}</p>" for l in slide["apoio"])
-    arrasta = (
-        '<span>Arraste para o lado</span><span class="seta">&rarr;</span>'
-        if numero < total else "<span>Fim</span>"
-    )
+    if estilo == "poster":
+        arrasta = "Arraste &rarr;" if numero < total else "Fim"
+    else:
+        arrasta = (
+            '<span>Arraste para o lado</span><span class="seta">&rarr;</span>'
+            if numero < total else "<span>Fim</span>"
+        )
     trocas = {
         "__FONTES__": FONTES.as_uri(),
         "__FOTO__": foto_css,
+        "__TEM_FOTO__": "none" if foto_css == "none" else "block",
+        "__NUM__": f"{numero:02d}",
         "__MARCA__": html.escape(marca),
         "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
-        "__TAM__": str(tamanho_titulo(slide["titulo"])),
+        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo)),
         "__TITULO__": marcar(slide["titulo"]),
         "__APOIO__": f'<div class="apoio">{corpo}</div>' if corpo else "",
         "__CONTADOR__": f"{numero:02d} / {total:02d}",
@@ -133,6 +142,8 @@ def main():
     parser.add_argument("--marca", default="WALLACE RIBAS", help="assinatura no topo do slide")
     parser.add_argument("--foto", default="", help="imagem de fundo (opcional)")
     parser.add_argument("--saida", default="slides", help="pasta onde salvar (padrao: slides)")
+    parser.add_argument("--estilo", default="wind", choices=list(TEMPLATES),
+                        help="wind = escuro moderno; poster = creme retro")
     args = parser.parse_args()
 
     try:
@@ -155,7 +166,7 @@ def main():
     if antigos:
         print(f"Removi {len(antigos)} slide(s) do carrossel anterior.\n")
 
-    print(f"Criando {len(slides)} slides...\n")
+    print(f"Criando {len(slides)} slides (estilo {args.estilo})...\n")
     temp = pasta / "_render.html"
     try:
         with sync_playwright() as p:
@@ -164,7 +175,7 @@ def main():
             navegador = p.chromium.launch(executable_path=atalho) if atalho else p.chromium.launch()
             pagina = navegador.new_page(viewport={"width": 1080, "height": 1080})
             for i, slide in enumerate(slides, start=1):
-                temp.write_text(montar_html(slide, i, len(slides), args.marca, foto_css), encoding="utf-8")
+                temp.write_text(montar_html(slide, i, len(slides), args.marca, foto_css, args.estilo), encoding="utf-8")
                 pagina.goto(temp.as_uri())
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
                 destino = pasta / f"slide-{i:02d}.png"

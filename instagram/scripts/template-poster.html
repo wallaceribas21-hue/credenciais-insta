@@ -1,0 +1,179 @@
+<meta charset="utf-8">
+<style>
+  /* ============================================================
+     Estilo POSTER — referência: cartazes retrô de impressão offset.
+     Creme, tipo condensado em caixa alta, foto em duotone com grão,
+     formas geométricas laranja e etiquetas de gráfica nas bordas.
+     ============================================================ */
+  @font-face { font-family: 'Anton'; src: url('__FONTES__/Anton-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Anton'; src: url('__FONTES__/Anton-400-latin-ext.woff2') format('woff2'); font-weight: 400; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Mono'; src: url('__FONTES__/JetBrainsMono-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Mono'; src: url('__FONTES__/JetBrainsMono-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Cond'; src: url('__FONTES__/BarlowCondensed-500-latin.woff2') format('woff2'); font-weight: 500; }
+  @font-face { font-family: 'Cond'; src: url('__FONTES__/BarlowCondensed-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Cond'; src: url('__FONTES__/BarlowCondensed-700-latin-ext.woff2') format('woff2'); font-weight: 700; unicode-range: U+0100-024F; }
+
+  :root {
+    --creme:   #E9DFCD;
+    --creme-2: #DDD0B8;
+    --tinta:   #17140F;
+    --laranja: #E8551F;
+    --brasa:   #C93B10;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; }
+
+  body {
+    position: relative;
+    overflow: hidden;
+    background: var(--creme);
+    font-family: 'Cond', sans-serif;
+    color: var(--tinta);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Papel: recorta tudo na moldura, para nada vazar a borda. */
+  .papel { position: absolute; inset: 36px; overflow: hidden; }
+
+  /* ---- Sol laranja: a forma geométrica que ancora a composição. ---- */
+  .sol {
+    position: absolute;
+    width: 620px; height: 620px;
+    right: -150px; top: 60px;
+    border-radius: 50%;
+    background: var(--laranja);
+  }
+
+  /* ---- Foto em duotone: cinza + laranja, como impressão de 2 cores. ---- */
+  .foto {
+    position: absolute;
+    inset: 58px 40px 268px;
+    background-image: __FOTO__;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(1) contrast(1.22) brightness(1.04);
+    mix-blend-mode: multiply;
+    display: __TEM_FOTO__;
+  }
+
+  /* ---- Grão grosso: o defeito de impressão que dá idade. ---- */
+  .grao {
+    position: absolute; inset: 0;
+    opacity: .30;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.68' numOctaves='3'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  /* ---- Moldura fina, como marca de corte de gráfica. ---- */
+  .moldura {
+    position: absolute;
+    inset: 34px;
+    border: 2px solid var(--tinta);
+    pointer-events: none;
+  }
+
+  /* ---- Etiquetas de borda: número da edição, data, formato. ---- */
+  .etiqueta {
+    position: absolute;
+    font-family: 'Mono', monospace;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: var(--tinta);
+    opacity: .62;
+  }
+  .et-cima-esq  { top: 54px;  left: 58px; }
+  .et-cima-dir  { top: 54px;  right: 58px; }
+  .et-baixo-esq { bottom: 54px; left: 58px; }
+
+  /* ---- Palco: texto ancorado embaixo, dentro da moldura. ---- */
+  .palco {
+    position: absolute;
+    left: 76px; right: 76px; bottom: 96px;
+    display: flex; flex-direction: column;
+  }
+
+  .selo {
+    align-self: flex-start;
+    margin-bottom: 18px;
+    padding: 8px 16px 6px;
+    background: var(--tinta);
+    color: var(--creme);
+    font-family: 'Mono', monospace;
+    font-size: 17px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: __TAM__px;
+    line-height: 1.04;
+    letter-spacing: -.005em;
+    text-transform: uppercase;
+    color: var(--tinta);
+    text-wrap: balance;
+  }
+  h1 .cor  { color: var(--laranja); }
+  h1 .leve {
+    color: transparent;
+    -webkit-text-stroke: 2.5px var(--laranja);
+  }
+  h1 .sub  {
+    background-image: linear-gradient(var(--laranja), var(--laranja));
+    background-size: 100% 8px;
+    background-position: 0 96%;
+    background-repeat: no-repeat;
+  }
+
+  /* Regra grossa entre título e apoio — a "linha de jornal". */
+  .regua {
+    height: 4px;
+    background: var(--tinta);
+    margin: 22px 0 18px;
+  }
+
+  .apoio {
+    font-family: 'Cond', sans-serif;
+    font-size: 30px; font-weight: 500;
+    line-height: 1.32;
+    max-width: 78%;
+    color: rgba(23,20,15,.80);
+    text-wrap: pretty;
+  }
+  .apoio .cor  { color: var(--laranja); font-weight: 700; }
+  .apoio .leve { color: var(--brasa); font-weight: 700; }
+  .apoio .sub  { font-weight: 700; color: var(--tinta); }
+  .apoio p + p { margin-top: 9px; }
+
+  .rodape {
+    margin-top: 26px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-family: 'Mono', monospace;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase;
+    color: rgba(23,20,15,.60);
+  }
+  .rodape .cont { color: var(--laranja); }
+</style>
+
+<div class="papel">
+  <div class="sol"></div>
+  <div class="foto"></div>
+</div>
+<div class="grao"></div>
+<div class="moldura"></div>
+
+<div class="etiqueta et-cima-esq">__MARCA__</div>
+<div class="etiqueta et-cima-dir">Nº __NUM__</div>
+<div class="etiqueta et-baixo-esq">1080 × 1080</div>
+
+<div class="palco">
+  __SELO__
+  <h1>__TITULO__</h1>
+  <div class="regua"></div>
+  __APOIO__
+  <div class="rodape">
+    <span class="cont">__CONTADOR__</span>
+    <span>__ARRASTA__</span>
+  </div>
+</div>
