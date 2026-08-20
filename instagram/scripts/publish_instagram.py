@@ -11,6 +11,7 @@ Rode antes: python descobrir_id.py
 import argparse
 import glob
 import sys
+import tempfile
 import time
 from pathlib import Path
 
@@ -83,16 +84,42 @@ HOSTS = [
     ("0x0", _zerox),
 ]
 
-MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
+# A API de publicacao da Meta aceita SOMENTE JPEG. PNG e recusado com
+# "The image format is not supported", entao convertemos antes de subir.
+def preparar_jpeg(caminho):
+    """Devolve (arquivo_jpeg, e_temporario)."""
+    arquivo = Path(caminho)
+    if arquivo.suffix.lower() in (".jpg", ".jpeg"):
+        return arquivo, False
+
+    try:
+        from PIL import Image
+    except ImportError:
+        print("ERRO: falta a biblioteca de imagem para converter PNG em JPEG.")
+        print("  Rode: pip install pillow")
+        sys.exit(1)
+
+    with Image.open(arquivo) as img:
+        destino = Path(tempfile.gettempdir()) / f"ig-{arquivo.stem}.jpg"
+        img.convert("RGB").save(destino, "JPEG", quality=92, optimize=True)
+    return destino, True
 
 
 def hospedar_imagem(caminho):
-    """Sobe a imagem para o primeiro host que responder."""
-    arquivo = Path(caminho)
-    tipo = MIME.get(arquivo.suffix.lower())
-    if tipo is None:
-        raise ValueError(f"Formato nao suportado: {arquivo.suffix} (use .png ou .jpg)")
+    """Converte para JPEG e sobe para o primeiro host que responder."""
+    if Path(caminho).suffix.lower() not in (".png", ".jpg", ".jpeg"):
+        raise ValueError(f"Formato nao suportado: {Path(caminho).suffix} (use .png ou .jpg)")
 
+    arquivo, temporario = preparar_jpeg(caminho)
+    tipo = "image/jpeg"
+    try:
+        return _tentar_hosts(arquivo, tipo)
+    finally:
+        if temporario:
+            arquivo.unlink(missing_ok=True)
+
+
+def _tentar_hosts(arquivo, tipo):
     problemas = []
     for nome, enviar in HOSTS:
         try:
