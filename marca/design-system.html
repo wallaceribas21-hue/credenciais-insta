@@ -1,0 +1,598 @@
+<title>Manual da Marca WR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+  /* ============================================================
+     Identidade @wallaceribas_ — laranja e preto.
+     A página é escura de propósito: o sistema É escuro, e mostrá-lo
+     sobre fundo claro seria mentir sobre a marca. Tema único, com
+     todas as cores pintadas explicitamente.
+     ============================================================ */
+  :root {
+    --preto:    #0B0B0C;
+    --carvao:   #141317;
+    --carvao-2: #1C1A20;
+    --borda:    #2A262E;
+    --laranja:  #FF6B1A;
+    --brasa:    #E8430A;
+    --branco:   #FFFFFF;
+    --cinza:    #B4B4BC;
+    --cinza-2:  #76737E;
+
+    --mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+    --sans: 'Montserrat', -apple-system, 'Segoe UI', sans-serif;
+
+    --u: 8px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--preto);
+    color: var(--cinza);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folha {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: calc(var(--u) * 7) calc(var(--u) * 4) calc(var(--u) * 12);
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--u) * 5);
+  }
+
+  /* ---------- Eyebrow em mono: registro de ficha técnica ---------- */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--cinza-2);
+  }
+
+  /* ---------- Cabeçalho ---------- */
+  .capa { display: flex; flex-direction: column; gap: calc(var(--u) * 2); }
+
+  .capa .faixa {
+    background: linear-gradient(96deg, var(--laranja), var(--brasa));
+    padding: calc(var(--u) * 2.5) calc(var(--u) * 3);
+  }
+  .capa h1 {
+    font-size: clamp(30px, 5.4vw, 58px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -.025em;
+    color: #150700;
+    text-wrap: balance;
+  }
+  .capa .linha-fina {
+    display: flex; flex-wrap: wrap; gap: calc(var(--u) * 3);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: .08em;
+    color: var(--cinza-2);
+    text-transform: uppercase;
+  }
+  .capa .linha-fina b { color: var(--laranja); font-weight: 700; }
+
+  /* ---------- Painéis ---------- */
+  .painel {
+    background: var(--carvao);
+    border: 1px solid var(--borda);
+  }
+  .painel > header {
+    padding: calc(var(--u) * 1.75) calc(var(--u) * 3);
+    border-bottom: 1px solid var(--borda);
+    background: var(--carvao-2);
+    display: flex; align-items: baseline; gap: calc(var(--u) * 2);
+  }
+  .painel > header h2 {
+    font-size: 15px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    color: var(--branco);
+  }
+  .painel > header .nota {
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--cinza-2); letter-spacing: .05em;
+  }
+  .painel > .corpo { padding: calc(var(--u) * 3.5); }
+
+  .dupla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(430px, 1fr));
+    gap: calc(var(--u) * 5);
+  }
+
+  /* ---------- Cores ---------- */
+  .cores { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 3); }
+  .cor { width: 128px; display: flex; flex-direction: column; gap: calc(var(--u) * 1.25); }
+  .cor .amostra {
+    height: 92px;
+    border: 1px solid var(--borda);
+  }
+  .cor .nome {
+    font-size: 12px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    color: var(--branco);
+  }
+  .cor .hex {
+    font-family: var(--mono); font-size: 12px;
+    color: var(--laranja); font-weight: 700;
+  }
+  .cor .uso { font-size: 12.5px; line-height: 1.4; color: var(--cinza-2); }
+
+  .regra-cor {
+    margin-top: calc(var(--u) * 4);
+    padding: calc(var(--u) * 2.5);
+    border-left: 3px solid var(--laranja);
+    background: rgba(255,107,26,.06);
+    font-size: 14.5px;
+    color: var(--cinza);
+  }
+  .regra-cor b { color: var(--branco); font-weight: 700; }
+
+  /* ---------- Tipografia ---------- */
+  .amostra-tipo { display: flex; flex-direction: column; gap: calc(var(--u) * 3.5); }
+  .linha-tipo { display: flex; flex-direction: column; gap: calc(var(--u) * .75); }
+  .linha-tipo .spec {
+    font-family: var(--mono); font-size: 11.5px;
+    letter-spacing: .09em; text-transform: uppercase;
+    color: var(--cinza-2);
+  }
+  .demo-h1 {
+    font-size: 40px; font-weight: 700; line-height: 1.16;
+    letter-spacing: -.018em; color: var(--branco);
+  }
+  .demo-h1 .leve { font-weight: 300; color: rgba(255,255,255,.82); }
+  .demo-h1 .cor  { color: var(--laranja); }
+  .demo-corpo { font-size: 19px; font-weight: 400; line-height: 1.5; color: var(--cinza); }
+  .demo-selo {
+    align-self: flex-start;
+    background: linear-gradient(96deg, var(--laranja), var(--brasa));
+    color: #160800; font-size: 14px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    padding: 8px 14px 7px;
+  }
+
+  .principio {
+    margin-top: calc(var(--u) * 4);
+    padding-top: calc(var(--u) * 3);
+    border-top: 1px solid var(--borda);
+  }
+  .principio h3 {
+    font-size: 13px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--laranja);
+    margin-bottom: calc(var(--u) * 1.5);
+  }
+  .principio p { font-size: 15px; line-height: 1.62; }
+  .principio p + p { margin-top: calc(var(--u) * 1.5); }
+  .principio b { color: var(--branco); font-weight: 700; }
+
+  /* ---------- Escala de espaço ---------- */
+  .escala { display: flex; flex-direction: column; gap: calc(var(--u) * 1.5); }
+  .passo { display: flex; align-items: center; gap: calc(var(--u) * 2); }
+  .passo .barra { height: 16px; background: linear-gradient(90deg, var(--laranja), var(--brasa)); }
+  .passo .val {
+    font-family: var(--mono); font-size: 12px; font-weight: 700;
+    color: var(--branco); width: 52px; flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .passo .onde { font-size: 12.5px; color: var(--cinza-2); }
+
+  /* ---------- Anatomia: miniatura real do slide ---------- */
+  .anatomia { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 4); align-items: flex-start; }
+
+  .slide {
+    position: relative;
+    width: 340px; height: 340px;
+    flex-shrink: 0;
+    background: var(--preto);
+    overflow: hidden;
+    border: 1px solid var(--borda);
+  }
+  .slide .brasas {
+    position: absolute; inset: -14%;
+    background:
+      radial-gradient(40% 34% at 76% 2%,  rgba(255,160,60,.58) 0%, transparent 66%),
+      radial-gradient(46% 40% at 98% 20%, rgba(232,67,10,.46)  0%, transparent 68%),
+      radial-gradient(54% 48% at 0% 78%,  rgba(190,44,10,.30)  0%, transparent 72%);
+  }
+  .slide .scrim {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(8,8,9,.94) 0%, rgba(8,8,9,.72) 30%, transparent 78%);
+  }
+  .slide .marca-mini {
+    position: absolute; top: 20px; left: 29px;
+    display: flex; align-items: center; gap: 5px;
+    font-size: 7.5px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase; color: #fff;
+  }
+  .slide .marca-mini i { width: 2px; height: 8px; background: var(--laranja); display: block; }
+  .slide .palco-mini {
+    position: absolute; inset: 0;
+    padding: 0 29px 27px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .slide .selo-mini {
+    align-self: flex-start; margin-bottom: 8px;
+    background: linear-gradient(96deg, var(--laranja), var(--brasa));
+    color: #160800; font-size: 7px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase; padding: 4px 7px 3px;
+  }
+  .slide .tit-mini {
+    font-size: 22px; font-weight: 700; line-height: 1.16;
+    letter-spacing: -.018em; color: #fff;
+  }
+  .slide .tit-mini .leve { font-weight: 300; color: rgba(255,255,255,.82); }
+  .slide .apoio-mini {
+    margin-top: 8px; font-size: 9.5px; line-height: 1.5; color: var(--cinza);
+  }
+  .slide .rodape-mini {
+    margin-top: 14px; display: flex; justify-content: space-between;
+    font-size: 6.5px; font-weight: 600; letter-spacing: .11em;
+    text-transform: uppercase; color: rgba(255,255,255,.38);
+  }
+  .slide .rodape-mini .c { color: var(--laranja); }
+
+  .legenda-anatomia { flex: 1; min-width: 280px; display: flex; flex-direction: column; gap: calc(var(--u) * 2); }
+  .item-anat { display: flex; gap: calc(var(--u) * 2); align-items: flex-start; }
+  .item-anat .marcador {
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    color: var(--laranja); flex-shrink: 0; width: 22px; padding-top: 2px;
+  }
+  .item-anat .txt { font-size: 14px; line-height: 1.55; }
+  .item-anat .txt b { color: var(--branco); font-weight: 700; display: block; font-size: 13px; }
+
+  /* ---------- Tabela de marcação ---------- */
+  .rolagem { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; min-width: 460px; }
+  th, td { padding: calc(var(--u) * 1.75) calc(var(--u) * 2); text-align: left; border-bottom: 1px solid var(--borda); }
+  th {
+    font-family: var(--mono); font-size: 11px; font-weight: 700;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--cinza-2);
+  }
+  td { font-size: 14.5px; }
+  td code {
+    font-family: var(--mono); font-size: 13px;
+    background: var(--carvao-2); border: 1px solid var(--borda);
+    padding: 3px 8px; color: var(--laranja); white-space: nowrap;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+
+  /* ---------- Faz / Não faz ---------- */
+  .regras { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: calc(var(--u) * 4); }
+  .coluna-regra h3 {
+    font-family: var(--mono); font-size: 11.5px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+    padding-bottom: calc(var(--u) * 1.5);
+    margin-bottom: calc(var(--u) * 2);
+    border-bottom: 2px solid;
+  }
+  .coluna-regra.faz h3    { color: var(--laranja); border-color: var(--laranja); }
+  .coluna-regra.nao h3    { color: var(--cinza-2); border-color: var(--borda); }
+  .coluna-regra ul { list-style: none; display: flex; flex-direction: column; gap: calc(var(--u) * 1.75); }
+  .coluna-regra li { font-size: 14px; line-height: 1.55; padding-left: calc(var(--u) * 2.5); position: relative; }
+  .coluna-regra li::before {
+    position: absolute; left: 0; top: 0;
+    font-family: var(--mono); font-weight: 700;
+  }
+  .coluna-regra.faz li::before { content: '+'; color: var(--laranja); }
+  .coluna-regra.nao li::before { content: '\2212'; color: var(--cinza-2); }
+  .coluna-regra b { color: var(--branco); font-weight: 700; }
+
+  /* ---------- Rodapé ---------- */
+  .fecho {
+    background: var(--carvao-2);
+    border: 1px solid var(--borda);
+    padding: calc(var(--u) * 3);
+    text-align: center;
+    font-family: var(--mono); font-size: 12.5px;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--cinza-2);
+  }
+  .fecho b { color: var(--laranja); font-weight: 700; }
+
+  .pendente {
+    padding: calc(var(--u) * 2.5);
+    border: 1px dashed var(--borda);
+    font-size: 14px; color: var(--cinza-2);
+  }
+  .pendente b { color: var(--branco); font-weight: 700; }
+
+  @media (max-width: 640px) {
+    .folha { padding: calc(var(--u) * 4) calc(var(--u) * 2) calc(var(--u) * 8); }
+    .painel > .corpo { padding: calc(var(--u) * 2.5); }
+    .slide { width: 100%; height: auto; aspect-ratio: 1; }
+  }
+</style>
+
+<div class="folha">
+
+  <!-- ============ CAPA ============ -->
+  <header class="capa">
+    <div class="eyebrow">// Manual da marca — @wallaceribas_</div>
+    <div class="faixa">
+      <h1>A fonte única da verdade de como tudo aparece</h1>
+    </div>
+    <div class="linha-fina">
+      <span>Versão <b>0.1</b></span>
+      <span>Atualizado em <b>20 · 08 · 2026</b></span>
+      <span>Status <b>em construção</b></span>
+      <span>Referência <b>@windcompany_</b></span>
+    </div>
+  </header>
+
+  <!-- ============ CORES ============ -->
+  <section class="painel">
+    <header>
+      <h2>Cores</h2>
+      <span class="nota">5 valores — nenhum a mais</span>
+    </header>
+    <div class="corpo">
+      <div class="cores">
+        <div class="cor">
+          <div class="amostra" style="background:#0B0B0C"></div>
+          <div class="nome">Preto</div>
+          <div class="hex">#0B0B0C</div>
+          <div class="uso">Fundo de todo slide</div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#FF6B1A"></div>
+          <div class="nome">Laranja</div>
+          <div class="hex">#FF6B1A</div>
+          <div class="uso">Selo, palavra em ênfase, contador</div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#E8430A"></div>
+          <div class="nome">Brasa</div>
+          <div class="hex">#E8430A</div>
+          <div class="uso">Só como fim do degradê do selo</div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#FFFFFF"></div>
+          <div class="nome">Branco</div>
+          <div class="hex">#FFFFFF</div>
+          <div class="uso">Título</div>
+        </div>
+        <div class="cor">
+          <div class="amostra" style="background:#B4B4BC"></div>
+          <div class="nome">Cinza</div>
+          <div class="hex">#B4B4BC</div>
+          <div class="uso">Texto de apoio</div>
+        </div>
+      </div>
+
+      <p class="regra-cor">
+        <b>O laranja é tempero, não é o prato.</b> Ele aparece em no máximo um
+        elemento por slide — o selo <em>ou</em> uma palavra <em>ou</em> um sublinhado.
+        Nunca os três juntos. Quando o laranja domina, ele para de chamar atenção
+        e vira ruído: é o erro que separa o feed que parece profissional do que
+        parece amador.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ TIPOGRAFIA ============ -->
+  <section class="painel">
+    <header>
+      <h2>Tipografia</h2>
+      <span class="nota">Montserrat — 300 / 400 / 700</span>
+    </header>
+    <div class="corpo">
+      <div class="amostra-tipo">
+        <div class="linha-tipo">
+          <span class="spec">Selo — 22px / peso 700 / espaçamento .07em / caixa alta</span>
+          <span class="demo-selo">do último mês</span>
+        </div>
+
+        <div class="linha-tipo">
+          <span class="spec">Título — 46 a 82px / peso 700 / entrelinha 1.16</span>
+          <div class="demo-h1">As jogadas <span class="leve">de marketing</span> mais inteligentes</div>
+        </div>
+
+        <div class="linha-tipo">
+          <span class="spec">Apoio — 31px / peso 400 / entrelinha 1.5</span>
+          <div class="demo-corpo">
+            O que deu certo nas contas que eu rodo — e o que eu
+            <span style="color:var(--laranja);font-weight:600">não repetiria</span>.
+          </div>
+        </div>
+      </div>
+
+      <div class="principio">
+        <h3>O princípio que sustenta tudo</h3>
+        <p>
+          O recurso central não é a fonte. É o <b>contraste de peso dentro da mesma
+          frase</b>: parte em 700, parte em 300. Isso cria ritmo de leitura e diz ao
+          olho o que importa, sem precisar de cor nenhuma.
+        </p>
+        <p>
+          Duas coisas que quebram isso na hora: <b>caixa alta no título</b> — o sistema
+          é sentence case, sempre — e <b>entrelinha abaixo de 1.16</b>, que corta o acento
+          do Á, do Ã e a cedilha do Ç. Em português isso não é detalhe, é erro visível.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ESPAÇO + ANATOMIA ============ -->
+  <div class="dupla">
+    <section class="painel">
+      <header>
+        <h2>Espaçamento</h2>
+        <span class="nota">Base 8 — tudo é múltiplo</span>
+      </header>
+      <div class="corpo">
+        <div class="escala">
+          <div class="passo"><span class="val">8px</span><span class="barra" style="width:8px"></span><span class="onde">Respiro mínimo</span></div>
+          <div class="passo"><span class="val">24px</span><span class="barra" style="width:24px"></span><span class="onde">Selo → título</span></div>
+          <div class="passo"><span class="val">26px</span><span class="barra" style="width:26px"></span><span class="onde">Título → apoio</span></div>
+          <div class="passo"><span class="val">44px</span><span class="barra" style="width:44px"></span><span class="onde">Apoio → rodapé</span></div>
+          <div class="passo"><span class="val">86px</span><span class="barra" style="width:86px"></span><span class="onde">Base do slide</span></div>
+          <div class="passo"><span class="val">92px</span><span class="barra" style="width:92px"></span><span class="onde">Margem lateral</span></div>
+        </div>
+        <p class="regra-cor" style="margin-top:calc(var(--u)*3.5)">
+          A margem lateral de <b>92px</b> nunca muda. É ela que faz slides diferentes
+          parecerem do mesmo lugar quando o dedo desliza no carrossel.
+        </p>
+      </div>
+    </section>
+
+    <section class="painel">
+      <header>
+        <h2>Anatomia do slide</h2>
+        <span class="nota">1080 × 1080</span>
+      </header>
+      <div class="corpo">
+        <div class="anatomia">
+          <div class="slide">
+            <div class="brasas"></div>
+            <div class="scrim"></div>
+            <div class="marca-mini"><i></i>Wallace Ribas</div>
+            <div class="palco-mini">
+              <span class="selo-mini">do último mês</span>
+              <div class="tit-mini">As jogadas <span class="leve">de marketing</span> mais inteligentes</div>
+              <div class="apoio-mini">O que deu certo nas contas que eu rodo.</div>
+              <div class="rodape-mini">
+                <span class="c">01 / 06</span>
+                <span>Arraste para o lado →</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="legenda-anatomia">
+            <div class="item-anat">
+              <span class="marcador">A</span>
+              <span class="txt"><b>Assinatura</b>Topo à esquerda. Barra laranja + nome. Aparece em todos os slides.</span>
+            </div>
+            <div class="item-anat">
+              <span class="marcador">B</span>
+              <span class="txt"><b>Selo</b>Opcional. Retângulo sem canto arredondado. Texto curtíssimo.</span>
+            </div>
+            <div class="item-anat">
+              <span class="marcador">C</span>
+              <span class="txt"><b>Título</b>Ancorado embaixo, nunca centralizado. Encolhe conforme cresce.</span>
+            </div>
+            <div class="item-anat">
+              <span class="marcador">D</span>
+              <span class="txt"><b>Apoio</b>Até 86% da largura. Duas ou três linhas, não mais.</span>
+            </div>
+            <div class="item-anat">
+              <span class="marcador">E</span>
+              <span class="txt"><b>Rodapé</b>Contador à esquerda, "arraste" à direita. Some no último slide.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ============ MARCAÇÃO ============ -->
+  <section class="painel">
+    <header>
+      <h2>Como escrever</h2>
+      <span class="nota">arquivo .txt → slides prontos</span>
+    </header>
+    <div class="corpo">
+      <div class="rolagem">
+        <table>
+          <thead>
+            <tr><th>Você escreve</th><th>Vira</th><th>Quando usar</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>*palavra*</code></td>
+              <td>Palavra em laranja</td>
+              <td>Uma por slide. A que carrega o argumento.</td>
+            </tr>
+            <tr>
+              <td><code>_palavra_</code></td>
+              <td>Peso leve</td>
+              <td>A conexão da frase — "de marketing", "que você".</td>
+            </tr>
+            <tr>
+              <td><code>__palavra__</code></td>
+              <td>Sublinhado laranja</td>
+              <td>Ênfase mais forte que o peso, mais leve que a cor.</td>
+            </tr>
+            <tr>
+              <td><code>[texto]</code></td>
+              <td>Selo laranja</td>
+              <td>Primeira linha do slide. Contexto ou chamada.</td>
+            </tr>
+            <tr>
+              <td><code>---</code></td>
+              <td>Separa os slides</td>
+              <td>Entre um slide e o próximo.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ REGRAS ============ -->
+  <section class="painel">
+    <header>
+      <h2>Faz / Não faz</h2>
+      <span class="nota">O que mantém o feed coerente</span>
+    </header>
+    <div class="corpo">
+      <div class="regras">
+        <div class="coluna-regra faz">
+          <h3>Faz</h3>
+          <ul>
+            <li><b>Sentence case</b> no título, sempre.</li>
+            <li><b>Foto de fundo</b> sempre que existir uma boa. O sistema foi feito pra ela.</li>
+            <li><b>Um número real</b> no slide de capa. É o que só você tem.</li>
+            <li><b>De 5 a 7 slides.</b> Menos não desenvolve, mais cansa.</li>
+            <li><b>Um público por post.</b> Dono de negócio ou aspirante a gestor — não os dois.</li>
+          </ul>
+        </div>
+        <div class="coluna-regra nao">
+          <h3>Não faz</h3>
+          <ul>
+            <li><b>Caixa alta</b> no título. Vira grito, não ênfase.</li>
+            <li><b>Laranja em dois lugares</b> no mesmo slide.</li>
+            <li><b>Título com mais de 10 palavras.</b> Se não cabe, o pensamento não está pronto.</li>
+            <li><b>Cor nova</b> sem passar por aqui primeiro.</li>
+            <li><b>Canto arredondado</b> no selo. O sistema é reto.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PENDÊNCIAS ============ -->
+  <section class="painel">
+    <header>
+      <h2>Ainda em aberto</h2>
+      <span class="nota">O que falta pra fechar a versão 1.0</span>
+    </header>
+    <div class="corpo" style="display:flex;flex-direction:column;gap:calc(var(--u)*2)">
+      <div class="pendente">
+        <b>Banco de fotos.</b> É a lacuna estrutural. Sem imagem, a metade de cima
+        do slide fica vazia — e a referência constrói tudo sobre foto.
+      </div>
+      <div class="pendente">
+        <b>Logo.</b> Hoje a assinatura é o nome em texto com uma barra laranja.
+        Funciona, mas não é uma marca.
+      </div>
+      <div class="pendente">
+        <b>Tom de voz.</b> Vai ser definido pelo que performar — salvamento e
+        comentário, não curtida. Preenchido com dado, não com achismo.
+      </div>
+    </div>
+  </section>
+
+  <div class="fecho">
+    Se não está aqui, <b>pergunte antes de inventar</b>
+  </div>
+
+</div>
