@@ -20,32 +20,96 @@ import api
 
 ENV_PATH, TOKEN, IG_ID, FLUXO, BASE_URL = api.carregar_credenciais()
 
+# A API do Instagram nao aceita arquivo local: a imagem precisa estar numa
+# URL publica. Estes sao os hosts gratuitos que usamos, em ordem de tentativa.
+# Se um cair (acontece), o proximo assume.
+#
+# ATENCAO: sao hosts publicos e anonimos. A imagem fica acessivel por link
+# para qualquer pessoa que tenha a URL. Nao use com material sigiloso.
+UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120.0 Safari/537.36"
+
+
+def _catbox(arquivo, tipo):
+    resp = requests.post(
+        "https://catbox.moe/user/api.php",
+        data={"reqtype": "fileupload"},
+        files={"fileToUpload": (arquivo.name, arquivo.open("rb"), tipo)},
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    url = resp.text.strip()
+    return url if url.startswith("https://") else None
+
+
+def _litterbox(arquivo, tipo):
+    resp = requests.post(
+        "https://litterbox.catbox.moe/resources/internals/api.php",
+        data={"reqtype": "fileupload", "time": "1h"},
+        files={"fileToUpload": (arquivo.name, arquivo.open("rb"), tipo)},
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    url = resp.text.strip()
+    return url if url.startswith("https://") else None
+
+
+def _tmpfiles(arquivo, tipo):
+    resp = requests.post(
+        "https://tmpfiles.org/api/v1/upload",
+        files={"file": (arquivo.name, arquivo.open("rb"), tipo)},
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    url = resp.json().get("data", {}).get("url", "")
+    # A resposta traz a pagina de visualizacao; /dl/ e o link direto do arquivo.
+    return url.replace("tmpfiles.org/", "tmpfiles.org/dl/", 1) if url.startswith("http") else None
+
+
+def _zerox(arquivo, tipo):
+    resp = requests.post(
+        "https://0x0.st",
+        files={"file": (arquivo.name, arquivo.open("rb"), tipo)},
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    url = resp.text.strip()
+    return url if url.startswith("http") else None
+
+
+HOSTS = [
+    ("catbox", _catbox),
+    ("litterbox", _litterbox),
+    ("tmpfiles", _tmpfiles),
+    ("0x0", _zerox),
+]
+
 MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
 
 
 def hospedar_imagem(caminho):
-    """A API do Instagram so aceita URL publica, entao subimos a imagem primeiro.
-
-    ATENCAO: catbox.moe e um host publico e anonimo. A imagem fica acessivel
-    por link para qualquer pessoa que tenha a URL. Nao use com material sigiloso.
-    """
+    """Sobe a imagem para o primeiro host que responder."""
     arquivo = Path(caminho)
     tipo = MIME.get(arquivo.suffix.lower())
     if tipo is None:
         raise ValueError(f"Formato nao suportado: {arquivo.suffix} (use .png ou .jpg)")
 
-    with arquivo.open("rb") as f:
-        resp = requests.post(
-            "https://catbox.moe/user/api.php",
-            data={"reqtype": "fileupload"},
-            files={"fileToUpload": (arquivo.name, f, tipo)},
-            timeout=120,
-        )
-    url = resp.text.strip()
-    if not url.startswith("https://"):
-        raise RuntimeError(f"Falha ao hospedar {arquivo.name}: {url}")
-    print(f"    hospedada: {url}")
-    return url
+    problemas = []
+    for nome, enviar in HOSTS:
+        try:
+            url = enviar(arquivo, tipo)
+        except requests.RequestException as e:
+            problemas.append(f"{nome}: {type(e).__name__}")
+            print(f"    {nome} falhou, tentando o proximo...")
+            continue
+        if url:
+            print(f"    hospedada em {nome}: {url}")
+            return url
+        problemas.append(f"{nome}: resposta inesperada")
+        print(f"    {nome} recusou, tentando o proximo...")
+
+    raise RuntimeError(
+        f"nenhum host aceitou {arquivo.name}. Tentativas: {'; '.join(problemas)}"
+    )
 
 
 def post(caminho_api, dados, contexto):
