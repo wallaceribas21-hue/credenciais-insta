@@ -1,0 +1,161 @@
+<meta charset="utf-8">
+<style>
+  /* Fontes locais — ficam no repositório, funcionam sem internet. */
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-300-latin.woff2') format('woff2'); font-weight: 300; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-600-latin.woff2') format('woff2'); font-weight: 600; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-800-latin.woff2') format('woff2'); font-weight: 800; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-300-latin-ext.woff2') format('woff2'); font-weight: 300; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-400-latin-ext.woff2') format('woff2'); font-weight: 400; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-600-latin-ext.woff2') format('woff2'); font-weight: 600; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-700-latin-ext.woff2') format('woff2'); font-weight: 700; unicode-range: U+0100-024F; }
+
+  :root {
+    --preto:   #0B0B0C;
+    --laranja: #FF6B1A;
+    --brasa:   #E8430A;
+    --branco:  #FFFFFF;
+    --cinza:   #B4B4BC;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1080px; }
+
+  body {
+    position: relative;
+    overflow: hidden;
+    background: var(--preto);
+    font-family: 'Mont', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---- Foto de fundo (opcional). Sem foto, sobra o degradê. ---- */
+  .foto {
+    position: absolute; inset: 0;
+    background-image: __FOTO__;
+    background-size: cover;
+    background-position: center;
+  }
+
+  /* ---- Atmosfera: brasas quentes vindas de cima. ---- */
+  .brasas {
+    position: absolute; inset: -14%;
+    background:
+      radial-gradient(40% 34% at 76% 2%,  rgba(255,160,60,.58) 0%, transparent 66%),
+      radial-gradient(46% 40% at 98% 20%, rgba(232,67,10,.46)  0%, transparent 68%),
+      radial-gradient(38% 32% at 22% 12%, rgba(150,52,16,.34)  0%, transparent 70%),
+      radial-gradient(54% 48% at 0% 78%,  rgba(190,44,10,.30)  0%, transparent 72%);
+  }
+
+  /* ---- Scrim: garante leitura do texto sobre qualquer fundo. ---- */
+  .scrim {
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, rgba(8,8,9,.94) 0%, rgba(8,8,9,.72) 30%, rgba(8,8,9,.18) 60%, transparent 78%),
+      linear-gradient(to bottom, rgba(8,8,9,.58) 0%, transparent 26%);
+  }
+
+  /* ---- Grão: tira o aspecto digital limpo demais. ---- */
+  .grao {
+    position: absolute; inset: 0;
+    opacity: .10;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---- Assinatura no topo, no lugar onde a Wind põe o logo. ---- */
+  .marca {
+    position: absolute;
+    top: 62px; left: 92px;
+    display: flex; align-items: center; gap: 16px;
+    font-size: 24px; font-weight: 700;
+    letter-spacing: .15em; text-transform: uppercase;
+    color: rgba(255,255,255,.94);
+  }
+  .marca .barra { width: 3px; height: 23px; background: var(--laranja); }
+
+  /* ---- Conteúdo ancorado embaixo. ---- */
+  .palco {
+    position: relative;
+    height: 100%;
+    padding: 0 92px 86px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+
+  /* Selo laranja — o recurso mais reconhecível da referência. */
+  .selo {
+    align-self: flex-start;
+    margin-bottom: 24px;
+    padding: 11px 20px 9px;
+    background: linear-gradient(96deg, var(--laranja), var(--brasa));
+    font-size: 22px; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase;
+    color: #160800;
+  }
+
+  h1 {
+    font-size: __TAM__px;
+    font-weight: 700;
+    /* 1.16 dá espaço para Á, Ã, Ç e Õ. Não aperte mais que isso. */
+    line-height: 1.16;
+    letter-spacing: -.018em;
+    color: var(--branco);
+    text-wrap: balance;
+  }
+
+  /* _texto_ vira peso leve — o contraste de peso dentro da frase. */
+  h1 .leve { font-weight: 300; color: rgba(255,255,255,.82); }
+  /* *texto* vira laranja. */
+  h1 .cor  { color: var(--laranja); }
+  /* __texto__ ganha sublinhado laranja. */
+  h1 .sub  {
+    background-image: linear-gradient(var(--laranja), var(--laranja));
+    background-size: 100% 5px;
+    background-position: 0 97%;
+    background-repeat: no-repeat;
+    padding-bottom: 5px;
+  }
+
+  .apoio {
+    margin-top: 26px;
+    max-width: 86%;
+    font-size: 31px; font-weight: 400;
+    line-height: 1.5;
+    color: var(--cinza);
+    text-wrap: pretty;
+  }
+  .apoio .leve { font-weight: 300; }
+  .apoio .cor  { color: var(--laranja); font-weight: 600; }
+  .apoio .sub  { color: #E9E9EE; font-weight: 600; }
+  .apoio p + p { margin-top: 13px; }
+
+  /* ---- Rodapé ---- */
+  .rodape {
+    margin-top: 44px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 21px; font-weight: 600;
+    letter-spacing: .11em; text-transform: uppercase;
+    color: rgba(255,255,255,.38);
+  }
+  .rodape .cont { color: var(--laranja); }
+  .rodape .arrasta { display: flex; align-items: center; gap: 12px; }
+  .rodape .seta { color: var(--laranja); font-size: 25px; letter-spacing: 0; }
+</style>
+
+<div class="foto"></div>
+<div class="brasas"></div>
+<div class="scrim"></div>
+<div class="grao"></div>
+
+<div class="marca"><span class="barra"></span>__MARCA__</div>
+
+<div class="palco">
+  __SELO__
+  <h1>__TITULO__</h1>
+  __APOIO__
+  <div class="rodape">
+    <span class="cont">__CONTADOR__</span>
+    <span class="arrasta">__ARRASTA__</span>
+  </div>
+</div>

@@ -97,20 +97,54 @@ quer manter — já associa a ele.
 
 ### Tipografia
 
-Sem fonte própria definida. Os slides usam a fonte do sistema (Segoe UI no
-Windows) — sem custo, sem instalação, e legível. Trocar por uma fonte própria
-é possível depois, se ele quiser.
+**Montserrat** (300 / 400 / 600 / 700 / 800), embutida no repositório em
+`instagram/fontes/` — funciona sem internet.
 
-### Referências
+A escolha veio da referência: a Wind usa uma geométrica desse tipo, e o
+recurso central não é a fonte em si, é o **contraste de peso dentro da mesma
+frase**.
 
-- **Gosto:** ⬜ aguardando exemplos
-- **Não gosto:** ⬜ aguardando exemplos
+### Referência: @windcompany_
+
+Wallace mandou o feed da Wind como o padrão de qualidade esperado.
+O que extraí, olhando o grid:
+
+| Elemento | O que a Wind faz |
+|---|---|
+| **Fundo** | Foto com gradiente escuro por cima — quase nunca cor chapada |
+| **Tipografia** | Peso misto na mesma frase: "**As jogadas** de marketing **mais inteligentes**" |
+| **Caixa** | Sentence case, **não** caixa alta |
+| **Laranja** | Doses pequenas e cirúrgicas — selo, uma palavra, um sublinhado |
+| **Selo** | Retângulo laranja com texto curto: "do último mês!", "10 PALAVRAS" |
+| **Assinatura** | `WIND \| COMPANY` no topo, pequena, com letter-spacing largo |
+| **Rodapé** | "Arraste para o lado" |
+
+**O erro que eu tinha cometido:** minha primeira proposta era caixa alta
+pesada (Anton), laranja como grande brilho de fundo, estilo racing. A Wind é
+o oposto — editorial, sentence case, laranja contido. Corrigido.
+
+### O que ainda falta
+
+- **Fotos.** É a diferença estrutural. A Wind constrói tudo sobre imagem;
+  sem foto, a metade de cima do slide fica vazia. Wallace precisa de um banco
+  de imagens (próprias ou de banco gratuito).
+- **Logo próprio.** Hoje a assinatura é o nome em texto. A Wind tem o "W".
 
 ---
 
 ## 7. Formato do carrossel
 
 ⚠️ **Primeira vez.** Nada validado ainda.
+
+**Marcação do arquivo de texto** (`instagram/scripts/criar_slides.py`):
+
+| Escrevo | Vira |
+|---|---|
+| `*palavra*` | laranja |
+| `_palavra_` | peso leve — o contraste da Wind |
+| `__palavra__` | sublinhado laranja |
+| `[texto]` na 1ª linha | selo laranja |
+| `---` | separa os slides |
 
 **Estrutura de partida (6 slides):**
 

@@ -3,115 +3,84 @@ criar_slides.py — Transforma um arquivo de texto em slides prontos pro Instagr
 
 Uso:
     python criar_slides.py carrossel.txt
-    python criar_slides.py carrossel.txt --tema claro
-    python criar_slides.py carrossel.txt --arroba @wallaceribas_
+    python criar_slides.py carrossel.txt --marca "WALLACE RIBAS" --foto capa.jpg
 
-O arquivo de texto e simples: cada slide separado por uma linha com ---
+Formato do arquivo — cada slide separado por uma linha com ---
 
-    Como triplicar seu alcance
-    O que ninguem te conta
+    [selo em laranja]
+    Titulo do slide com _peso leve_ e *palavra laranja*
+    Linha de apoio, tambem aceita marcacao.
     ---
-    1. Poste no horario que SEU publico esta online
-    Nao o horario que a internet diz
-    ---
-    Salva esse post
-    pra nao esquecer
+    Proximo slide
 
-A primeira linha de cada slide vira o titulo (maior).
-As linhas seguintes viram o texto de apoio (menor).
+Marcacoes disponiveis:
+    *texto*     -> laranja
+    _texto_     -> peso leve (o contraste de peso da referencia Wind)
+    __texto__   -> sublinhado laranja
+    [texto]     -> selo laranja (so na primeira linha do slide)
+
+Precisa do navegador, instalado uma unica vez:
+    pip install playwright
+    playwright install chromium
 """
 import argparse
+import base64
+import html
+import mimetypes
+import os
+import re
 import sys
 from pathlib import Path
 
-from PIL import Image, ImageDraw, ImageFont
+AQUI = Path(__file__).resolve().parent
+TEMPLATE = AQUI / "template.html"
+FONTES = AQUI.parent / "fontes"
 
-TAMANHO = 1080
-MARGEM = 96
-
-# Onde procurar fontes, em ordem de preferencia, em cada sistema.
-FONTES = {
-    "bold": [
-        "C:/Windows/Fonts/segoeuib.ttf",           # Windows — Segoe UI Bold
-        "C:/Windows/Fonts/arialbd.ttf",            # Windows — Arial Bold
-        "/System/Library/Fonts/Supplemental/Arial Bold.ttf",  # Mac
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",  # Linux
-    ],
-    "regular": [
-        "C:/Windows/Fonts/segoeui.ttf",
-        "C:/Windows/Fonts/arial.ttf",
-        "/System/Library/Fonts/Supplemental/Arial.ttf",
-        "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    ],
-}
-
-TEMAS = {
-    # Identidade @wallaceribas_ — laranja e preto.
-    "wr-preto": {
-        "fundo": (10, 10, 11),
-        "fundo2": (24, 16, 10),
-        "titulo": (255, 255, 255),
-        "texto": (154, 154, 160),
-        "destaque": (255, 107, 26),
-        "marcador": "barra",
-    },
-    "wr-laranja": {
-        "fundo": (255, 107, 26),
-        "fundo2": (224, 82, 8),
-        "titulo": (10, 10, 11),
-        "texto": (60, 26, 8),
-        "destaque": (10, 10, 11),
-        "marcador": "barra",
-    },
-    "wr-bloco": {
-        "fundo": (10, 10, 11),
-        "fundo2": (10, 10, 11),
-        "titulo": (255, 255, 255),
-        "texto": (154, 154, 160),
-        "destaque": (255, 107, 26),
-        "marcador": "faixa",
-    },
-    "escuro": {
-        "fundo": (13, 17, 29),
-        "fundo2": (28, 26, 56),
-        "titulo": (255, 255, 255),
-        "texto": (176, 186, 204),
-        "destaque": (99, 102, 241),
-        "marcador": "barra",
-    },
-    "claro": {
-        "fundo": (247, 245, 240),
-        "fundo2": (232, 228, 220),
-        "titulo": (17, 22, 34),
-        "texto": (82, 90, 105),
-        "destaque": (79, 70, 229),
-        "marcador": "barra",
-    },
-}
+# Titulo curto pode ser grande; titulo longo precisa encolher para caber.
+FAIXAS = [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)]
 
 
-def achar_fonte(peso, tamanho):
-    for caminho in FONTES[peso]:
-        if Path(caminho).is_file():
-            return ImageFont.truetype(caminho, tamanho)
-    print(f"AVISO: nenhuma fonte '{peso}' encontrada, usando a padrao (vai ficar feio).")
-    return ImageFont.load_default(tamanho)
+def tamanho_titulo(texto):
+    limpo = re.sub(r"[*_]", "", texto)
+    for limite, tam in FAIXAS:
+        if len(limpo) <= limite:
+            return tam
+    return FAIXAS[-1][1]
+
+
+def marcar(texto):
+    """Escapa HTML e aplica as marcacoes de estilo.
+
+    A ordem importa: __sublinhado__ antes de _leve_, senao o primeiro
+    par de underscores seria consumido pela regra de peso leve.
+    """
+    t = html.escape(texto)
+    t = re.sub(r"__([^_]+)__", r'<span class="sub">\1</span>', t)
+    t = re.sub(r"\*([^*]+)\*", r'<span class="cor">\1</span>', t)
+    t = re.sub(r"_([^_]+)_", r'<span class="leve">\1</span>', t)
+    return t
 
 
 def ler_slides(caminho):
-    """Le o arquivo e devolve [(titulo, [linhas de apoio]), ...]."""
     arquivo = Path(caminho)
     if not arquivo.is_file():
         print(f"ERRO: arquivo nao encontrado: {caminho}")
         sys.exit(1)
 
-    blocos = [b.strip() for b in arquivo.read_text(encoding="utf-8").split("---")]
     slides = []
-    for bloco in blocos:
-        if not bloco:
+    for bloco in arquivo.read_text(encoding="utf-8").split("---"):
+        linhas = [l.strip() for l in bloco.strip().splitlines() if l.strip()]
+        if not linhas:
             continue
-        linhas = [l.strip() for l in bloco.splitlines() if l.strip()]
-        slides.append((linhas[0], linhas[1:]))
+        # Primeira linha entre colchetes vira selo; o titulo passa a ser a seguinte.
+        selo = ""
+        if linhas[0].startswith("[") and linhas[0].endswith("]"):
+            selo = linhas[0][1:-1].strip()
+            linhas = linhas[1:]
+        if not linhas:
+            print(f"ERRO: um slide tem o selo '[{selo}]' mas nenhum titulo depois.")
+            sys.exit(1)
+        slides.append({"selo": selo, "titulo": linhas[0], "apoio": linhas[1:]})
 
     if not slides:
         print("ERRO: o arquivo esta vazio.")
@@ -122,126 +91,92 @@ def ler_slides(caminho):
     return slides
 
 
-def quebrar(texto, fonte, largura_max, draw):
-    """Quebra o texto em linhas que cabem na largura."""
-    palavras, linhas, atual = texto.split(), [], ""
-    for palavra in palavras:
-        teste = f"{atual} {palavra}".strip()
-        if draw.textlength(teste, font=fonte) <= largura_max:
-            atual = teste
-        else:
-            if atual:
-                linhas.append(atual)
-            atual = palavra
-    if atual:
-        linhas.append(atual)
-    return linhas
+def foto_embutida(caminho):
+    """Converte a foto em data URI para o navegador ler sem servidor."""
+    if not caminho:
+        return "none"
+    arquivo = Path(caminho)
+    if not arquivo.is_file():
+        print(f"ERRO: foto nao encontrada: {caminho}")
+        sys.exit(1)
+    tipo = mimetypes.guess_type(arquivo.name)[0] or "image/jpeg"
+    dados = base64.b64encode(arquivo.read_bytes()).decode()
+    return f"url('data:{tipo};base64,{dados}')"
 
 
-def fundo_degrade(cores):
-    """Degrade vertical suave entre as duas cores do tema."""
-    img = Image.new("RGB", (TAMANHO, TAMANHO), cores["fundo"])
-    draw = ImageDraw.Draw(img)
-    c1, c2 = cores["fundo"], cores["fundo2"]
-    for y in range(TAMANHO):
-        p = y / TAMANHO
-        draw.line(
-            [(0, y), (TAMANHO, y)],
-            fill=tuple(int(c1[i] + (c2[i] - c1[i]) * p) for i in range(3)),
-        )
-    return img
-
-
-def desenhar_slide(titulo, apoio, numero, total, cores, arroba, capa):
-    img = fundo_degrade(cores)
-    draw = ImageDraw.Draw(img)
-    largura = TAMANHO - MARGEM * 2
-
-    # A capa (slide 1) tem texto maior para prender a atencao.
-    tam_titulo = 76 if capa else 60
-    f_titulo = achar_fonte("bold", tam_titulo)
-    f_apoio = achar_fonte("regular", 38)
-    f_meta = achar_fonte("bold", 26)
-
-    # Barra de destaque no topo do bloco de texto.
-    linhas_t = quebrar(titulo, f_titulo, largura, draw)
-    linhas_a = []
-    for linha in apoio:
-        linhas_a.extend(quebrar(linha, f_apoio, largura, draw))
-
-    alt_t = len(linhas_t) * int(tam_titulo * 1.25)
-    alt_a = len(linhas_a) * 56 + (40 if linhas_a else 0)
-    y = (TAMANHO - alt_t - alt_a) // 2
-
-    if cores["marcador"] == "faixa":
-        # Faixa laranja atras da primeira linha do titulo — destaca de longe.
-        larg_faixa = draw.textlength(linhas_t[0], font=f_titulo)
-        draw.rectangle(
-            [MARGEM - 20, y - 14, MARGEM + larg_faixa + 24, y + int(tam_titulo * 1.18)],
-            fill=cores["destaque"],
-        )
-    else:
-        # Barrinha curta acima do titulo.
-        draw.rounded_rectangle(
-            [MARGEM, y - 56, MARGEM + 72, y - 44], radius=6, fill=cores["destaque"]
-        )
-
-    for i, linha in enumerate(linhas_t):
-        # Na faixa, a primeira linha fica preta sobre o laranja.
-        cor = cores["fundo"] if (cores["marcador"] == "faixa" and i == 0) else cores["titulo"]
-        draw.text((MARGEM, y), linha, font=f_titulo, fill=cor)
-        y += int(tam_titulo * 1.25)
-
-    if linhas_a:
-        y += 40
-        for linha in linhas_a:
-            draw.text((MARGEM, y), linha, font=f_apoio, fill=cores["texto"])
-            y += 56
-
-    # Rodape: "01/04 · @conta" na esquerda, seta de arrasta na direita.
-    rodape_y = TAMANHO - MARGEM - 20
-    contador = f"{numero:02d}/{total:02d}"
-    draw.text((MARGEM, rodape_y), contador, font=f_meta, fill=cores["destaque"])
-
-    if arroba:
-        x = MARGEM + draw.textlength(contador, font=f_meta) + 16
-        draw.text((x, rodape_y), f"· {arroba}", font=f_meta, fill=cores["texto"])
-
-    # Seta so nos slides que tem proximo.
-    if numero < total:
-        f_seta = achar_fonte("bold", 40)
-        larg = draw.textlength("→", font=f_seta)
-        draw.text((TAMANHO - MARGEM - larg, rodape_y - 12), "→", font=f_seta, fill=cores["destaque"])
-
-    return img
+def montar_html(slide, numero, total, marca, foto_css):
+    modelo = TEMPLATE.read_text(encoding="utf-8")
+    corpo = "".join(f"<p>{marcar(l)}</p>" for l in slide["apoio"])
+    arrasta = (
+        '<span>Arraste para o lado</span><span class="seta">&rarr;</span>'
+        if numero < total else "<span>Fim</span>"
+    )
+    trocas = {
+        "__FONTES__": FONTES.as_uri(),
+        "__FOTO__": foto_css,
+        "__MARCA__": html.escape(marca),
+        "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
+        "__TAM__": str(tamanho_titulo(slide["titulo"])),
+        "__TITULO__": marcar(slide["titulo"]),
+        "__APOIO__": f'<div class="apoio">{corpo}</div>' if corpo else "",
+        "__CONTADOR__": f"{numero:02d} / {total:02d}",
+        "__ARRASTA__": arrasta,
+    }
+    for chave, valor in trocas.items():
+        modelo = modelo.replace(chave, valor)
+    return modelo
 
 
 def main():
     parser = argparse.ArgumentParser(description="Cria slides de carrossel a partir de um .txt")
     parser.add_argument("arquivo", help="arquivo de texto com os slides separados por ---")
-    parser.add_argument("--tema", default="wr-preto", choices=list(TEMAS), help="cores do slide")
-    parser.add_argument("--arroba", default="", help="seu @ no rodape (ex: @wallaceribas_)")
+    parser.add_argument("--marca", default="WALLACE RIBAS", help="assinatura no topo do slide")
+    parser.add_argument("--foto", default="", help="imagem de fundo (opcional)")
     parser.add_argument("--saida", default="slides", help="pasta onde salvar (padrao: slides)")
     args = parser.parse_args()
 
+    try:
+        from playwright.sync_api import sync_playwright
+    except ImportError:
+        print("ERRO: o navegador de renderizacao nao esta instalado.")
+        print("\nRode estes dois comandos uma unica vez:")
+        print("  pip install playwright")
+        print("  playwright install chromium")
+        sys.exit(1)
+
     slides = ler_slides(args.arquivo)
-    cores = TEMAS[args.tema]
+    foto_css = foto_embutida(args.foto)
     pasta = Path(args.saida)
     pasta.mkdir(parents=True, exist_ok=True)
 
-    # Limpa slides antigos para nao misturar carrosseis.
     antigos = sorted(pasta.glob("slide-*.png"))
     for velho in antigos:
         velho.unlink()
     if antigos:
         print(f"Removi {len(antigos)} slide(s) do carrossel anterior.\n")
 
-    print(f"Criando {len(slides)} slides (tema {args.tema})...\n")
-    for i, (titulo, apoio) in enumerate(slides, start=1):
-        img = desenhar_slide(titulo, apoio, i, len(slides), cores, args.arroba, capa=(i == 1))
-        destino = pasta / f"slide-{i:02d}.png"
-        img.save(destino, "PNG", optimize=True)
-        print(f"  {destino}  —  {titulo[:48]}")
+    print(f"Criando {len(slides)} slides...\n")
+    temp = pasta / "_render.html"
+    try:
+        with sync_playwright() as p:
+            # CHROMIUM_PATH permite usar um Chromium ja instalado no sistema.
+            atalho = os.getenv("CHROMIUM_PATH")
+            navegador = p.chromium.launch(executable_path=atalho) if atalho else p.chromium.launch()
+            pagina = navegador.new_page(viewport={"width": 1080, "height": 1080})
+            for i, slide in enumerate(slides, start=1):
+                temp.write_text(montar_html(slide, i, len(slides), args.marca, foto_css), encoding="utf-8")
+                pagina.goto(temp.as_uri())
+                pagina.wait_for_timeout(340)  # deixa as fontes carregarem
+                destino = pasta / f"slide-{i:02d}.png"
+                pagina.screenshot(path=str(destino))
+                print(f"  {destino}  —  {re.sub(r'[*_]', '', slide['titulo'])[:46]}")
+            navegador.close()
+    except Exception as e:
+        print(f"\nERRO ao renderizar: {e}")
+        print("Se falar em executavel faltando, rode: playwright install chromium")
+        sys.exit(1)
+    finally:
+        temp.unlink(missing_ok=True)
 
     print(f"\nPronto! {len(slides)} slides em '{pasta}/'")
     print("\nProximo passo — conferir sem publicar:")
