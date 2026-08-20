@@ -1,30 +1,37 @@
-[feito por uma IA]
-Eu não fiz esse post
-Eu só dei o tema. Copy, design e publicação _foram dela_.
+[feito com Claude]
+Esse post não fui eu que fiz
+E não é sobre design. É sobre o que a IA já consegue fazer _dentro de uma empresa_.
 ---
-Você conhece o ciclo
-Pensa no tema. Abre o Canva. Monta sete slides. Escreve a legenda. Agenda.
-_Duas horas_ pra um post que vive vinte e quatro.
+A maioria usa IA pra escrever texto
+E para por aí.
+O salto acontece quando ela deixa de responder e começa a *executar*.
 ---
-Hoje eu escrevo *uma linha*
-E vou cuidar de conta de cliente.
-Quando volto, o carrossel _já está no ar_.
+[o que muda na prática]
+Ela pega tarefa repetitiva e devolve _tempo_
+Cruzar planilha de venda. Montar relatório de campanha. Organizar processo.
+Conectar dois sistemas que nunca conversaram.
+Coisa que ocupa a sua semana inteira e _não precisa de você_.
 ---
-E não, eu não entreguei o layout pronto
-Mandei *print de quatro posts* que eu acho bonito. Só isso.
-Ela leu a paleta, a fonte, o espaçamento — e montou meu manual de marca sozinha.
+Eu resolvi testar num caso real
+Peguei a tarefa que mais me consome: *postar todo dia*.
+E mandei ela resolver de ponta a ponta.
 ---
-[o fluxo inteiro]
-Quatro passos, _zero_ Canva
-1. Conecta na API oficial do Instagram
-2. Aprende sua identidade pelas referências
-3. Escreve a copy e monta os slides
-4. Publica direto na sua conta
+[passo 1]
+Conectou na API *oficial* do Instagram
+Sem ferramenta de terceiro. Sem mensalidade. Sem intermediário lendo seus dados.
+A conexão é __direto com a Meta__.
 ---
-A sacada não é a IA *desenhar*
-Desenhar, qualquer uma desenha. Bonito e genérico.
-A diferença é ela __saber quem é você__ — seu público, seus clientes, seu jeito de falar.
+[passo 2]
+Aprendeu minha identidade _sozinha_
+Mandei print de quatro posts que eu acho bonito. Só isso.
+Ela leu a paleta, a fonte, o espaçamento — e montou o meu *manual de marca*.
 ---
-[salva esse post]
-A prova é o que você _acabou de ler_
-Comenta *COMO* que eu te mando o caminho.
+[passo 3]
+Eu escrevo o tema. Ela faz o resto.
+Copy, slides e publicação, tudo de uma vez.
+Eu volto depois e o post _já está no ar_.
+---
+[a prova está aqui]
+Esse carrossel foi *escrito, desenhado e publicado* assim
+Se isso resolve postar todo dia, imagina o que resolve na _sua operação_.
+Comenta *COMO* que eu te mostro o caminho.

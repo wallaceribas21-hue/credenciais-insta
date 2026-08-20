@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<body class="__CAPA__">
 <style>
   /* ============================================================
      Estilo POSTER — referência: cartazes retrô de impressão offset.
@@ -86,6 +87,31 @@
   .et-cima-dir  { top: 54px;  right: 58px; }
   .et-baixo-esq { bottom: 54px; left: 58px; }
 
+  /* ============ CAPA ============
+     Slide 1 recebe tratamento de cartaz: cabeçalho de jornal, tipo
+     tomando o quadro e o sol maior atrás. Os outros ficam sóbrios
+     para o texto respirar. ---- */
+  body.capa .sol { width: 780px; height: 780px; right: -230px; top: -60px; }
+
+  .masthead {
+    position: absolute;
+    top: 96px; left: 76px; right: 76px;
+    display: none;
+    align-items: center; gap: 18px;
+    font-family: 'Mono', monospace;
+    font-size: 15px; font-weight: 700;
+    letter-spacing: .24em; text-transform: uppercase;
+    color: var(--tinta);
+  }
+  body.capa .masthead { display: flex; }
+  body.capa .et-cima-esq { display: none; }
+  .masthead .fio { flex: 1; height: 3px; background: var(--tinta); }
+
+  body.capa .palco { bottom: 88px; }
+  body.capa h1 { line-height: .98; }
+  body.capa .regua { height: 6px; margin: 26px 0 20px; }
+  body.capa .apoio { font-size: 33px; max-width: 84%; }
+
   /* ---- Palco: texto ancorado embaixo, dentro da moldura. ---- */
   .palco {
     position: absolute;
@@ -163,6 +189,7 @@
 <div class="grao"></div>
 <div class="moldura"></div>
 
+<div class="masthead"><span class="fio"></span>__MARCA__<span class="fio"></span></div>
 <div class="etiqueta et-cima-esq">__MARCA__</div>
 <div class="etiqueta et-cima-dir">Nº __NUM__</div>
 <div class="etiqueta et-baixo-esq">1080 × 1080</div>

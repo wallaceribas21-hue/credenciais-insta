@@ -40,12 +40,14 @@ FONTES = AQUI.parent / "fontes"
 FAIXAS = {
     "wind":   [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)],
     "poster": [(24, 118), (48, 96), (78, 80), (115, 66), (999, 56)],
+    "poster-capa": [(24, 156), (44, 128), (70, 104), (100, 86), (999, 72)],
 }
 
 
-def tamanho_titulo(texto, estilo):
+def tamanho_titulo(texto, estilo, capa=False):
     limpo = re.sub(r"[*_]", "", texto)
-    faixas = FAIXAS[estilo]
+    chave = f"{estilo}-capa" if capa and f"{estilo}-capa" in FAIXAS else estilo
+    faixas = FAIXAS[chave]
     for limite, tam in faixas:
         if len(limpo) <= limite:
             return tam
@@ -125,7 +127,8 @@ def montar_html(slide, numero, total, marca, foto_css, estilo):
         "__NUM__": f"{numero:02d}",
         "__MARCA__": html.escape(marca),
         "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
-        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo)),
+        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1)),
+        "__CAPA__": "capa" if numero == 1 else "",
         "__TITULO__": marcar(slide["titulo"]),
         "__APOIO__": f'<div class="apoio">{corpo}</div>' if corpo else "",
         "__CONTADOR__": f"{numero:02d} / {total:02d}",
