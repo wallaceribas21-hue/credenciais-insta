@@ -1,4 +1,6 @@
-# Conectar o Instagram ao Claude Code
+# ✅ Conectar o Instagram ao Claude Code
+
+**Concluída em:** 2026-08-20
 
 **Criada em:** 2026-08-20
 **Prioridade:** alta
@@ -20,22 +22,27 @@ ambiente na nuvem bloqueia `graph.facebook.com`.
 | Instagram | **@wallaceribas_** |
 | Página do Facebook | **WR 03- Wallace** |
 | `FACEBOOK_PAGE_ID` | `512007262005431` ✅ já descoberto |
-| `INSTAGRAM_BUSINESS_ID` | ⬜ falta — sai do `descobrir_id.py` |
+| `INSTAGRAM_BUSINESS_ID` | `17841408395593838` ✅ |
+| Fluxo usado | Instagram Login (token `IGAA...`) |
+| Tipo da conta | MEDIA_CREATOR |
 
 ## Passos
 
-- [ ] Confirmar que a @wallaceribas_ é Business/Creator
-- [ ] Clonar o repositório na máquina local
-- [ ] `pip install -r instagram/requirements.txt`
-- [ ] Gerar o token (caminho A `IGAA...` ou caminho B `EAA...` — tanto faz)
-- [ ] `python instagram/scripts/descobrir_id.py`
+- [x] Confirmar que a @wallaceribas_ é Business/Creator
+- [x] Clonar o repositório na máquina local
+- [x] `pip install -r instagram/requirements.txt`
+- [x] Gerar o token (caminho A `IGAA...` ou caminho B `EAA...` — tanto faz)
+- [x] `python instagram/scripts/descobrir_id.py`
       (detecta o caminho, descobre o ID e escreve o `.env` sozinho)
-- [ ] `python instagram/scripts/verificar_conexao.py` → tem que passar nos 3 testes
-- [ ] Trocar por um token de longa duração (~60 dias)
+- [x] `python instagram/scripts/verificar_conexao.py` → tem que passar nos 3 testes
+- [ ] Trocar por um token de longa duração (~60 dias) — pendente
 
-## Pronto quando
+## Resultado
 
-`verificar_conexao.py` imprime `@wallaceribas_` e os 3 testes passam.
+`verificar_conexao.py` passou nos 3 testes com a conta @wallaceribas_.
+Configuração concluída em 2026-08-20.
+
+**Falta só:** trocar pelo token de longa duração antes que o atual expire.
 
 ## Observações
 
