@@ -160,7 +160,7 @@ def main():
 
     slides = ler_slides(args.arquivo)
     foto_css = foto_embutida(args.foto)
-    pasta = Path(args.saida)
+    pasta = Path(args.saida).resolve()
     pasta.mkdir(parents=True, exist_ok=True)
 
     antigos = sorted(pasta.glob("slide-*.png"))

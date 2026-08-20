@@ -1,0 +1,32 @@
+Esse post não fui eu que fiz.
+
+Eu escrevi uma linha dizendo o tema. O resto (a copy, os oito slides, a identidade visual e a publicação) foi a IA que resolveu.
+
+E o ponto aqui não é design. É o que já dá pra colocar uma IA pra executar dentro de uma empresa hoje.
+
+A maioria das pessoas usa pra escrever texto e para por aí. O salto acontece quando ela deixa de responder e começa a executar tarefa de verdade:
+
+• cruzar planilha de venda
+• montar relatório de campanha
+• organizar processo que ninguém documentou
+• conectar dois sistemas que nunca conversaram
+
+Coisa que ocupa a sua semana inteira e não precisa de você.
+
+Eu peguei a tarefa que mais consome o meu tempo, que é postar todo dia, e mandei ela resolver de ponta a ponta.
+
+PASSO 1. Conectou na API oficial do Instagram. Sem ferramenta de terceiro, sem mensalidade, sem intermediário lendo os meus dados. A conexão é direto com a Meta.
+
+PASSO 2. Aprendeu a minha identidade sozinha. Eu mandei print de quatro posts que eu acho bonito. Ela leu a paleta, a fonte e o espaçamento, e montou o meu manual de marca.
+
+PASSO 3. Agora eu escrevo o tema e ela faz copy, slides e publicação. Eu volto depois e o post já está no ar.
+
+Se isso resolve o meu problema de postar todo dia, imagina o que resolve na sua operação.
+
+Comenta COMO que eu te mostro o caminho.
+
+.
+.
+.
+
+#inteligenciaartificial #automacao #marketingdigital #trafegopago #gestordetrafego #empreendedorismo #produtividade #ia #negocios #agenciademarketing
