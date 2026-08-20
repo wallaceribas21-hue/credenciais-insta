@@ -9,6 +9,7 @@ Funciona com os dois fluxos (token IGAA... ou EAA...).
 Rode antes: python descobrir_id.py
 """
 import argparse
+import glob
 import sys
 import time
 from pathlib import Path
@@ -96,6 +97,27 @@ def esperar_processar(container_id, tentativas=12, intervalo=5):
     raise TimeoutError(f"nao ficou pronto em {tentativas * intervalo}s. Tente publicar de novo.")
 
 
+def expandir(padroes):
+    """Resolve padroes como slides/*.png.
+
+    O PowerShell do Windows nao expande curingas para programas externos
+    (o bash do Linux/Mac expande), entao fazemos isso aqui para o comando
+    funcionar igual nos dois sistemas.
+    """
+    arquivos = []
+    for padrao in padroes:
+        if any(c in padrao for c in "*?["):
+            achados = sorted(glob.glob(padrao))
+            if not achados:
+                print(f"ERRO: nenhuma imagem encontrada em '{padrao}'.")
+                print("  Confira se a pasta existe e se os arquivos sao .png ou .jpg.")
+                sys.exit(1)
+            arquivos.extend(achados)
+        else:
+            arquivos.append(padrao)
+    return arquivos
+
+
 def run(imagens, legenda, dry_run=False):
     if not IG_ID or not TOKEN:
         print(f"ERRO: credenciais ausentes ({ENV_PATH or 'nenhum .env encontrado'}).")
@@ -147,4 +169,4 @@ if __name__ == "__main__":
     parser.add_argument("--caption", required=True, help="legenda do post")
     parser.add_argument("--dry-run", action="store_true", help="valida sem publicar")
     args = parser.parse_args()
-    run(args.images, args.caption, args.dry_run)
+    run(expandir(args.images), args.caption, args.dry_run)
