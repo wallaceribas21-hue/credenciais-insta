@@ -1,0 +1,324 @@
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Anton'; src: url('__FONTES__/Anton-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Anton'; src: url('__FONTES__/Anton-400-latin-ext.woff2') format('woff2'); font-weight: 400; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Mono'; src: url('__FONTES__/JetBrainsMono-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Mono'; src: url('__FONTES__/JetBrainsMono-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-300-latin.woff2') format('woff2'); font-weight: 300; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-700-latin-ext.woff2') format('woff2'); font-weight: 700; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Mont'; src: url('__FONTES__/Montserrat-400-latin-ext.woff2') format('woff2'); font-weight: 400; unicode-range: U+0100-024F; }
+
+  :root {
+    --creme:   #E9DFCD;
+    --papel:   #F2EADC;
+    --tinta:   #0B0B0C;
+    --laranja: #FF6B1A;
+    --brasa:   #E8430A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  @page { size: 297mm 210mm; margin: 0; }
+
+  body {
+    width: 297mm; height: 210mm;
+    background: var(--creme);
+    font-family: 'Mont', sans-serif;
+    color: var(--tinta);
+    padding: 9mm;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .quadro {
+    position: relative;
+    height: 100%;
+    border: 2.5px solid var(--tinta);
+    background: var(--papel);
+    padding: 6mm;
+    display: flex; flex-direction: column; gap: 5mm;
+    overflow: hidden;
+  }
+
+  /* Grão leve: dá o aspecto de impresso em vez de exportado. */
+  .grao {
+    position: absolute; inset: 0;
+    opacity: .16; mix-blend-mode: multiply; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23g)'/%3E%3C/svg%3E");
+  }
+
+  .etiqueta-topo {
+    position: absolute; top: 2.2mm; left: 3mm;
+    font-family: 'Mono', monospace;
+    font-size: 6pt; font-weight: 700;
+    letter-spacing: .26em; text-transform: uppercase;
+    color: rgba(11,11,12,.42);
+  }
+
+  /* ---------- Faixa do título ---------- */
+  .faixa {
+    background: var(--laranja);
+    padding: 3.4mm 5mm 2.6mm;
+    text-align: center;
+  }
+  .faixa h1 {
+    font-family: 'Anton', sans-serif;
+    font-size: 34pt;
+    line-height: .96;
+    letter-spacing: .004em;
+    text-transform: uppercase;
+    color: var(--papel);
+  }
+
+  /* ---------- Painéis ---------- */
+  .painel { border: 2px solid var(--tinta); display: flex; flex-direction: column; }
+  .painel > h2 {
+    background: var(--laranja);
+    padding: 1.7mm 3mm 1.3mm;
+    text-align: center;
+    font-family: 'Mono', monospace;
+    font-size: 9pt; font-weight: 700;
+    letter-spacing: .3em; text-transform: uppercase;
+    color: var(--papel);
+  }
+  .painel > .corpo { flex: 1; padding: 4.5mm; }
+
+  .colunas { flex: 1; display: grid; grid-template-columns: 1.06fr 1fr; gap: 5mm; }
+
+  /* ---------- Cores ---------- */
+  .amostras { display: flex; justify-content: space-between; gap: 2.5mm; }
+  .cor { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 1.6mm; }
+  .disco {
+    width: 19mm; height: 19mm; border-radius: 50%;
+    border: 2px solid var(--tinta);
+  }
+  .cor .nome {
+    font-family: 'Mono', monospace;
+    font-size: 6.6pt; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase;
+    text-align: center; line-height: 1.25;
+  }
+  .cor .hex {
+    font-family: 'Mono', monospace;
+    font-size: 6.4pt; color: rgba(11,11,12,.62);
+  }
+  .cor .uso {
+    font-size: 6pt; line-height: 1.3; text-align: center;
+    color: rgba(11,11,12,.58); max-width: 24mm;
+  }
+
+  .nota {
+    margin-top: 4.5mm; padding: 2.6mm 3mm;
+    border: 1.5px dashed var(--tinta);
+    font-size: 7.4pt; line-height: 1.42;
+  }
+  .nota b { font-weight: 700; }
+  .nota .marcador {
+    font-family: 'Mono', monospace; font-weight: 700;
+    color: var(--brasa); letter-spacing: .1em;
+  }
+
+  /* ---------- Combinações ---------- */
+  .combos { margin-top: 4mm; }
+  .combos .rotulo {
+    font-family: 'Mono', monospace;
+    font-size: 6.2pt; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--brasa); margin-bottom: 2mm;
+  }
+  .combo { display: flex; align-items: stretch; height: 13mm; margin-bottom: 2mm; border: 1.5px solid var(--tinta); }
+  .combo .peca {
+    flex: 1; display: flex; align-items: center; padding: 0 3mm;
+    font-size: 8pt; font-weight: 700;
+  }
+  .combo .peca .fina { font-weight: 300; opacity: .72; }
+  .combo .selo-mini {
+    display: flex; align-items: center; padding: 0 2.4mm;
+    font-family: 'Mono', monospace;
+    font-size: 5.6pt; font-weight: 700;
+    letter-spacing: .12em; text-transform: uppercase;
+  }
+  .combo .quando {
+    display: flex; align-items: center; padding: 0 2.6mm;
+    border-left: 1.5px solid var(--tinta);
+    font-family: 'Mono', monospace;
+    font-size: 5.4pt; letter-spacing: .06em;
+    text-transform: uppercase; color: rgba(11,11,12,.55);
+    background: var(--papel); width: 27mm; line-height: 1.3;
+  }
+
+  /* ---------- Tipografia ---------- */
+  .bloco-tipo + .bloco-tipo { margin-top: 4mm; padding-top: 4mm; border-top: 1.5px solid rgba(11,11,12,.16); }
+  .bloco-tipo .rotulo {
+    font-family: 'Mono', monospace;
+    font-size: 6.2pt; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--brasa);
+    margin-bottom: 1.6mm;
+  }
+  .display {
+    font-family: 'Anton', sans-serif;
+    font-size: 25pt; line-height: 1.04;
+    text-transform: uppercase; letter-spacing: -.004em;
+  }
+  .titulo {
+    font-family: 'Mont', sans-serif;
+    font-weight: 700; font-size: 15pt; line-height: 1.18;
+    letter-spacing: -.018em;
+  }
+  .titulo .leve { font-weight: 300; color: rgba(11,11,12,.55); }
+  .corpo-demo {
+    font-family: 'Mont', sans-serif;
+    font-weight: 400; font-size: 8.6pt; line-height: 1.5;
+    color: rgba(11,11,12,.78);
+  }
+  .mono-demo {
+    font-family: 'Mono', monospace;
+    font-weight: 700; font-size: 7.6pt;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+  .spec {
+    font-family: 'Mono', monospace;
+    font-size: 5.9pt; color: rgba(11,11,12,.5);
+    letter-spacing: .05em; margin-top: 1.2mm;
+  }
+
+  /* ---------- Rodapé ---------- */
+  .rodape {
+    background: var(--tinta);
+    padding: 2.4mm;
+    text-align: center;
+    font-family: 'Mono', monospace;
+    font-size: 7.4pt; font-weight: 700;
+    letter-spacing: .2em; text-transform: uppercase;
+    color: var(--papel);
+  }
+</style>
+
+<div class="quadro">
+  <div class="grao"></div>
+  <div class="etiqueta-topo">// Wallace Ribas — padrão de identidade visual — v1.0</div>
+
+  <div class="faixa"><h1>Identidade Visual</h1></div>
+
+  <div class="colunas">
+
+    <!-- ============ CORES ============ -->
+    <section class="painel">
+      <h2>Cores</h2>
+      <div class="corpo">
+        <div class="amostras">
+          <div class="cor">
+            <div class="disco" style="background:#0B0B0C"></div>
+            <div class="nome">Preto</div>
+            <div class="hex">#0B0B0C</div>
+            <div class="uso">Fundo principal</div>
+          </div>
+          <div class="cor">
+            <div class="disco" style="background:#FF6B1A"></div>
+            <div class="nome">Laranja</div>
+            <div class="hex">#FF6B1A</div>
+            <div class="uso">A marca. Ênfase e selo</div>
+          </div>
+          <div class="cor">
+            <div class="disco" style="background:#E8430A"></div>
+            <div class="nome">Brasa</div>
+            <div class="hex">#E8430A</div>
+            <div class="uso">Fim do degradê do laranja</div>
+          </div>
+          <div class="cor">
+            <div class="disco" style="background:#E9DFCD"></div>
+            <div class="nome">Creme</div>
+            <div class="hex">#E9DFCD</div>
+            <div class="uso">Fundo claro alternativo</div>
+          </div>
+          <div class="cor">
+            <div class="disco" style="background:#FFFFFF"></div>
+            <div class="nome">Branco</div>
+            <div class="hex">#FFFFFF</div>
+            <div class="uso">O acabamento fino</div>
+          </div>
+        </div>
+
+        <div class="nota">
+          <span class="marcador">A+</span> &nbsp;O <b>branco puro</b> não é fundo, é acabamento.
+          Use em pouca quantidade quando a peça pedir elegância: um fio, um respiro,
+          uma palavra isolada. Em área grande ele apaga o laranja e a peça perde a assinatura.
+        </div>
+
+        <div class="nota" style="margin-top:2.6mm">
+          <span class="marcador">Regra</span> &nbsp;<b>O laranja é tempero, não é o prato.</b>
+          No máximo um elemento laranja por peça: o selo <i>ou</i> uma palavra <i>ou</i> um
+          sublinhado. Nunca os três.
+        </div>
+
+        <div class="combos">
+          <div class="rotulo">Combinações que funcionam</div>
+
+          <div class="combo">
+            <div class="peca" style="background:#0B0B0C;color:#FFFFFF">
+              Título&nbsp;<span class="fina">em peso leve</span>
+            </div>
+            <div class="selo-mini" style="background:#FF6B1A;color:#0B0B0C">selo</div>
+            <div class="quando">Padrão. Feed e story</div>
+          </div>
+
+          <div class="combo">
+            <div class="peca" style="background:#E9DFCD;color:#0B0B0C">
+              Título&nbsp;<span class="fina">em peso leve</span>
+            </div>
+            <div class="selo-mini" style="background:#0B0B0C;color:#E9DFCD">selo</div>
+            <div class="quando">Cartaz e material impresso</div>
+          </div>
+
+          <div class="combo">
+            <div class="peca" style="background:#FF6B1A;color:#0B0B0C">
+              Chamada curta
+            </div>
+            <div class="selo-mini" style="background:#0B0B0C;color:#FF6B1A">selo</div>
+            <div class="quando">Só em anúncio e promoção</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TIPOGRAFIA ============ -->
+    <section class="painel">
+      <h2>Tipografia</h2>
+      <div class="corpo">
+
+        <div class="bloco-tipo">
+          <div class="rotulo">Display · Anton</div>
+          <div class="display">A raposa marrom<br>salta sobre o cão</div>
+          <div class="spec">Caixa alta · entrelinha 1.04 · títulos de impacto</div>
+        </div>
+
+        <div class="bloco-tipo">
+          <div class="rotulo">Título · Montserrat 700 / 300</div>
+          <div class="titulo">As jogadas <span class="leve">de marketing</span> mais inteligentes</div>
+          <div class="spec">Sentence case · entrelinha mínima 1.16 · nunca abaixo disso</div>
+        </div>
+
+        <div class="bloco-tipo">
+          <div class="rotulo">Corpo · Montserrat 400</div>
+          <div class="corpo-demo">
+            A raposa marrom e ágil salta sobre o cão preguiçoso. Texto de apoio,
+            legenda e parágrafo corrido.
+          </div>
+          <div class="spec">Entrelinha 1.5 · largura máxima 86%</div>
+        </div>
+
+        <div class="bloco-tipo">
+          <div class="rotulo">Etiqueta · JetBrains Mono 700</div>
+          <div class="mono-demo">01 / 08 · Nº 271 · Arraste</div>
+          <div class="spec">Espaçamento .14em · números, contador e dado técnico</div>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <div class="rodape">A fonte única da verdade de como tudo aparece</div>
+</div>
