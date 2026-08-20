@@ -5,45 +5,15 @@ Uso:
     python verificar_conexao.py
 
 Roda isso ANTES de tentar publicar. Se passar nos 3 testes, esta tudo pronto.
+Funciona com os dois fluxos (token IGAA... ou EAA...).
 """
-import os
 import sys
-from pathlib import Path
 
 import requests
-from dotenv import load_dotenv
 
+import api
 
-def carregar_env():
-    atual = Path(__file__).resolve().parent
-    for pasta in [atual, *atual.parents]:
-        candidato = pasta / ".env"
-        if candidato.is_file():
-            load_dotenv(candidato)
-            return candidato
-    return None
-
-
-ENV_PATH = carregar_env()
-IG_ID = os.getenv("INSTAGRAM_BUSINESS_ID")
-TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
-BASE_URL = f"https://graph.facebook.com/{os.getenv('META_API_VERSION', 'v19.0')}"
-
-# Erros comuns da Meta traduzidos para portugues.
-DIAGNOSTICO = {
-    190: "Token invalido ou expirado. Gere um novo no Graph API Explorer.",
-    200: "Faltam permissoes. Adicione instagram_basic, instagram_content_publish e pages_read_engagement.",
-    100: "Parametro invalido. Confira se o INSTAGRAM_BUSINESS_ID esta correto.",
-    803: "Conta nao encontrada. Confirme que o Instagram e Business/Creator e esta vinculado a Pagina.",
-}
-
-
-def explicar(dados):
-    erro = dados.get("error", {})
-    codigo = erro.get("code")
-    msg = erro.get("message", "erro desconhecido")
-    dica = DIAGNOSTICO.get(codigo)
-    return f"{msg}" + (f"\n     -> {dica}" if dica else "")
+ENV_PATH, TOKEN, IG_ID, FLUXO, BASE_URL = api.carregar_credenciais()
 
 
 def main():
@@ -52,49 +22,56 @@ def main():
     print("[1/3] Credenciais no .env")
     if not ENV_PATH:
         print("  FALHOU: nenhum .env encontrado.")
-        print("  Copie instagram/.env.example para instagram/.env e preencha.")
+        print("  Rode: python instagram/scripts/descobrir_id.py")
         sys.exit(1)
     if not IG_ID or not TOKEN:
         print(f"  FALHOU: .env encontrado em {ENV_PATH}, mas faltam valores.")
-        print("  Preencha INSTAGRAM_BUSINESS_ID e INSTAGRAM_ACCESS_TOKEN.")
+        print("  Rode: python instagram/scripts/descobrir_id.py")
+        sys.exit(1)
+    if FLUXO is None:
+        print("  FALHOU: token nao reconhecido (deveria comecar com IGAA ou EAA).")
         sys.exit(1)
     print(f"  OK  ({ENV_PATH})")
+    print(f"      fluxo: {api.nome_fluxo(FLUXO)}")
 
     print("\n[2/3] Token valido")
     try:
         resp = requests.get(
             f"{BASE_URL}/me",
-            params={"fields": "id,name", "access_token": TOKEN},
+            params={"fields": "id,username", "access_token": TOKEN},
             timeout=30,
         )
     except requests.RequestException as e:
-        print(f"  FALHOU: sem acesso a graph.facebook.com ({e})")
+        print(f"  FALHOU: sem acesso a API da Meta ({e})")
         sys.exit(1)
     dados = resp.json()
     if "error" in dados:
-        print(f"  FALHOU: {explicar(dados)}")
+        print(f"  FALHOU: {api.explicar_erro(dados)}")
         sys.exit(1)
-    print(f"  OK  (autenticado como: {dados.get('name', dados.get('id'))})")
+    print("  OK")
 
-    print("\n[3/3] Conta do Instagram acessivel")
+    print("\n[3/3] Conta acessivel e pronta para publicar")
+    campos = "id,username,account_type" if FLUXO == api.FLUXO_INSTAGRAM else "id,username,name"
     resp = requests.get(
         f"{BASE_URL}/{IG_ID}",
-        params={"fields": "id,username,name,followers_count", "access_token": TOKEN},
+        params={"fields": campos, "access_token": TOKEN},
         timeout=30,
     )
     dados = resp.json()
     if "error" in dados:
-        print(f"  FALHOU: {explicar(dados)}")
+        print(f"  FALHOU: {api.explicar_erro(dados)}")
         sys.exit(1)
+    print("  OK")
 
-    print(f"  OK")
     print("\n--- Tudo certo! ---")
-    print(f"  Conta:     @{dados.get('username', '?')}")
-    print(f"  Nome:      {dados.get('name', '?')}")
-    print(f"  ID:        {dados.get('id')}")
-    if "followers_count" in dados:
-        print(f"  Seguidores: {dados['followers_count']}")
-    print("\nJa pode publicar com publish_instagram.py\n")
+    print(f"  Conta:  @{dados.get('username', '?')}")
+    if dados.get("name"):
+        print(f"  Nome:   {dados['name']}")
+    if dados.get("account_type"):
+        print(f"  Tipo:   {dados['account_type']}")
+    print(f"  ID:     {dados.get('id', IG_ID)}")
+    print("\nJa pode publicar:")
+    print('  python instagram/scripts/publish_instagram.py --images slides/*.png --caption "sua legenda"\n')
 
 
 if __name__ == "__main__":

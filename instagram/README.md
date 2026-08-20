@@ -10,53 +10,75 @@ Guia completo para conectar sua conta e publicar carrosséis automaticamente.
 
 ## Antes de começar
 
-Confirme os 3 pré-requisitos:
-
-1. **Conta do Instagram Profissional** (Business ou Creator)
-   Instagram → Configurações → Conta → Tipo de conta
-   Se for pessoal: converta para Creator. É gratuito e você não perde seguidores.
-
-2. **Página do Facebook vinculada** ao Instagram
-   Instagram → Configurações → Conta → Página vinculada
-
-3. **Acesso ao Facebook** que administra essa Página
+**Conta do Instagram Profissional** (Business ou Creator) —
+Instagram → Configurações → Conta → Tipo de conta.
+Se for pessoal: converta para Creator. É gratuito e você não perde seguidores.
 
 ---
 
-## Passo 1 — Abrir o Graph API Explorer
+## Existem dois caminhos — os scripts aceitam os dois
 
-Acesse: **https://developers.facebook.com/tools/explorer**
+A Meta tem duas formas de autorizar publicação, e o token de cada uma é
+diferente. **Escolha uma.** Os scripts detectam qual você usou pelo prefixo
+do token e se ajustam sozinhos.
 
-Entre com o Facebook que administra a Página.
+| | **A. Instagram Login** | **B. Facebook Login** |
+|---|---|---|
+| Token começa com | `IGAA...` | `EAA...` |
+| Servidor | `graph.instagram.com` | `graph.facebook.com` |
+| Precisa de Página do Facebook? | ❌ não | ✅ sim |
+| Dificuldade | mais simples | mais passos |
 
-No canto superior direito, em **"Meta App"**, escolha um app existente.
-Se não tiver nenhum: **Criar App** → tipo **Business** → nome qualquer (ex: `MeuBot`) → confirmar.
+> 💡 Se você seguiu um tutorial e acabou com um token `IGAA...`, você usou o
+> **caminho A**. Está certo — pule direto para o Passo 4.
 
 ---
 
-## Passo 2 — Selecionar a Página
+## Passo 1 — Criar/abrir o app
 
-Logo abaixo, no campo **"User or Page"**, selecione **sua Página do Facebook**.
+Acesse **https://developers.facebook.com/apps** e entre.
 
-> Não deixe em "Usuário" — tem que ser a Página.
+Escolha um app existente ou crie um novo (tipo **Business**, nome qualquer).
+
+---
+
+## Passo 2 — Configurar o produto
+
+### Caminho A — Instagram Login (recomendado)
+
+1. No menu lateral do app: **Instagram** → **Configuração da API**
+2. Escolha **"Configurar a API do Instagram com o login do Instagram"**
+3. Em **Gerar tokens de acesso**, clique em **Adicionar conta**
+4. Faça login com a **@wallaceribas_** e autorize
+
+### Caminho B — Facebook Login
+
+1. Abra o **Graph API Explorer**: developers.facebook.com/tools/explorer
+2. Em **"Meta App"**, escolha seu app
+3. Em **"User or Page"**, selecione a Página **WR 03- Wallace**
+   (não deixe em "Usuário")
 
 ---
 
 ## Passo 3 — Gerar o token
 
-1. Clique em **"Add a Permission"** e adicione as **3 permissões**:
-   - `instagram_basic`
-   - `instagram_content_publish`
-   - `pages_read_engagement`
+### Caminho A
 
-2. Clique em **"Generate Access Token"**
+Clique em **Gerar token** ao lado da conta. Copie — começa com `IGAA...`
 
-3. Autorize na janela que abrir (Continuar → OK em tudo)
+Permissões necessárias (o fluxo já pede automaticamente):
+`instagram_business_basic`, `instagram_business_content_publish`
 
-4. Copie o token que aparece (começa com `EAA...`)
+### Caminho B
+
+1. **"Add a Permission"** → adicione as 3:
+   `instagram_basic`, `instagram_content_publish`, `pages_read_engagement`
+2. **"Generate Access Token"** → autorize (Continuar → OK)
+3. Copie — começa com `EAA...`
 
 > 🔒 **Esse token é uma senha.** Ele dá acesso para publicar na sua conta.
 > Não mande por WhatsApp, não cole em chat, não suba pro GitHub.
+> Se vazar, revogue em: App → Configurações → Básico.
 
 ---
 
@@ -76,23 +98,31 @@ Um comando faz tudo — descobre o `INSTAGRAM_BUSINESS_ID` e escreve o `.env`:
 python instagram/scripts/descobrir_id.py
 ```
 
-Ele vai pedir o token (digitação oculta — não aparece na tela nem fica no
-histórico do terminal), listar suas contas com o `@usuario` de cada uma e
-deixar você escolher:
+Ele pede o token (digitação oculta — não aparece na tela nem fica no
+histórico do terminal), detecta qual caminho você usou e resolve o resto:
+
+**Caminho A (`IGAA...`)** — pega o ID direto, sem escolher nada:
 
 ```
-Contas disponiveis:
+Fluxo detectado: Instagram Login (graph.instagram.com)
 
-  [1] @wallaceribas_              Pagina: WR 03- Wallace  <- Pagina WR 03- Wallace
-      INSTAGRAM_BUSINESS_ID=17841...
-  [2] @outraconta                 Pagina: Outra Página
-      INSTAGRAM_BUSINESS_ID=17841...
+  Conta:  @wallaceribas_
+  Tipo:   BUSINESS
+  ID:     17841...
+```
+
+**Caminho B (`EAA...`)** — lista suas contas para você escolher:
+
+```
+Fluxo detectado: Facebook Login (graph.facebook.com)
+
+  [1] @wallaceribas_          Pagina: WR 03- Wallace  <- Pagina WR 03- Wallace
+  [2] @outraconta             Pagina: Outra Página
 
 Qual usar? (1-2)
 ```
 
-Escolha a `@wallaceribas_` e pronto — o `.env` é criado com permissão `600`
-(só você lê).
+Nos dois casos o `.env` é criado com permissão `600` (só você lê).
 
 > O `.env` já está no `.gitignore`. Ele **nunca** vai pro GitHub.
 
@@ -101,32 +131,39 @@ Escolha a `@wallaceribas_` e pronto — o `.env` é criado com permissão `600`
 
 ```bash
 cp instagram/.env.example instagram/.env
+```
+
+**Caminho A** — o `/me` já devolve tudo:
+```bash
+curl "https://graph.instagram.com/v23.0/me?fields=user_id,username&access_token=SEU_TOKEN"
+```
+
+**Caminho B** — procure a Página com `instagram_business_account`:
+```bash
 curl "https://graph.facebook.com/v19.0/me/accounts?fields=id,name,instagram_business_account&access_token=SEU_TOKEN"
 ```
 
-Na resposta, procure a Página com `instagram_business_account` e preencha o `.env`:
-
+Preencha o `.env` com o que voltou (o `FACEBOOK_PAGE_ID` só existe no caminho B):
 ```
-INSTAGRAM_BUSINESS_ID=17841400000000000    <- instagram_business_account.id
-FACEBOOK_PAGE_ID=512007262005431           <- Página "WR 03- Wallace"
-INSTAGRAM_ACCESS_TOKEN=EAA...
-META_API_VERSION=v19.0
+INSTAGRAM_BUSINESS_ID=17841400000000000
+FACEBOOK_PAGE_ID=512007262005431      # só no caminho B — Página "WR 03- Wallace"
+INSTAGRAM_ACCESS_TOKEN=IGAA... ou EAA...
 ```
 </details>
 
 ---
 
-## Passo 7 — Testar a conexão
+## Passo 6 — Testar a conexão
 
 ```bash
 python instagram/scripts/verificar_conexao.py
 ```
 
-Se aparecer o seu `@usuario` e a contagem de seguidores, está funcionando. ✅
+Se passar nos 3 testes e mostrar `@wallaceribas_`, está funcionando. ✅
 
 ---
 
-## Passo 8 — Publicar
+## Passo 7 — Publicar
 
 ```bash
 # Testar sem publicar de verdade:
@@ -150,15 +187,25 @@ python instagram/scripts/publish_instagram.py \
 
 ---
 
-## O token expira em 1 hora
+## Validade do token
 
-O token do Graph API Explorer é de curta duração. Para um token de ~60 dias:
+**Caminho A (`IGAA...`)** — o token já nasce com ~60 dias. Para renovar antes
+de expirar (só funciona com token ainda válido):
+
+```bash
+curl "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=SEU_TOKEN"
+```
+
+**Caminho B (`EAA...`)** — o token do Graph API Explorer **expira em 1 hora**.
+Troque por um de ~60 dias:
 
 ```bash
 curl "https://graph.facebook.com/v19.0/oauth/access_token?grant_type=fb_exchange_token&client_id=SEU_APP_ID&client_secret=SEU_APP_SECRET&fb_exchange_token=SEU_TOKEN_ATUAL"
 ```
 
-`APP_ID` e `APP_SECRET` ficam em: developers.facebook.com → seu App → Configurações → Básico.
+`APP_ID` e `APP_SECRET`: developers.facebook.com → seu App → Configurações → Básico.
+
+Quando expirar, rode o `descobrir_id.py` de novo com o token novo.
 
 ---
 
@@ -171,6 +218,8 @@ curl "https://graph.facebook.com/v19.0/oauth/access_token?grant_type=fb_exchange
 | `#100 image_url required` | Imagem local | O script já resolve — confira o caminho do arquivo |
 | `Instagram account not found` | Conta não é Business | Converta em Configurações → Conta |
 | `Pages not found` | Página não vinculada | Vincule em Instagram → Configurações → Página vinculada |
+| `#9007` | Limite de 25 posts/24h | Espere e tente de novo |
+| `Unsupported request` | Token e servidor trocados | Os scripts já resolvem — não edite `META_API_VERSION` na mão |
 
 O `verificar_conexao.py` já traduz esses erros automaticamente.
 
@@ -181,9 +230,10 @@ O `verificar_conexao.py` já traduz esses erros automaticamente.
 Esta sessão do Claude Code roda **num container na nuvem**, não no seu computador.
 Duas consequências:
 
-1. **`graph.facebook.com` está bloqueado** pela política de rede do ambiente
-   (o proxy responde `403` na conexão). Então nada que fale com a Meta API
-   — validar token, descobrir o ID, testar, publicar — funciona daqui.
+1. **A API da Meta está bloqueada** pela política de rede do ambiente —
+   tanto `graph.facebook.com` quanto `graph.instagram.com` respondem `403`
+   no proxy. Então validar token, descobrir o ID, testar e publicar não
+   funcionam daqui.
 
 2. **O container é temporário.** Um `.env` salvo aqui é apagado quando
    a sessão termina. Credencial precisa ficar na sua máquina.

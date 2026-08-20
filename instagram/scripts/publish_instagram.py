@@ -1,38 +1,23 @@
 """
-publish_instagram.py — Publicacao de carrossel no Instagram via Meta Graph API.
+publish_instagram.py — Publicacao de carrossel no Instagram.
 
 Uso:
     python publish_instagram.py --images slides/*.png --caption "sua legenda"
     python publish_instagram.py --images a.png b.png --caption "teste" --dry-run
 
-Requer um .env com INSTAGRAM_BUSINESS_ID e INSTAGRAM_ACCESS_TOKEN.
-Veja o .env.example na pasta instagram/.
+Funciona com os dois fluxos (token IGAA... ou EAA...).
+Rode antes: python descobrir_id.py
 """
 import argparse
-import os
 import sys
 import time
 from pathlib import Path
 
 import requests
-from dotenv import load_dotenv
 
+import api
 
-def carregar_env():
-    """Procura o .env subindo a partir da pasta do script."""
-    atual = Path(__file__).resolve().parent
-    for pasta in [atual, *atual.parents]:
-        candidato = pasta / ".env"
-        if candidato.is_file():
-            load_dotenv(candidato)
-            return candidato
-    return None
-
-
-ENV_PATH = carregar_env()
-IG_ID = os.getenv("INSTAGRAM_BUSINESS_ID")
-TOKEN = os.getenv("INSTAGRAM_ACCESS_TOKEN")
-BASE_URL = f"https://graph.facebook.com/{os.getenv('META_API_VERSION', 'v19.0')}"
+ENV_PATH, TOKEN, IG_ID, FLUXO, BASE_URL = api.carregar_credenciais()
 
 MIME = {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg"}
 
@@ -44,9 +29,6 @@ def hospedar_imagem(caminho):
     por link para qualquer pessoa que tenha a URL. Nao use com material sigiloso.
     """
     arquivo = Path(caminho)
-    if not arquivo.is_file():
-        raise FileNotFoundError(f"Imagem nao encontrada: {caminho}")
-
     tipo = MIME.get(arquivo.suffix.lower())
     if tipo is None:
         raise ValueError(f"Formato nao suportado: {arquivo.suffix} (use .png ou .jpg)")
@@ -65,78 +47,62 @@ def hospedar_imagem(caminho):
     return url
 
 
+def post(caminho_api, dados, contexto):
+    """POST na API da Meta, com erro traduzido."""
+    resp = requests.post(f"{BASE_URL}/{caminho_api}", data={**dados, "access_token": TOKEN}, timeout=60)
+    resultado = resp.json()
+    if "id" not in resultado:
+        raise RuntimeError(f"{contexto}: {api.explicar_erro(resultado)}")
+    return resultado["id"]
+
+
 def criar_container(caminho):
-    resp = requests.post(
-        f"{BASE_URL}/{IG_ID}/media",
-        data={
-            "access_token": TOKEN,
-            "image_url": hospedar_imagem(caminho),
-            "is_carousel_item": "true",
-        },
-        timeout=60,
+    container_id = post(
+        f"{IG_ID}/media",
+        {"image_url": hospedar_imagem(caminho), "is_carousel_item": "true"},
+        "erro ao enviar imagem",
     )
-    dados = resp.json()
-    if "id" not in dados:
-        raise RuntimeError(f"Erro ao criar container: {dados}")
-    print(f"    container: {dados['id']}")
-    return dados["id"]
+    print(f"    container: {container_id}")
+    return container_id
 
 
 def criar_carrossel(ids, legenda):
-    resp = requests.post(
-        f"{BASE_URL}/{IG_ID}/media",
-        data={
-            "access_token": TOKEN,
-            "media_type": "CAROUSEL",
-            "children": ",".join(ids),
-            "caption": legenda,
-        },
-        timeout=60,
+    carrossel_id = post(
+        f"{IG_ID}/media",
+        {"media_type": "CAROUSEL", "children": ",".join(ids), "caption": legenda},
+        "erro ao montar carrossel",
     )
-    dados = resp.json()
-    if "id" not in dados:
-        raise RuntimeError(f"Erro ao montar carrossel: {dados}")
-    print(f"    carrossel: {dados['id']}")
-    return dados["id"]
+    print(f"    carrossel: {carrossel_id}")
+    return carrossel_id
 
 
 def esperar_processar(container_id, tentativas=12, intervalo=5):
     for i in range(tentativas):
         resp = requests.get(
             f"{BASE_URL}/{container_id}",
-            params={"fields": "status_code,status", "access_token": TOKEN},
+            params={"fields": "status_code", "access_token": TOKEN},
             timeout=30,
         )
         dados = resp.json()
+        if "error" in dados:
+            raise RuntimeError(f"erro ao checar processamento: {api.explicar_erro(dados)}")
         status = dados.get("status_code", "")
         if status == "FINISHED":
             return
         if status == "ERROR":
-            raise RuntimeError(f"Meta retornou erro no processamento: {dados}")
+            raise RuntimeError(f"a Meta rejeitou o carrossel: {dados}")
         print(f"    processando... {i * intervalo}s")
         time.sleep(intervalo)
-    raise TimeoutError(
-        f"Container nao ficou pronto em {tentativas * intervalo}s. Tente publicar de novo."
-    )
-
-
-def publicar(container_id):
-    resp = requests.post(
-        f"{BASE_URL}/{IG_ID}/media_publish",
-        data={"access_token": TOKEN, "creation_id": container_id},
-        timeout=60,
-    )
-    dados = resp.json()
-    if "id" not in dados:
-        raise RuntimeError(f"Erro ao publicar: {dados}")
-    return dados["id"]
+    raise TimeoutError(f"nao ficou pronto em {tentativas * intervalo}s. Tente publicar de novo.")
 
 
 def run(imagens, legenda, dry_run=False):
     if not IG_ID or not TOKEN:
-        origem = ENV_PATH or "nenhum .env encontrado"
-        print(f"ERRO: credenciais ausentes ({origem}).")
-        print("Preencha INSTAGRAM_BUSINESS_ID e INSTAGRAM_ACCESS_TOKEN no .env.")
+        print(f"ERRO: credenciais ausentes ({ENV_PATH or 'nenhum .env encontrado'}).")
+        print("Rode: python instagram/scripts/descobrir_id.py")
+        sys.exit(1)
+    if FLUXO is None:
+        print("ERRO: token nao reconhecido (deveria comecar com IGAA ou EAA).")
         sys.exit(1)
     if not 2 <= len(imagens) <= 10:
         print(f"ERRO: carrossel precisa de 2 a 10 imagens (recebi {len(imagens)}).")
@@ -149,9 +115,10 @@ def run(imagens, legenda, dry_run=False):
             print(f"  - {i}")
         sys.exit(1)
 
-    print(f"\nPublicando {len(imagens)} slides no Instagram (conta {IG_ID})")
+    print(f"\nPublicando {len(imagens)} slides (conta {IG_ID})")
+    print(f"Fluxo: {api.nome_fluxo(FLUXO)}")
     if dry_run:
-        print("[DRY RUN] Credenciais e imagens OK. Remova --dry-run para publicar de verdade.")
+        print("\n[DRY RUN] Credenciais e imagens OK. Remova --dry-run para publicar.")
         return
 
     try:
@@ -163,9 +130,12 @@ def run(imagens, legenda, dry_run=False):
 
         print("\nPasso 3/3 - publicando")
         esperar_processar(carrossel_id)
-        post_id = publicar(carrossel_id)
-    except (RuntimeError, TimeoutError, FileNotFoundError, ValueError) as e:
+        post_id = post(f"{IG_ID}/media_publish", {"creation_id": carrossel_id}, "erro ao publicar")
+    except (RuntimeError, TimeoutError, ValueError) as e:
         print(f"\nFALHOU: {e}")
+        sys.exit(1)
+    except requests.RequestException as e:
+        print(f"\nFALHOU: problema de rede ({e})")
         sys.exit(1)
 
     print(f"\nPublicado! Post ID: {post_id}")

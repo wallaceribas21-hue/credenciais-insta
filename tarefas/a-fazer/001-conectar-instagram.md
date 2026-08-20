@@ -27,10 +27,9 @@ ambiente na nuvem bloqueia `graph.facebook.com`.
 - [ ] Confirmar que a @wallaceribas_ é Business/Creator
 - [ ] Clonar o repositório na máquina local
 - [ ] `pip install -r instagram/requirements.txt`
-- [ ] Gerar o token no Graph API Explorer com as 3 permissões,
-      selecionando a Página **WR 03- Wallace**
-- [ ] `python instagram/scripts/descobrir_id.py` → escolher a @wallaceribas_
-      (descobre o ID e escreve o `.env` sozinho)
+- [ ] Gerar o token (caminho A `IGAA...` ou caminho B `EAA...` — tanto faz)
+- [ ] `python instagram/scripts/descobrir_id.py`
+      (detecta o caminho, descobre o ID e escreve o `.env` sozinho)
 - [ ] `python instagram/scripts/verificar_conexao.py` → tem que passar nos 3 testes
 - [ ] Trocar por um token de longa duração (~60 dias)
 
@@ -45,7 +44,9 @@ ambiente na nuvem bloqueia `graph.facebook.com`.
 - O `.env` está bloqueado pelo `.gitignore`. Nunca subir credencial pro GitHub.
 - **Precisa rodar na máquina local**: o ambiente do Claude Code na nuvem
   bloqueia `graph.facebook.com` (403 no CONNECT do proxy)
-- Tentei descobrir o `INSTAGRAM_BUSINESS_ID` pelos conectores da Meta e do
-  Reportei sem sucesso: a consulta `ads_get_ig_accounts` não está liberada
-  em nenhuma das 5 contas de anúncio testadas, e a @wallaceribas_ não está
-  no Reportei. Por isso o passo do token é inevitável.
+- Tentei descobrir o `INSTAGRAM_BUSINESS_ID` pelo conector da Meta sem sucesso:
+  a consulta `ads_get_ig_accounts` não está liberada em nenhuma das 5 contas
+  de anúncio testadas. Por isso o passo do token é inevitável.
+- Os scripts aceitam **os dois fluxos** da Meta (token `IGAA...` do Instagram
+  Login e `EAA...` do Facebook Login) — `api.py` detecta pelo prefixo e
+  aponta para o servidor certo. O `FACEBOOK_PAGE_ID` só é usado no fluxo `EAA`.
