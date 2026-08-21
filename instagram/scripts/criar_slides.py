@@ -65,7 +65,7 @@ MARGEM_PALCO = 76   # a margem lateral do texto
 FOLGA = 34          # respiro minimo entre a imagem e a letra
 
 
-def caixa_do_recorte(layout, medida):
+def caixa_do_recorte(layout, medida, espelhar=False):
     """Decide onde o recorte entra, a partir da forma da imagem.
 
     A regra vem do desenho, nao da conveniencia:
@@ -76,7 +76,10 @@ def caixa_do_recorte(layout, medida):
       ocupando o quadro todo. Espremer um sujeito largo na lateral tapa
       a letra e ainda deixa ele pequeno demais para ser lido.
 
-    Devolve (estilo_do_recorte, largura_maxima_do_titulo_ou_None).
+    - O lado ALTERNA de slide para slide. Com a imagem sempre a direita o
+      carrossel fica previsivel e o olho para de procurar.
+
+    Devolve (estilo, limite_do_texto, espelhado).
     """
     caixa = CAIXAS.get(layout, CAIXAS["declaracao"])
     largura, altura = caixa["w"], caixa["h"]
@@ -93,8 +96,9 @@ def caixa_do_recorte(layout, medida):
         if altura > 430:
             altura = 430
             largura = round(altura * proporcao)
-        estilo = f"width:{largura}px;height:{altura}px;right:{caixa['dir']}px;top:96px"
-        return estilo, None
+        lado = "left" if espelhar else "right"
+        estilo = f"width:{largura}px;height:{altura}px;{lado}:{caixa['dir']}px;top:96px"
+        return estilo, None, False
 
     if medida:
         escala = min(largura / medida[0], altura / medida[1])
@@ -103,16 +107,16 @@ def caixa_do_recorte(layout, medida):
     partes = [f"width:{largura}px", f"height:{altura}px"]
     if caixa.get("centro"):
         partes += [f"left:{round((1080 - largura) / 2)}px", f"top:{caixa['topo']}px"]
-        return ";".join(partes), None
-    if "topo" in caixa:
-        partes += [f"right:{caixa['dir']}px", f"top:{caixa['topo']}px"]
-        # Imagem no topo e texto embaixo: so o titulo curto precisa de limite.
-        return ";".join(partes), 1080 - caixa["dir"] - largura - MARGEM_PALCO - FOLGA
+        return ";".join(partes), None, False
 
-    partes += [f"right:{caixa['dir']}px", f"bottom:{caixa['base']}px"]
-    # Imagem na lateral: o texto vai exatamente ate onde ela comeca.
+    lado = "left" if espelhar else "right"
+    # O texto vai exatamente ate onde a imagem comeca, com folga.
     limite = 1080 - caixa["dir"] - largura - MARGEM_PALCO - FOLGA
-    return ";".join(partes), limite
+    if "topo" in caixa:
+        partes += [f"{lado}:{caixa['dir']}px", f"top:{caixa['topo']}px"]
+    else:
+        partes += [f"{lado}:{caixa['dir']}px", f"bottom:{caixa['base']}px"]
+    return ";".join(partes), limite, espelhar
 
 
 # Onde o texto senta em cada slide. Layout com muito conteudo fica sempre
@@ -445,9 +449,23 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
         "" if tem_recorte else "sem-recorte",
     ]))
     if tem_recorte:
-        estilo_recorte, limite = caixa_do_recorte(layout, recorte_medida)
-        limite_css = (f"<style>.palco h1,.palco .apoio,.palco .regua"
-                      f"{{max-width:{max(limite, 320)}px}}</style>") if limite else ""
+        # Slide par joga a imagem para a esquerda. Sempre do mesmo lado o
+        # carrossel vira padrao e o olho para de procurar.
+        estilo_recorte, limite, espelhado = caixa_do_recorte(
+            layout, recorte_medida, espelhar=(numero % 2 == 0))
+        regras = []
+        if limite:
+            largura_texto = max(limite, 320)
+            regras.append(f".palco h1,.palco .apoio,.palco .regua"
+                          f"{{max-width:{largura_texto}px}}")
+            if espelhado:
+                # A imagem foi para a esquerda: o texto anda para a direita
+                # exatamente o que sobra, senao os dois se sobrepoem.
+                recuo = 1080 - MARGEM_PALCO * 2 - largura_texto
+                regras.append(f".palco h1,.palco .apoio,.palco .regua,.palco .selo,"
+                              f".palco .lista,.palco .fluxo,.palco .versus"
+                              f"{{margin-left:{recuo}px}}")
+        limite_css = f"<style>{''.join(regras)}</style>" if regras else ""
     else:
         estilo_recorte, limite_css = "", ""
 
