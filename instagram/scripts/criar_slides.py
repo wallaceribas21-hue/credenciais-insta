@@ -38,6 +38,37 @@ FONTES = AQUI.parent / "fontes"
 
 # Titulo curto pode ser grande; titulo longo precisa encolher para caber.
 LAYOUTS = ("capa", "declaracao", "numero", "lista", "fluxo", "comparacao", "fecho")
+FUNDOS = ("creme", "laranja", "preto")
+
+# Ritmo do carrossel: um fundo calmo entre cada fundo forte, para o feed
+# nao ficar nem monotono nem cansativo.
+RITMO = ("creme", "preto", "creme", "laranja", "creme", "preto", "creme", "laranja",
+         "creme", "preto")
+
+# Cada slide recebe uma combinacao de elementos graficos diferente, para a
+# arte nao se repetir. As receitas alternam de forma previsivel.
+CARIMBO = "Wallace<br>Ribas"
+
+RECEITAS = [
+    '<div class="camada reticula canto-sd"></div>'
+    '<div class="disco" style="width:150px;height:150px;left:-46px;bottom:210px;opacity:.9"></div>',
+
+    '<div class="barra-diag" style="top:250px"></div>'
+    '<div class="camada reticula faixa-baixo"></div>',
+
+    '<div class="camada reticula coluna-esq"></div>'
+    '<div class="carimbo" style="top:120px;right:96px">__CARIMBO__</div>',
+
+    '<div class="disco" style="width:520px;height:520px;right:-170px;top:-130px"></div>'
+    '<div class="camada hachura" style="inset:auto 0 0 0;height:190px;'
+    '-webkit-mask-image:linear-gradient(to top,#000 6%,transparent 88%)"></div>',
+
+    '<div class="camada reticula faixa-baixo"></div>'
+    '<div class="disco" style="width:230px;height:230px;right:110px;top:96px"></div>',
+
+    '<div class="carimbo" style="top:130px;left:92px">__CARIMBO__</div>'
+    '<div class="camada reticula canto-sd"></div>',
+]
 
 FAIXAS = {
     "wind":   [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)],
@@ -84,14 +115,18 @@ def ler_slides(caminho):
         if not linhas:
             continue
         # [selo] e {layout} podem vir em qualquer ordem, antes do titulo.
-        selo, layout, numerao = "", "declaracao", ""
+        selo, layout, numerao, fundo = "", "declaracao", "", ""
         while linhas:
             linha = linhas[0]
             if linha.startswith("[") and linha.endswith("]"):
                 selo = linha[1:-1].strip()
             elif linha.startswith("{") and "}" in linha:
                 fecha = linha.index("}")
-                layout = linha[1:fecha].strip().lower()
+                dentro = linha[1:fecha].strip().lower().split()
+                layout = dentro[0] if dentro else "declaracao"
+                for extra in dentro[1:]:
+                    if extra in FUNDOS:
+                        fundo = extra
                 if layout not in LAYOUTS:
                     print(f"ERRO: layout '{layout}' nao existe. Use: {', '.join(LAYOUTS)}")
                     sys.exit(1)
@@ -115,7 +150,8 @@ def ler_slides(caminho):
         itens = [l[2:].strip() for l in linhas[1:] if l.startswith("- ")]
         apoio = [l for l in linhas[1:] if not l.startswith("- ")]
         slides.append({"selo": selo, "layout": layout, "numerao": numerao,
-                       "titulo": linhas[0], "itens": itens, "apoio": apoio})
+                       "fundo": fundo, "titulo": linhas[0], "itens": itens,
+                       "apoio": apoio})
 
     if not slides:
         print("ERRO: o arquivo esta vazio.")
@@ -124,6 +160,22 @@ def ler_slides(caminho):
         print(f"ERRO: {len(slides)} slides. O Instagram aceita no maximo 10.")
         sys.exit(1)
     return slides
+
+
+def fotos_da_pasta(pasta):
+    """Procura foto-01, foto-02... na pasta e casa cada uma com o seu slide."""
+    if not pasta:
+        return {}
+    diretorio = Path(pasta)
+    if not diretorio.is_dir():
+        print(f"ERRO: pasta de fotos nao encontrada: {pasta}")
+        sys.exit(1)
+    achadas = {}
+    for arquivo in sorted(diretorio.iterdir()):
+        casa = re.match(r"(foto|recorte)-?(\d+)", arquivo.stem, re.I)
+        if casa and arquivo.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+            achadas[(casa.group(1).lower(), int(casa.group(2)))] = arquivo
+    return achadas
 
 
 def foto_embutida(caminho):
@@ -174,11 +226,21 @@ def montar_corpo(slide):
     return ""
 
 
-def montar_html(slide, numero, total, marca, foto_css, estilo):
+def montar_html(slide, numero, total, marca, foto_css, recorte_css, estilo):
     modelo = TEMPLATES[estilo].read_text(encoding="utf-8")
     corpo = "".join(f"<p>{marcar(l)}</p>" for l in slide["apoio"])
     layout = slide["layout"] if numero > 1 else "capa"
-    classes = " ".join(filter(None, ["capa" if numero == 1 else "", f"l-{layout}"]))
+    fundo = slide["fundo"] or RITMO[(numero - 1) % len(RITMO)]
+    tem_foto = foto_css != "none"
+    tem_recorte = recorte_css != "none"
+    classes = " ".join(filter(None, [
+        f"l-{layout}", f"f-{fundo}",
+        "" if tem_foto else "sem-foto",
+        "" if tem_recorte else "sem-recorte",
+    ]))
+    # Sem foto, a receita grafica precisa preencher mais o quadro.
+    receita = RECEITAS[(numero - 1 + (0 if (tem_foto or tem_recorte) else 3)) % len(RECEITAS)]
+    receita = receita.replace("__CARIMBO__", CARIMBO)
     if estilo == "poster":
         arrasta = "Arraste &rarr;" if numero < total else "Fim"
     else:
@@ -195,6 +257,8 @@ def montar_html(slide, numero, total, marca, foto_css, estilo):
         "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
         "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1, layout)),
         "__CLASSES__": classes,
+        "__DECORACAO__": receita,
+        "__RECORTE__": recorte_css,
         "__NUMERAO__": f'<div class="numerao">{html.escape(slide["numerao"])}</div>' if slide["numerao"] else "",
         "__CORPO__": montar_corpo(slide),
         "__TITULO__": marcar(slide["titulo"]),
@@ -211,7 +275,8 @@ def main():
     parser = argparse.ArgumentParser(description="Cria slides de carrossel a partir de um .txt")
     parser.add_argument("arquivo", help="arquivo de texto com os slides separados por ---")
     parser.add_argument("--marca", default="WALLACE RIBAS", help="assinatura no topo do slide")
-    parser.add_argument("--foto", default="", help="imagem de fundo (opcional)")
+    parser.add_argument("--foto", default="", help="uma imagem para todos os slides")
+    parser.add_argument("--fotos", default="", help="pasta com foto-01/recorte-01... uma por slide")
     parser.add_argument("--saida", default="slides", help="pasta onde salvar (padrao: slides)")
     parser.add_argument("--estilo", default="wind", choices=list(TEMPLATES),
                         help="wind = escuro moderno; poster = creme retro")
@@ -227,7 +292,8 @@ def main():
         sys.exit(1)
 
     slides = ler_slides(args.arquivo)
-    foto_css = foto_embutida(args.foto)
+    foto_unica = foto_embutida(args.foto)
+    mapa_fotos = fotos_da_pasta(args.fotos)
     pasta = Path(args.saida).resolve()
     pasta.mkdir(parents=True, exist_ok=True)
 
@@ -246,7 +312,11 @@ def main():
             navegador = p.chromium.launch(executable_path=atalho) if atalho else p.chromium.launch()
             pagina = navegador.new_page(viewport={"width": 1080, "height": 1080})
             for i, slide in enumerate(slides, start=1):
-                temp.write_text(montar_html(slide, i, len(slides), args.marca, foto_css, args.estilo), encoding="utf-8")
+                temp.write_text(montar_html(
+                    slide, i, len(slides), args.marca,
+                    foto_embutida(mapa_fotos[("foto", i)]) if ("foto", i) in mapa_fotos else foto_unica,
+                    foto_embutida(mapa_fotos[("recorte", i)]) if ("recorte", i) in mapa_fotos else "none",
+                    args.estilo), encoding="utf-8")
                 pagina.goto(temp.as_uri())
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
                 destino = pasta / f"slide-{i:02d}.png"
