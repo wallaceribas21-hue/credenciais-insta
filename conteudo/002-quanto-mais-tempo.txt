@@ -2,12 +2,12 @@
 Pedi um post pra IA e veio *horrível*
 Na primeira vez. E na segunda também.
 ---
-{declaracao}
+{declaracao img:pastas}
 E é exatamente *por isso* que hoje funciona
 Cada erro dela virou uma regra escrita.
 Nada foi jogado fora.
 ---
-{comparacao}
+{comparacao img:escada}
 O que mudou entre a primeira e a terceira
 - Tentativa 1 | Bonito e genérico
 - Tentativa 3 | Parece meu
@@ -17,7 +17,7 @@ Não foi a IA que ficou mais *inteligente*
 Foi o _contexto_ que ela passou a ter.
 A ferramenta é a mesma. O que mudou fui eu ensinando.
 ---
-{fluxo}
+{fluxo img:engrenagens}
 O processo que fez ela virar minha
 - Mandei referência do que eu acho bonito
 - Corrigi o que saiu torto, e ela escreveu a regra
@@ -35,7 +35,7 @@ E isso não é só pra quem posta
 - Loja: cruzar estoque parado com o que mais sai
 - Barbearia: preencher horário vago da semana
 ---
-{fecho}
+{fecho img:telefone}
 [me chama no direct]
 Cada mercado usa de um jeito _diferente_
 O seu tem uma tarefa que come seu tempo e não precisa de você.

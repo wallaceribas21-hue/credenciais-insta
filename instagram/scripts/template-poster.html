@@ -342,6 +342,10 @@
 
   /* ============ FECHO ============ */
   body.l-fecho .palco { justify-content: center; align-items: center; text-align: center; }
+  /* Fecho COM imagem: a imagem fica centralizada no topo e o texto tambem
+     se centraliza no quadro, entao os dois caiam um em cima do outro.
+     O texto passa a se centralizar so na metade de baixo. */
+  body.l-fecho:not(.sem-recorte) .palco { padding-top: 512px; }
   body.l-fecho h1 { text-align: center; }
   body.l-fecho .selo { align-self: center; }
   body.l-fecho .regua { width: 200px; align-self: center; }

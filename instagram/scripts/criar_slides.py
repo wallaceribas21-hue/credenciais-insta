@@ -57,7 +57,7 @@ CAIXAS = {
     "lista":      {"w": 400, "h": 400, "dir": 40, "topo": 74},
     "fluxo":      {"w": 400, "h": 400, "dir": 36, "topo": 74},
     "comparacao": {"w": 380, "h": 380, "dir": 44, "topo": 70},
-    "fecho":      {"w": 430, "h": 380, "centro": True, "topo": 96},
+    "fecho":      {"w": 400, "h": 350, "centro": True, "topo": 92},
 }
 
 
