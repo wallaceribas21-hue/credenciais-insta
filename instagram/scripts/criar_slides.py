@@ -115,6 +115,47 @@ def caixa_do_recorte(layout, medida):
     return ";".join(partes), limite
 
 
+# Onde o texto senta em cada slide. Layout com muito conteudo fica sempre
+# embaixo, porque precisa do espaco; os de pouco texto alternam.
+ANCORAS = {
+    "capa": "baixo", "lista": "baixo", "fluxo": "baixo",
+    "comparacao": "baixo", "fecho": "centro",
+}
+RITMO_ANCORA = ("baixo", "topo", "baixo", "centro", "topo", "baixo")
+
+
+def ancora_do_slide(layout, numero, tem_recorte):
+    if layout in ANCORAS:
+        return ANCORAS[layout]
+    ancora = RITMO_ANCORA[(numero - 1) % len(RITMO_ANCORA)]
+    # Texto no topo sem imagem embaixo deixa metade do quadro vazia.
+    if ancora == "topo" and not tem_recorte:
+        return "centro"
+    return ancora
+
+
+# Alturas da ponte. O par de slides (1-2, 3-4, ...) divide a MESMA altura:
+# a forma sai pela direita de um quadro e entra pela esquerda do seguinte
+# no mesmo ponto, entao o arrasto le como uma peca so.
+ALTURAS_PONTE = (250, 690, 420, 150, 560)
+
+# So estes pixels entram no quadro. O texto comeca em 76px da borda, entao
+# a ponte nunca alcanca uma letra, em qualquer ancora.
+PONTE_DENTRO = 72
+PONTE_TAMANHO = 320
+
+
+def ponte_entre_slides(numero, total):
+    """Forma que sai por um lado e entra pelo outro no slide seguinte."""
+    if numero >= total:
+        return ""
+    altura = ALTURAS_PONTE[((numero - 1) // 2) % len(ALTURAS_PONTE)]
+    lado = "right" if numero % 2 == 1 else "left"
+    fora = PONTE_TAMANHO - PONTE_DENTRO
+    return (f'<div class="ponte" style="width:{PONTE_TAMANHO}px;'
+            f'height:{PONTE_TAMANHO}px;{lado}:-{fora}px;top:{altura}px"></div>')
+
+
 CARIMBO = "Wallace<br>Ribas"
 
 RECEITAS = [
@@ -346,8 +387,9 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
     recorte_css, recorte_medida = recorte
     tem_foto = foto_css != "none"
     tem_recorte = recorte_css != "none"
+    ancora = ancora_do_slide(layout, numero, tem_recorte)
     classes = " ".join(filter(None, [
-        f"l-{layout}", f"f-{fundo}",
+        f"l-{layout}", f"f-{fundo}", f"a-{ancora}",
         "" if tem_foto else "sem-foto",
         "" if tem_recorte else "sem-recorte",
     ]))
@@ -378,6 +420,7 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
         "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1, layout)),
         "__CLASSES__": classes,
         "__DECORACAO__": receita,
+        "__PONTE__": ponte_entre_slides(numero, total),
         "__RECORTE__": recorte_css,
         "__CAIXA_RECORTE__": estilo_recorte,
         "__LIMITE_TEXTO__": limite_css,

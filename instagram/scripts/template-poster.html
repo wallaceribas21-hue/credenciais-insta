@@ -162,10 +162,30 @@
   .et-esq { top: 52px; left: 58px; }
   .et-dir { top: 52px; right: 58px; }
 
-  /* ============ PALCO ============ */
+  /* ============ PALCO ============
+     A ancora do texto muda de slide para slide. Se todo quadro tem o
+     texto no mesmo lugar, o olho relaxa no meio do carrossel e a pessoa
+     sai. Alternar a altura obriga a reler a cada arraste. */
   .palco {
-    position: absolute; left: 76px; right: 76px; bottom: 92px;
+    position: absolute; left: 76px; right: 76px;
     display: flex; flex-direction: column;
+  }
+  /* O fecho ja se centraliza sozinho mais abaixo, por isso fica de fora:
+     as duas regras juntas empurravam o texto para fora do quadro. */
+  body.a-baixo:not(.l-fecho)  .palco { bottom: 92px; }
+  body.a-topo:not(.l-fecho)   .palco { top: 150px; bottom: auto; }
+  body.a-centro:not(.l-fecho) .palco { top: 50%; bottom: auto; transform: translateY(-50%); }
+
+  /* ============ PONTE ENTRE SLIDES ============
+     A mesma forma sai pela direita de um slide e entra pela esquerda do
+     seguinte, na mesma altura. No arraste os dois quadros parecem uma
+     peca continua, e e isso que segura o dedo ate o final.
+     Ela entra so um pedaco: forma grande sobre texto tapa palavra. */
+  .ponte {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--realce);
+    opacity: .92;
   }
 
   .selo {
@@ -189,8 +209,10 @@
   }
   h1 .cor  { color: var(--realce); }
   body.f-laranja h1 .cor { color: #FFF6EE; }
-  h1 .leve { color: transparent; -webkit-text-stroke: 2.5px var(--realce); }
-  body.f-laranja h1 .leve { -webkit-text-stroke: 3.5px var(--tinta); }
+  /* Palavra _assim_: contorno COM miolo cheio. So contorno, sem
+     preenchimento, some no feed pequeno do celular. */
+  h1 .leve { color: var(--realce); -webkit-text-stroke: 3px var(--contra); paint-order: stroke fill; }
+  body.f-laranja h1 .leve { color: #FFF6EE; -webkit-text-stroke: 4px var(--tinta); }
   h1 .sub {
     background-image: linear-gradient(var(--realce), var(--realce));
     background-size: 100% 9px; background-position: 0 96%; background-repeat: no-repeat;
@@ -323,6 +345,7 @@ __LIMITE_TEXTO__
 
 __DECORACAO__
 
+__PONTE__
 <div class="anel-fecho"></div>
 <div class="recorte" style="__CAIXA_RECORTE__"></div>
 <div class="camada grao" style="z-index:6"></div>
