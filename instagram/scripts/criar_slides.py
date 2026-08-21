@@ -37,6 +37,8 @@ TEMPLATES = {"wind": AQUI / "template.html", "poster": AQUI / "template-poster.h
 FONTES = AQUI.parent / "fontes"
 
 # Titulo curto pode ser grande; titulo longo precisa encolher para caber.
+LAYOUTS = ("capa", "declaracao", "numero", "lista", "fluxo", "comparacao", "fecho")
+
 FAIXAS = {
     "wind":   [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)],
     "poster": [(24, 118), (48, 96), (78, 80), (115, 66), (999, 56)],
@@ -44,8 +46,11 @@ FAIXAS = {
 }
 
 
-def tamanho_titulo(texto, estilo, capa=False):
+def tamanho_titulo(texto, estilo, capa=False, layout="declaracao"):
     limpo = re.sub(r"[*_]", "", texto)
+    # Layouts com muito conteudo abaixo precisam de titulo menor.
+    if layout in ("lista", "fluxo", "comparacao", "numero"):
+        return {"numero": 58, "comparacao": 56}.get(layout, 52)
     chave = f"{estilo}-capa" if capa and f"{estilo}-capa" in FAIXAS else estilo
     faixas = FAIXAS[chave]
     for limite, tam in faixas:
@@ -78,15 +83,39 @@ def ler_slides(caminho):
         linhas = [l.strip() for l in bloco.strip().splitlines() if l.strip()]
         if not linhas:
             continue
-        # Primeira linha entre colchetes vira selo; o titulo passa a ser a seguinte.
-        selo = ""
-        if linhas[0].startswith("[") and linhas[0].endswith("]"):
-            selo = linhas[0][1:-1].strip()
+        # [selo] e {layout} podem vir em qualquer ordem, antes do titulo.
+        selo, layout, numerao = "", "declaracao", ""
+        while linhas:
+            linha = linhas[0]
+            if linha.startswith("[") and linha.endswith("]"):
+                selo = linha[1:-1].strip()
+            elif linha.startswith("{") and "}" in linha:
+                fecha = linha.index("}")
+                layout = linha[1:fecha].strip().lower()
+                if layout not in LAYOUTS:
+                    print(f"ERRO: layout '{layout}' nao existe. Use: {', '.join(LAYOUTS)}")
+                    sys.exit(1)
+                resto = linha[fecha + 1:].strip()
+                if resto:
+                    linhas[0] = resto
+                    continue
+            else:
+                break
             linhas = linhas[1:]
+
+        # No layout numero, a linha seguinte e o proprio numero gigante.
+        if layout == "numero" and linhas:
+            numerao, linhas = linhas[0], linhas[1:]
+
         if not linhas:
-            print(f"ERRO: um slide tem o selo '[{selo}]' mas nenhum titulo depois.")
+            print("ERRO: um slide tem selo ou layout mas nenhum titulo depois.")
             sys.exit(1)
-        slides.append({"selo": selo, "titulo": linhas[0], "apoio": linhas[1:]})
+
+        # Linhas que comecam com "- " sao itens; o resto e texto de apoio.
+        itens = [l[2:].strip() for l in linhas[1:] if l.startswith("- ")]
+        apoio = [l for l in linhas[1:] if not l.startswith("- ")]
+        slides.append({"selo": selo, "layout": layout, "numerao": numerao,
+                       "titulo": linhas[0], "itens": itens, "apoio": apoio})
 
     if not slides:
         print("ERRO: o arquivo esta vazio.")
@@ -110,9 +139,46 @@ def foto_embutida(caminho):
     return f"url('data:{tipo};base64,{dados}')"
 
 
+def montar_corpo(slide):
+    """Cada layout desenha o miolo do slide do seu proprio jeito."""
+    layout, itens = slide["layout"], slide["itens"]
+
+    if layout == "lista" and itens:
+        linhas = "".join(
+            f'<div class="item"><span class="marca-item">{i:02d}</span>'
+            f'<span class="txt-item">{marcar(x)}</span></div>'
+            for i, x in enumerate(itens, start=1)
+        )
+        return f'<div class="lista">{linhas}</div>'
+
+    if layout == "fluxo" and itens:
+        etapas = "".join(
+            f'<div class="etapa"><div class="trilho"><div class="bolha">{i}</div>'
+            f'<div class="fio-v"></div></div>'
+            f'<div class="corpo-etapa">{marcar(x)}</div></div>'
+            for i, x in enumerate(itens, start=1)
+        )
+        return f'<div class="fluxo">{etapas}</div>'
+
+    if layout == "comparacao" and itens:
+        lados = []
+        for i, bruto in enumerate(itens[:2]):
+            rotulo, _, valor = bruto.partition("|")
+            classe = "antes" if i == 0 else "depois"
+            lados.append(
+                f'<div class="lado {classe}"><div class="rotulo">{marcar(rotulo.strip())}</div>'
+                f'<div class="valor">{marcar(valor.strip())}</div></div>'
+            )
+        return f'<div class="versus">{"".join(lados)}</div>'
+
+    return ""
+
+
 def montar_html(slide, numero, total, marca, foto_css, estilo):
     modelo = TEMPLATES[estilo].read_text(encoding="utf-8")
     corpo = "".join(f"<p>{marcar(l)}</p>" for l in slide["apoio"])
+    layout = slide["layout"] if numero > 1 else "capa"
+    classes = " ".join(filter(None, ["capa" if numero == 1 else "", f"l-{layout}"]))
     if estilo == "poster":
         arrasta = "Arraste &rarr;" if numero < total else "Fim"
     else:
@@ -127,8 +193,10 @@ def montar_html(slide, numero, total, marca, foto_css, estilo):
         "__NUM__": f"{numero:02d}",
         "__MARCA__": html.escape(marca),
         "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
-        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1)),
-        "__CAPA__": "capa" if numero == 1 else "",
+        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1, layout)),
+        "__CLASSES__": classes,
+        "__NUMERAO__": f'<div class="numerao">{html.escape(slide["numerao"])}</div>' if slide["numerao"] else "",
+        "__CORPO__": montar_corpo(slide),
         "__TITULO__": marcar(slide["titulo"]),
         "__APOIO__": f'<div class="apoio">{corpo}</div>' if corpo else "",
         "__CONTADOR__": f"{numero:02d} / {total:02d}",
@@ -183,7 +251,7 @@ def main():
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
                 destino = pasta / f"slide-{i:02d}.png"
                 pagina.screenshot(path=str(destino))
-                print(f"  {destino}  —  {re.sub(r'[*_]', '', slide['titulo'])[:46]}")
+                print(f"  {destino}  [{slide['layout']}]  {re.sub(r'[*_]', '', slide['titulo'])[:38]}")
             navegador.close()
     except Exception as e:
         print(f"\nERRO ao renderizar: {e}")

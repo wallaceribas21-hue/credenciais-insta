@@ -2,36 +2,41 @@
 Esse post não fui eu que fiz
 E não é sobre design. É sobre o que a IA já consegue fazer _dentro de uma empresa_.
 ---
+{declaracao}
 A maioria usa IA pra escrever texto
 E para por aí.
 O salto acontece quando ela deixa de responder e começa a *executar*.
 ---
-[o que muda na prática]
-Ela pega tarefa repetitiva e devolve _tempo_
-Cruzar planilha de venda. Montar relatório de campanha. Organizar processo.
-Conectar dois sistemas que nunca conversaram.
-Coisa que ocupa a sua semana inteira e _não precisa de você_.
+{lista}
+O que ela tira das suas costas
+- Cruzar planilha de venda
+- Montar relatório de campanha
+- Organizar processo que ninguém documentou
+- Conectar dois sistemas que nunca conversaram
 ---
-Eu resolvi testar num caso real
-Peguei a tarefa que mais me consome: *postar todo dia*.
-E mandei ela resolver de ponta a ponta.
+{comparacao}
+Eu testei na tarefa que mais me consome
+- Antes | Duas horas no Canva
+- Agora | Uma linha de texto
 ---
-[passo 1]
-Conectou na API *oficial* do Instagram
-Sem ferramenta de terceiro. Sem mensalidade. Sem intermediário lendo seus dados.
-A conexão é __direto com a Meta__.
+{fluxo}
+Como ela resolveu, de ponta a ponta
+- Conectou na API oficial do Instagram, direto com a Meta
+- Aprendeu minha identidade com quatro prints que mandei
+- Escreveu a copy, montou os slides e publicou
 ---
-[passo 2]
-Aprendeu minha identidade _sozinha_
-Mandei print de quatro posts que eu acho bonito. Só isso.
-Ela leu a paleta, a fonte, o espaçamento. E montou o meu *manual de marca*.
+{numero}
+4
+Quatro prints. Foi só isso que eu dei pra ela.
+Ela leu a paleta, a fonte e o espaçamento. E montou o meu *manual de marca*.
 ---
-[passo 3]
-Eu escrevo o tema. Ela faz o resto.
-Copy, slides e publicação, tudo de uma vez.
-Eu volto depois e o post _já está no ar_.
+{declaracao}
+A sacada não é a IA *desenhar*
+Desenhar, qualquer uma desenha. Bonito e genérico.
+A diferença é ela __saber quem é você__.
 ---
+{fecho}
 [a prova está aqui]
 Esse carrossel foi *escrito, desenhado e publicado* assim
-Se isso resolve postar todo dia, imagina o que resolve na _sua operação_.
+Se resolve postar todo dia, imagina o que resolve na _sua operação_.
 Comenta *COMO* que eu te mostro o caminho.

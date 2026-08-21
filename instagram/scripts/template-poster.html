@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<body class="__CAPA__">
+<body class="__CLASSES__">
 <style>
   /* ============================================================
      Estilo POSTER — referência: cartazes retrô de impressão offset.
@@ -180,6 +180,115 @@
     color: rgba(23,20,15,.60);
   }
   .rodape .cont { color: var(--laranja); }
+
+  /* ============================================================
+     LAYOUTS — cada slide recebe a forma que o conteudo pede.
+     A fôrma unica fazia oito slides iguais; aqui a estrutura
+     visual carrega significado junto com a copy.
+     ============================================================ */
+
+  /* ---- NUMERO: o dado vira o protagonista da arte. ---- */
+  .numerao {
+    font-family: 'Anton', sans-serif;
+    font-size: 300px; line-height: .78;
+    color: var(--laranja);
+    letter-spacing: -.02em;
+    margin-bottom: 6px;
+  }
+  body.l-numero h1 { font-size: 62px; }
+  body.l-numero .palco { bottom: 92px; }
+
+  /* ---- LISTA: cada item ganha marcador e linha propria. ---- */
+  .lista { margin-top: 4px; }
+  .lista .item {
+    display: flex; align-items: baseline; gap: 20px;
+    padding: 15px 0;
+    border-bottom: 2px solid rgba(23,20,15,.16);
+  }
+  .lista .item:last-child { border-bottom: 0; }
+  .lista .marca-item {
+    font-family: 'Mono', monospace;
+    font-size: 19px; font-weight: 700;
+    color: var(--laranja);
+    flex-shrink: 0; width: 40px;
+  }
+  .lista .txt-item {
+    font-family: 'Cond', sans-serif;
+    font-size: 37px; font-weight: 500;
+    line-height: 1.18;
+    color: var(--tinta);
+  }
+
+  /* ---- FLUXO: caixas ligadas, para processo em etapas. ---- */
+  .fluxo { margin-top: 8px; display: flex; flex-direction: column; gap: 0; }
+  .fluxo .etapa { display: flex; align-items: stretch; gap: 0; }
+  .fluxo .trilho {
+    width: 54px; flex-shrink: 0;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .fluxo .bolha {
+    width: 42px; height: 42px; flex-shrink: 0;
+    border: 3px solid var(--tinta);
+    background: var(--laranja);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Mono', monospace;
+    font-size: 17px; font-weight: 700;
+    color: var(--tinta);
+  }
+  .fluxo .fio-v { flex: 1; width: 3px; background: var(--tinta); }
+  .fluxo .etapa:last-child .fio-v { display: none; }
+  .fluxo .corpo-etapa {
+    padding: 4px 0 26px 22px;
+    font-family: 'Cond', sans-serif;
+    font-size: 35px; font-weight: 500;
+    line-height: 1.16; color: var(--tinta);
+  }
+  .fluxo .etapa:last-child .corpo-etapa { padding-bottom: 0; }
+
+  /* ---- COMPARACAO: dois blocos, o contraste vira imagem. ---- */
+  .versus { margin-top: 10px; display: flex; gap: 0; border: 3px solid var(--tinta); }
+  .versus .lado { flex: 1; padding: 26px 24px 28px; }
+  .versus .lado + .lado { border-left: 3px solid var(--tinta); }
+  .versus .antes { background: rgba(23,20,15,.06); }
+  .versus .depois { background: var(--laranja); }
+  .versus .rotulo {
+    font-family: 'Mono', monospace;
+    font-size: 16px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .versus .antes .rotulo  { color: rgba(23,20,15,.52); }
+  .versus .depois .rotulo { color: rgba(23,20,15,.62); }
+  .versus .valor {
+    font-family: 'Anton', sans-serif;
+    font-size: 46px; line-height: 1.02;
+    text-transform: uppercase; color: var(--tinta);
+  }
+
+  /* No layout numero o proprio numero e a massa laranja: dois circulos
+     grandes brigariam pela atencao. */
+  body.l-numero .sol { display: none; }
+
+  /* Layouts com muito conteudo: o sol recua para canto, sem boiar no meio. */
+  body.l-lista .sol,
+  body.l-fluxo .sol,
+  body.l-comparacao .sol {
+    width: 340px; height: 340px;
+    right: -110px; top: -80px;
+  }
+
+  /* ---- FECHO: centralizado, o unico slide que quebra o eixo. ---- */
+  body.l-fecho .palco {
+    top: 0; bottom: 0;
+    justify-content: center; align-items: center; text-align: center;
+  }
+  body.l-fecho h1 { text-align: center; }
+  body.l-fecho .selo { align-self: center; }
+  body.l-fecho .regua { width: 180px; align-self: center; }
+  body.l-fecho .apoio { max-width: 100%; text-align: center; }
+  body.l-fecho .rodape { width: 100%; }
+  body.l-fecho .sol { width: 900px; height: 900px; right: -300px; top: -180px; }
 </style>
 
 <div class="papel">
@@ -196,8 +305,10 @@
 
 <div class="palco">
   __SELO__
+  __NUMERAO__
   <h1>__TITULO__</h1>
   <div class="regua"></div>
+  __CORPO__
   __APOIO__
   <div class="rodape">
     <span class="cont">__CONTADOR__</span>
