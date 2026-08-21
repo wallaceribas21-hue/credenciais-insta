@@ -178,14 +178,54 @@ def fotos_da_pasta(pasta):
     return achadas
 
 
-def foto_embutida(caminho):
-    """Converte a foto em data URI para o navegador ler sem servidor."""
+def aparar_transparencia(arquivo):
+    """Corta a moldura transparente em volta do recorte.
+
+    O gerador de imagem quase nunca centraliza o sujeito: sobra vazio de um
+    lado e ele acaba aparecendo pequeno e torto no slide. Aparando a borda,
+    o enquadramento fica igual para qualquer imagem que chegue.
+
+    Devolve (bytes_png, True) quando aparou, ou (None, False) quando nao ha
+    o que aparar ou a imagem nao tem transparencia.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        return None, False
+
+    import io
+    with Image.open(arquivo) as img:
+        if img.mode not in ("RGBA", "LA"):
+            return None, False
+        limites = img.convert("RGBA").getchannel("A").getbbox()
+        if not limites:
+            return None, False
+        largura, altura = img.size
+        # Se ja esta justo, nao mexe.
+        if limites == (0, 0, largura, altura):
+            return None, False
+        buffer = io.BytesIO()
+        img.crop(limites).save(buffer, "PNG", optimize=True)
+        sobra = 100 - round(100 * (limites[2] - limites[0]) * (limites[3] - limites[1])
+                            / (largura * altura))
+        print(f"    aparei {sobra}% de borda vazia em {arquivo.name}")
+        return buffer.getvalue(), True
+
+
+def foto_embutida(caminho, aparar=False):
+    """Converte a imagem em data URI para o navegador ler sem servidor."""
     if not caminho:
         return "none"
     arquivo = Path(caminho)
     if not arquivo.is_file():
-        print(f"ERRO: foto nao encontrada: {caminho}")
+        print(f"ERRO: imagem nao encontrada: {caminho}")
         sys.exit(1)
+
+    if aparar:
+        cortada, deu = aparar_transparencia(arquivo)
+        if deu:
+            return f"url('data:image/png;base64,{base64.b64encode(cortada).decode()}')"
+
     tipo = mimetypes.guess_type(arquivo.name)[0] or "image/jpeg"
     dados = base64.b64encode(arquivo.read_bytes()).decode()
     return f"url('data:{tipo};base64,{dados}')"
@@ -315,7 +355,7 @@ def main():
                 temp.write_text(montar_html(
                     slide, i, len(slides), args.marca,
                     foto_embutida(mapa_fotos[("foto", i)]) if ("foto", i) in mapa_fotos else foto_unica,
-                    foto_embutida(mapa_fotos[("recorte", i)]) if ("recorte", i) in mapa_fotos else "none",
+                    foto_embutida(mapa_fotos[("recorte", i)], aparar=True) if ("recorte", i) in mapa_fotos else "none",
                     args.estilo), encoding="utf-8")
                 pagina.goto(temp.as_uri())
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
