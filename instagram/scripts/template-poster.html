@@ -144,10 +144,9 @@
      imagem, e e injetado logo apos este bloco. O tipo pode ser interrompido pela
      imagem, como na referencia, mas jamais coberto: letra tapada e erro. */
 
-  /* Sem imagem, o tipo assume o quadro: um slide so de texto pede
-     titulo maior, senao sobra um vazio enorme em cima. */
-  body.sem-recorte.sem-foto.l-declaracao h1 { font-size: 92px; line-height: 1.0; }
-  body.sem-recorte.sem-foto.l-declaracao .apoio { font-size: 34px; }
+  /* Sem imagem o titulo cresce, mas o tamanho vem do script, que
+     mede o texto. Regra fixa aqui anulava esse calculo. */
+  body.sem-recorte h1 { line-height: 1.0; }
 
   /* ============ MOLDURA E ETIQUETAS ============ */
   .borda { position: absolute; inset: 32px; border: 3px solid var(--frente); pointer-events: none; }
@@ -166,15 +165,17 @@
      A ancora do texto muda de slide para slide. Se todo quadro tem o
      texto no mesmo lugar, o olho relaxa no meio do carrossel e a pessoa
      sai. Alternar a altura obriga a reler a cada arraste. */
+  /* O palco ocupa o quadro inteiro e so muda para que lado empurra o
+     conteudo. Assim o rodape pode ficar cravado no pe em todo slide:
+     antes ele subia junto com o texto e ficava boiando no meio. */
   .palco {
-    position: absolute; left: 76px; right: 76px;
+    position: absolute; left: 76px; right: 76px; top: 0; bottom: 0;
+    padding: 150px 0 124px;
     display: flex; flex-direction: column;
   }
-  /* O fecho ja se centraliza sozinho mais abaixo, por isso fica de fora:
-     as duas regras juntas empurravam o texto para fora do quadro. */
-  body.a-baixo:not(.l-fecho)  .palco { bottom: 92px; }
-  body.a-topo:not(.l-fecho)   .palco { top: 150px; bottom: auto; }
-  body.a-centro:not(.l-fecho) .palco { top: 50%; bottom: auto; transform: translateY(-50%); }
+  body.a-baixo  .palco { justify-content: flex-end; }
+  body.a-topo   .palco { justify-content: flex-start; }
+  body.a-centro .palco { justify-content: center; }
 
   /* ============ PONTE ENTRE SLIDES ============
      A mesma forma sai pela direita de um slide e entra pela esquerda do
@@ -231,14 +232,17 @@
   .apoio p + p { margin-top: 9px; }
 
   .rodape {
-    margin-top: 24px;
+    position: absolute; left: 0; right: 0; bottom: 58px;
     display: flex; align-items: center; justify-content: space-between;
     font-family: 'Mono', monospace;
     font-size: 16px; font-weight: 700;
     letter-spacing: .16em; text-transform: uppercase;
-    color: var(--frente); opacity: .82;
+    color: var(--frente); opacity: 1;
   }
   .rodape .cont { color: var(--realce); opacity: 1; }
+  /* No creme o contador laranja caia em cima da textura laranja do pe
+     e sumia. No preto o laranja tem contraste, entao continua. */
+  body.f-creme .rodape .cont { color: var(--frente); }
   body.f-preto .rodape .cont { color: #FF8A3D; }
   body.f-preto .rodape { opacity: .86; }
   body.f-laranja .rodape { color: var(--tinta); opacity: .9; }
@@ -256,7 +260,7 @@
   body.l-capa .masthead { display: flex; }
   body.l-capa .et-esq { display: none; }
   .masthead .fio { flex: 1; height: 4px; background: var(--frente); }
-  body.l-capa .palco { bottom: 84px; }
+  body.l-capa .palco { padding-bottom: 116px; }
   body.l-capa h1 { line-height: .97; }
 
   /* ============ NÚMERO ============ */
@@ -270,6 +274,20 @@
     margin-bottom: 22px;
   }
   body.f-laranja .numerao { color: var(--contra); }
+
+  /* ============ SLIDE SEM IMAGEM ============
+     Sem foto sobra meio quadro. O titulo ja cresce no script; aqui
+     cresce o resto junto, senao o titulo fica gigante em cima de um
+     corpo miudo e a arte desequilibra. */
+  body.sem-recorte .apoio { font-size: 35px; max-width: 88%; }
+  body.sem-recorte .lista .item { padding: 21px 0; }
+  body.sem-recorte .lista .txt-item { font-size: 42px; }
+  body.sem-recorte .fluxo .corpo-etapa { font-size: 40px; padding-bottom: 34px; }
+  body.sem-recorte .fluxo .bolha { width: 54px; height: 54px; font-size: 21px; }
+  body.sem-recorte .fluxo .trilho { width: 64px; }
+  body.sem-recorte .versus .lado { padding: 34px 30px 36px; }
+  body.sem-recorte .versus .valor { font-size: 54px; }
+  body.sem-recorte .regua { height: 6px; margin: 26px 0 20px; }
 
   /* ============ LISTA ============ */
   .lista .item {
@@ -323,7 +341,7 @@
   .versus .depois .valor { color: var(--tinta); }
 
   /* ============ FECHO ============ */
-  body.l-fecho .palco { top: 0; bottom: 0; justify-content: center; align-items: center; text-align: center; }
+  body.l-fecho .palco { justify-content: center; align-items: center; text-align: center; }
   body.l-fecho h1 { text-align: center; }
   body.l-fecho .selo { align-self: center; }
   body.l-fecho .regua { width: 200px; align-self: center; }

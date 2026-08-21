@@ -141,7 +141,7 @@ ALTURAS_PONTE = (250, 690, 420, 150, 560)
 
 # So estes pixels entram no quadro. O texto comeca em 76px da borda, entao
 # a ponte nunca alcanca uma letra, em qualquer ancora.
-PONTE_DENTRO = 72
+PONTE_DENTRO = 54
 PONTE_TAMANHO = 320
 
 
@@ -186,17 +186,30 @@ FAIXAS = {
 }
 
 
-def tamanho_titulo(texto, estilo, capa=False, layout="declaracao"):
+# Slide sem imagem tem meio quadro sobrando. Quem nao tem foto para
+# encher, enche com tipografia: o titulo cresce ate ocupar o vazio.
+# Sem isso o carrossel alterna slide cheio / slide oco e perde o ritmo.
+SEM_FOTO_CONTEUDO = {"comparacao": 84, "fluxo": 78, "lista": 72, "numero": 58}
+SEM_FOTO_FATOR = 1.34
+
+
+def tamanho_titulo(texto, estilo, capa=False, layout="declaracao", tem_recorte=True):
     limpo = re.sub(r"[*_]", "", texto)
     # Layouts com muito conteudo abaixo precisam de titulo menor.
     if layout in ("lista", "fluxo", "comparacao", "numero"):
-        return {"numero": 58, "comparacao": 56}.get(layout, 52)
+        if tem_recorte:
+            return {"numero": 58, "comparacao": 56}.get(layout, 52)
+        return SEM_FOTO_CONTEUDO[layout]
     chave = f"{estilo}-capa" if capa and f"{estilo}-capa" in FAIXAS else estilo
     faixas = FAIXAS[chave]
-    for limite, tam in faixas:
+    tam = faixas[-1][1]
+    for limite, valor in faixas:
         if len(limpo) <= limite:
-            return tam
-    return faixas[-1][1]
+            tam = valor
+            break
+    if not tem_recorte and not capa:
+        tam = round(tam * SEM_FOTO_FATOR)
+    return tam
 
 
 def marcar(texto):
@@ -417,7 +430,7 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
         "__NUM__": f"{numero:02d}",
         "__MARCA__": html.escape(marca),
         "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
-        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1, layout)),
+        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1, layout, tem_recorte)),
         "__CLASSES__": classes,
         "__DECORACAO__": receita,
         "__PONTE__": ponte_entre_slides(numero, total),
