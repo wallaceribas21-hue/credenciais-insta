@@ -135,37 +135,13 @@
   }
   body.sem-recorte .recorte { display: none; }
 
-  /* Onde o recorte entra muda por layout, e ele sempre invade o texto. */
-  .l-capa       .recorte { right: 40px;  bottom: 300px; width: 620px; height: 620px; }
-  .l-declaracao .recorte { right: 34px;  bottom: 210px; width: 560px; height: 600px; }
-  .l-numero     .recorte { right: 30px;  bottom: 230px; width: 500px; height: 560px; }
-  .l-lista      .recorte { right: 34px;  top: 70px;     width: 400px; height: 420px; }
-  .l-fluxo      .recorte { right: 30px;  top: 70px;     width: 400px; height: 420px; }
-  .l-comparacao .recorte { right: 40px;  top: 66px;     width: 380px; height: 400px; }
-  .l-fecho      .recorte { left: 50%; transform: translateX(-50%); top: 92px; width: 440px; height: 400px; }
+  /* A posicao e o tamanho do recorte sao calculados no Python a partir
+     da forma da imagem, e chegam em __CAIXA_RECORTE__. */
 
   /* LEGIBILIDADE — regra inegociavel.
-     Onde o recorte fica na altura do texto, o texto encolhe para nunca
-     passar por baixo dele. O tipo pode ser interrompido pela imagem,
-     como na referencia, mas jamais coberto: letra tapada e erro, nao estilo. */
-  body:not(.sem-recorte).l-declaracao h1,
-  body:not(.sem-recorte).l-numero h1,
-  body:not(.sem-recorte).l-capa h1 { max-width: 58%; }
-
-  body:not(.sem-recorte).l-declaracao .apoio,
-  body:not(.sem-recorte).l-numero .apoio,
-  body:not(.sem-recorte).l-capa .apoio { max-width: 56%; }
-
-  body:not(.sem-recorte).l-declaracao .regua,
-  body:not(.sem-recorte).l-numero .regua,
-  body:not(.sem-recorte).l-capa .regua { width: 58%; }
-
-  /* Onde o recorte fica no topo, o texto embaixo tem o quadro inteiro. */
-  body:not(.sem-recorte).l-lista .lista,
-  body:not(.sem-recorte).l-fluxo .fluxo { max-width: 100%; }
-  body:not(.sem-recorte).l-lista h1,
-  body:not(.sem-recorte).l-fluxo h1,
-  body:not(.sem-recorte).l-comparacao h1 { max-width: 64%; }
+     O limite do texto e calculado no Python a partir da largura real da
+     imagem, e e injetado logo apos este bloco. O tipo pode ser interrompido pela
+     imagem, como na referencia, mas jamais coberto: letra tapada e erro. */
 
   /* ============ MOLDURA E ETIQUETAS ============ */
   .borda { position: absolute; inset: 32px; border: 3px solid var(--frente); pointer-events: none; }
@@ -321,10 +297,11 @@
   body.l-fecho .apoio { max-width: 92%; text-align: center; }
   body.l-fecho .rodape { width: 100%; }
 </style>
+__LIMITE_TEXTO__
 
 __DECORACAO__
 
-<div class="recorte"></div>
+<div class="recorte" style="__CAIXA_RECORTE__"></div>
 <div class="camada grao" style="z-index:6"></div>
 <div class="borda"></div>
 

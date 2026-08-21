@@ -47,6 +47,74 @@ RITMO = ("creme", "preto", "creme", "laranja", "creme", "preto", "creme", "laran
 
 # Cada slide recebe uma combinacao de elementos graficos diferente, para a
 # arte nao se repetir. As receitas alternam de forma previsivel.
+# Espaco disponivel para o recorte em cada layout. A imagem e encaixada
+# dentro dessa caixa preservando a proporcao, entao um sujeito largo cresce
+# na horizontal e um sujeito alto cresce na vertical, sempre bem aproveitado.
+CAIXAS = {
+    "capa":       {"w": 600, "h": 560, "dir": 46, "base": 300},
+    "declaracao": {"w": 540, "h": 580, "dir": 40, "base": 205},
+    "numero":     {"w": 480, "h": 540, "dir": 36, "base": 225},
+    "lista":      {"w": 400, "h": 400, "dir": 40, "topo": 74},
+    "fluxo":      {"w": 400, "h": 400, "dir": 36, "topo": 74},
+    "comparacao": {"w": 380, "h": 380, "dir": 44, "topo": 70},
+    "fecho":      {"w": 430, "h": 380, "centro": True, "topo": 96},
+}
+
+
+MARGEM_PALCO = 76   # a margem lateral do texto
+FOLGA = 34          # respiro minimo entre a imagem e a letra
+
+
+def caixa_do_recorte(layout, medida):
+    """Decide onde o recorte entra, a partir da forma da imagem.
+
+    A regra vem do desenho, nao da conveniencia:
+
+    - Sujeito ALTO (busto, pessoa) fica AO LADO do texto. O texto encolhe
+      exatamente ate onde a imagem comeca, com folga.
+    - Sujeito LARGO (uma fila de objetos, um leque) fica ACIMA do texto,
+      ocupando o quadro todo. Espremer um sujeito largo na lateral tapa
+      a letra e ainda deixa ele pequeno demais para ser lido.
+
+    Devolve (estilo_do_recorte, largura_maxima_do_titulo_ou_None).
+    """
+    caixa = CAIXAS.get(layout, CAIXAS["declaracao"])
+    largura, altura = caixa["w"], caixa["h"]
+    proporcao = (medida[0] / medida[1]) if medida else 1.0
+
+    # Layouts com o texto ja embaixo colocam a imagem no topo de qualquer jeito.
+    topo_fixo = "topo" in caixa or caixa.get("centro")
+
+    if proporcao >= 1.25 and not topo_fixo:
+        # Faixa larga no topo: o sujeito respira e o titulo fica inteiro.
+        # A faixa nao pode descer ate o selo: 430px e o teto seguro.
+        largura = min(1080 - MARGEM_PALCO * 2, round(caixa["h"] * proporcao * 1.35))
+        altura = round(largura / proporcao)
+        if altura > 430:
+            altura = 430
+            largura = round(altura * proporcao)
+        estilo = f"width:{largura}px;height:{altura}px;right:{caixa['dir']}px;top:96px"
+        return estilo, None
+
+    if medida:
+        escala = min(largura / medida[0], altura / medida[1])
+        largura, altura = round(medida[0] * escala), round(medida[1] * escala)
+
+    partes = [f"width:{largura}px", f"height:{altura}px"]
+    if caixa.get("centro"):
+        partes += [f"left:{round((1080 - largura) / 2)}px", f"top:{caixa['topo']}px"]
+        return ";".join(partes), None
+    if "topo" in caixa:
+        partes += [f"right:{caixa['dir']}px", f"top:{caixa['topo']}px"]
+        # Imagem no topo e texto embaixo: so o titulo curto precisa de limite.
+        return ";".join(partes), 1080 - caixa["dir"] - largura - MARGEM_PALCO - FOLGA
+
+    partes += [f"right:{caixa['dir']}px", f"bottom:{caixa['base']}px"]
+    # Imagem na lateral: o texto vai exatamente ate onde ela comeca.
+    limite = 1080 - caixa["dir"] - largura - MARGEM_PALCO - FOLGA
+    return ";".join(partes), limite
+
+
 CARIMBO = "Wallace<br>Ribas"
 
 RECEITAS = [
@@ -191,44 +259,48 @@ def aparar_transparencia(arquivo):
     try:
         from PIL import Image
     except ImportError:
-        return None, False
+        return None, None
 
     import io
     with Image.open(arquivo) as img:
         if img.mode not in ("RGBA", "LA"):
-            return None, False
+            return None, img.size
         limites = img.convert("RGBA").getchannel("A").getbbox()
         if not limites:
-            return None, False
+            return None, img.size
         largura, altura = img.size
         # Se ja esta justo, nao mexe.
         if limites == (0, 0, largura, altura):
-            return None, False
+            return None, img.size
         buffer = io.BytesIO()
-        img.crop(limites).save(buffer, "PNG", optimize=True)
+        cortada = img.crop(limites)
+        cortada.save(buffer, "PNG", optimize=True)
         sobra = 100 - round(100 * (limites[2] - limites[0]) * (limites[3] - limites[1])
                             / (largura * altura))
         print(f"    aparei {sobra}% de borda vazia em {arquivo.name}")
-        return buffer.getvalue(), True
+        return buffer.getvalue(), cortada.size
 
 
 def foto_embutida(caminho, aparar=False):
-    """Converte a imagem em data URI para o navegador ler sem servidor."""
+    """Converte a imagem em data URI. Devolve (uri, medida_em_px_ou_None)."""
     if not caminho:
-        return "none"
+        return "none", None
     arquivo = Path(caminho)
     if not arquivo.is_file():
         print(f"ERRO: imagem nao encontrada: {caminho}")
         sys.exit(1)
 
     if aparar:
-        cortada, deu = aparar_transparencia(arquivo)
-        if deu:
-            return f"url('data:image/png;base64,{base64.b64encode(cortada).decode()}')"
+        cortada, medida = aparar_transparencia(arquivo)
+        if cortada:
+            return f"url('data:image/png;base64,{base64.b64encode(cortada).decode()}')", medida
 
     tipo = mimetypes.guess_type(arquivo.name)[0] or "image/jpeg"
     dados = base64.b64encode(arquivo.read_bytes()).decode()
-    return f"url('data:{tipo};base64,{dados}')"
+    medida = None
+    if aparar:
+        _, medida = aparar_transparencia(arquivo)
+    return f"url('data:{tipo};base64,{dados}')", medida
 
 
 def montar_corpo(slide):
@@ -266,11 +338,12 @@ def montar_corpo(slide):
     return ""
 
 
-def montar_html(slide, numero, total, marca, foto_css, recorte_css, estilo):
+def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
     modelo = TEMPLATES[estilo].read_text(encoding="utf-8")
     corpo = "".join(f"<p>{marcar(l)}</p>" for l in slide["apoio"])
     layout = slide["layout"] if numero > 1 else "capa"
     fundo = slide["fundo"] or RITMO[(numero - 1) % len(RITMO)]
+    recorte_css, recorte_medida = recorte
     tem_foto = foto_css != "none"
     tem_recorte = recorte_css != "none"
     classes = " ".join(filter(None, [
@@ -278,6 +351,13 @@ def montar_html(slide, numero, total, marca, foto_css, recorte_css, estilo):
         "" if tem_foto else "sem-foto",
         "" if tem_recorte else "sem-recorte",
     ]))
+    if tem_recorte:
+        estilo_recorte, limite = caixa_do_recorte(layout, recorte_medida)
+        limite_css = (f"<style>.palco h1,.palco .apoio,.palco .regua"
+                      f"{{max-width:{max(limite, 320)}px}}</style>") if limite else ""
+    else:
+        estilo_recorte, limite_css = "", ""
+
     # Sem foto, a receita grafica precisa preencher mais o quadro.
     receita = RECEITAS[(numero - 1 + (0 if (tem_foto or tem_recorte) else 3)) % len(RECEITAS)]
     receita = receita.replace("__CARIMBO__", CARIMBO)
@@ -299,6 +379,8 @@ def montar_html(slide, numero, total, marca, foto_css, recorte_css, estilo):
         "__CLASSES__": classes,
         "__DECORACAO__": receita,
         "__RECORTE__": recorte_css,
+        "__CAIXA_RECORTE__": estilo_recorte,
+        "__LIMITE_TEXTO__": limite_css,
         "__NUMERAO__": f'<div class="numerao">{html.escape(slide["numerao"])}</div>' if slide["numerao"] else "",
         "__CORPO__": montar_corpo(slide),
         "__TITULO__": marcar(slide["titulo"]),
@@ -332,7 +414,7 @@ def main():
         sys.exit(1)
 
     slides = ler_slides(args.arquivo)
-    foto_unica = foto_embutida(args.foto)
+    foto_unica = foto_embutida(args.foto)[0]
     mapa_fotos = fotos_da_pasta(args.fotos)
     pasta = Path(args.saida).resolve()
     pasta.mkdir(parents=True, exist_ok=True)
@@ -354,8 +436,8 @@ def main():
             for i, slide in enumerate(slides, start=1):
                 temp.write_text(montar_html(
                     slide, i, len(slides), args.marca,
-                    foto_embutida(mapa_fotos[("foto", i)]) if ("foto", i) in mapa_fotos else foto_unica,
-                    foto_embutida(mapa_fotos[("recorte", i)], aparar=True) if ("recorte", i) in mapa_fotos else "none",
+                    foto_embutida(mapa_fotos[("foto", i)])[0] if ("foto", i) in mapa_fotos else foto_unica,
+                    foto_embutida(mapa_fotos[("recorte", i)], aparar=True) if ("recorte", i) in mapa_fotos else ("none", None),
                     args.estilo), encoding="utf-8")
                 pagina.goto(temp.as_uri())
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
