@@ -237,7 +237,7 @@ def ler_slides(caminho):
         if not linhas:
             continue
         # [selo] e {layout} podem vir em qualquer ordem, antes do titulo.
-        selo, layout, numerao, fundo = "", "declaracao", "", ""
+        selo, layout, numerao, fundo, imagem = "", "declaracao", "", "", ""
         while linhas:
             linha = linhas[0]
             if linha.startswith("[") and linha.endswith("]"):
@@ -249,6 +249,11 @@ def ler_slides(caminho):
                 for extra in dentro[1:]:
                     if extra in FUNDOS:
                         fundo = extra
+                    elif extra.startswith("img:"):
+                        # {declaracao img:cerebro} pega fotos/banco/cerebro.png.
+                        # Sem isso a imagem so entra pelo numero do slide, e
+                        # trocar a ordem dos slides obriga a renomear arquivo.
+                        imagem = extra[4:]
                 if layout not in LAYOUTS:
                     print(f"ERRO: layout '{layout}' nao existe. Use: {', '.join(LAYOUTS)}")
                     sys.exit(1)
@@ -272,8 +277,8 @@ def ler_slides(caminho):
         itens = [l[2:].strip() for l in linhas[1:] if l.startswith("- ")]
         apoio = [l for l in linhas[1:] if not l.startswith("- ")]
         slides.append({"selo": selo, "layout": layout, "numerao": numerao,
-                       "fundo": fundo, "titulo": linhas[0], "itens": itens,
-                       "apoio": apoio})
+                       "fundo": fundo, "imagem": imagem, "titulo": linhas[0],
+                       "itens": itens, "apoio": apoio})
 
     if not slides:
         print("ERRO: o arquivo esta vazio.")
@@ -284,8 +289,19 @@ def ler_slides(caminho):
     return slides
 
 
+EXTENSOES = (".jpg", ".jpeg", ".png", ".webp")
+
+
 def fotos_da_pasta(pasta):
-    """Procura foto-01, foto-02... na pasta e casa cada uma com o seu slide."""
+    """Monta o indice de imagens.
+
+    Duas formas de escolher a imagem de um slide:
+      1. numero  - recorte-01.png vai no slide 1. Simples, mas mudar a ordem
+                   dos slides obriga a renomear arquivo.
+      2. nome    - fotos/banco/cerebro.png entra com {declaracao img:cerebro}.
+                   A copia manda na imagem, entao remexer o carrossel nao
+                   quebra nada. E a forma preferida.
+    """
     if not pasta:
         return {}
     diretorio = Path(pasta)
@@ -294,10 +310,32 @@ def fotos_da_pasta(pasta):
         sys.exit(1)
     achadas = {}
     for arquivo in sorted(diretorio.iterdir()):
+        if arquivo.suffix.lower() not in EXTENSOES:
+            continue
         casa = re.match(r"(foto|recorte)-?(\d+)", arquivo.stem, re.I)
-        if casa and arquivo.suffix.lower() in (".jpg", ".jpeg", ".png", ".webp"):
+        if casa:
             achadas[(casa.group(1).lower(), int(casa.group(2)))] = arquivo
+    banco = diretorio / "banco"
+    if banco.is_dir():
+        for arquivo in sorted(banco.iterdir()):
+            if arquivo.suffix.lower() in EXTENSOES:
+                achadas[("banco", arquivo.stem.lower())] = arquivo
     return achadas
+
+
+def recorte_do_slide(slide, numero, mapa):
+    """Devolve o arquivo de recorte do slide, ou None."""
+    nome = slide.get("imagem", "")
+    if nome:
+        arquivo = mapa.get(("banco", nome.lower()))
+        if arquivo is None:
+            disponiveis = sorted(v for k, v in mapa if k == "banco")
+            print(f"ERRO: imagem '{nome}' nao existe em fotos/banco/.")
+            if disponiveis:
+                print(f"       Disponiveis: {', '.join(disponiveis)}")
+            sys.exit(1)
+        return arquivo
+    return mapa.get(("recorte", numero))
 
 
 def aparar_transparencia(arquivo):
@@ -454,7 +492,7 @@ def main():
     parser.add_argument("arquivo", help="arquivo de texto com os slides separados por ---")
     parser.add_argument("--marca", default="WALLACE RIBAS", help="assinatura no topo do slide")
     parser.add_argument("--foto", default="", help="uma imagem para todos os slides")
-    parser.add_argument("--fotos", default="", help="pasta com foto-01/recorte-01... uma por slide")
+    parser.add_argument("--fotos", default="", help="pasta com recorte-01.png por slide e/ou uma subpasta banco/ com nomes")
     parser.add_argument("--saida", default="slides", help="pasta onde salvar (padrao: slides)")
     parser.add_argument("--estilo", default="wind", choices=list(TEMPLATES),
                         help="wind = escuro moderno; poster = creme retro")
@@ -493,7 +531,7 @@ def main():
                 temp.write_text(montar_html(
                     slide, i, len(slides), args.marca,
                     foto_embutida(mapa_fotos[("foto", i)])[0] if ("foto", i) in mapa_fotos else foto_unica,
-                    foto_embutida(mapa_fotos[("recorte", i)], aparar=True) if ("recorte", i) in mapa_fotos else ("none", None),
+                    foto_embutida(recorte, aparar=True) if (recorte := recorte_do_slide(slide, i, mapa_fotos)) else ("none", None),
                     args.estilo), encoding="utf-8")
                 pagina.goto(temp.as_uri())
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
