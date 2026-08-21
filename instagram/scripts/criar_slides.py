@@ -119,9 +119,9 @@ CARIMBO = "Wallace<br>Ribas"
 
 RECEITAS = [
     '<div class="camada reticula canto-sd"></div>'
-    '<div class="disco" style="width:150px;height:150px;left:-46px;bottom:210px;opacity:.9"></div>',
+    '<div class="disco" style="width:170px;height:170px;left:-70px;top:150px"></div>',
 
-    '<div class="barra-diag" style="top:250px"></div>'
+    '<div class="barra-diag" style="top:200px"></div>'
     '<div class="camada reticula faixa-baixo"></div>',
 
     '<div class="camada reticula coluna-esq"></div>'
@@ -132,7 +132,7 @@ RECEITAS = [
     '-webkit-mask-image:linear-gradient(to top,#000 6%,transparent 88%)"></div>',
 
     '<div class="camada reticula faixa-baixo"></div>'
-    '<div class="disco" style="width:230px;height:230px;right:110px;top:96px"></div>',
+    '<div class="camada reticula canto-sd"></div>',
 
     '<div class="carimbo" style="top:130px;left:92px">__CARIMBO__</div>'
     '<div class="camada reticula canto-sd"></div>',

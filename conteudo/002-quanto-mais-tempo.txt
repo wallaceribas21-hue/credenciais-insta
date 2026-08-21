@@ -25,7 +25,7 @@ O processo que fez ela virar minha
 ---
 {numero}
 0
-*Zero* briefing hoje
+Briefings que eu escrevo hoje
 Eu falo o tema. Ela já sabe a cor, a fonte, o tom e o formato.
 ---
 {lista}
