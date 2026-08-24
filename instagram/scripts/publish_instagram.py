@@ -105,10 +105,23 @@ def preparar_jpeg(caminho):
     return destino, True
 
 
+# Tudo isto o Pillow abre e converte para JPEG antes de subir, entao a
+# Meta nunca ve outra coisa. WEBP entrou porque o banco de imagens usa
+# WEBP: e 14x mais leve que PNG sem diferenca visivel.
+FORMATOS = (".png", ".jpg", ".jpeg", ".webp")
+
+
+def checar_formato(caminho):
+    """Erro cedo e com o nome do arquivo, nao no meio do upload."""
+    if Path(caminho).suffix.lower() not in FORMATOS:
+        raise ValueError(
+            f"Formato nao suportado em {Path(caminho).name}: "
+            f"{Path(caminho).suffix} (use {', '.join(FORMATOS)})")
+
+
 def hospedar_imagem(caminho):
     """Converte para JPEG e sobe para o primeiro host que responder."""
-    if Path(caminho).suffix.lower() not in (".png", ".jpg", ".jpeg"):
-        raise ValueError(f"Formato nao suportado: {Path(caminho).suffix} (use .png ou .jpg)")
+    checar_formato(caminho)
 
     arquivo, temporario = preparar_jpeg(caminho)
     try:
@@ -234,10 +247,19 @@ def run(imagens, legenda, dry_run=False):
             print(f"  - {i}")
         sys.exit(1)
 
+    # O dry-run tem de reprovar tudo que a publicacao reprovaria. Antes ele
+    # so olhava credencial, entao dizia OK e a publicacao morria no formato.
+    try:
+        for img in imagens:
+            checar_formato(img)
+    except ValueError as e:
+        print(f"ERRO: {e}")
+        sys.exit(1)
+
     print(f"\nPublicando {len(imagens)} slides (conta {IG_ID})")
     print(f"Fluxo: {api.nome_fluxo(FLUXO)}")
     if dry_run:
-        print("\n[DRY RUN] Credenciais e imagens OK. Remova --dry-run para publicar.")
+        print("\n[DRY RUN] Credenciais, formatos e imagens OK. Remova --dry-run para publicar.")
         return
 
     try:
