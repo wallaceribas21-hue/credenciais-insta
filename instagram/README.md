@@ -189,23 +189,38 @@ python instagram/scripts/publish_instagram.py \
 
 ## Validade do token
 
-**Caminho A (`IGAA...`)** — o token já nasce com ~60 dias. Para renovar antes
-de expirar (só funciona com token ainda válido):
+O token dura cerca de **60 dias**. Enquanto ele ainda está válido, renovar é
+um comando. Se deixar vencer, não dá para renovar: tem que refazer o Passo 3
+inteiro no site da Meta.
 
 ```bash
-curl "https://graph.instagram.com/refresh_access_token?grant_type=ig_refresh_token&access_token=SEU_TOKEN"
+python instagram/scripts/renovar_token.py
 ```
 
-**Caminho B (`EAA...`)** — o token do Graph API Explorer **expira em 1 hora**.
-Troque por um de ~60 dias:
+Ele fala com a Meta, grava o token novo direto no `.env` e reinicia a contagem
+de 60 dias. Você não copia nada. Pode rodar quantas vezes quiser, e cada vez
+empurra o vencimento para 60 dias à frente.
 
-```bash
-curl "https://graph.facebook.com/v19.0/oauth/access_token?grant_type=fb_exchange_token&client_id=SEU_APP_ID&client_secret=SEU_APP_SECRET&fb_exchange_token=SEU_TOKEN_ATUAL"
+**Como você fica sabendo que está perto:** não precisa lembrar. A partir de
+15 dias antes, o `publish_instagram.py` avisa sozinho toda vez que você
+publica. O `verificar_conexao.py` mostra o prazo sempre.
+
+> O `INSTAGRAM_TOKEN_EXPIRA_EM` no `.env` é quem guarda a data. Ele só passa a
+> existir depois da primeira renovação, então rode uma vez agora para começar
+> a contagem.
+
+**Se usa o Caminho B (`EAA...`)**, o script precisa de mais duas linhas no
+`.env`, porque a Meta exige o app para esse fluxo:
+
+```
+META_APP_ID=...
+META_APP_SECRET=...
 ```
 
-`APP_ID` e `APP_SECRET`: developers.facebook.com → seu App → Configurações → Básico.
+Pegue em developers.facebook.com → seu App → Configurações → Básico.
 
-Quando expirar, rode o `descobrir_id.py` de novo com o token novo.
+**Se já venceu**, não tem renovação: rode o Passo 3 de novo e depois o
+`descobrir_id.py` com o token novo.
 
 ---
 

@@ -312,6 +312,7 @@ def run(imagens, legenda, dry_run=False):
     if FLUXO is None:
         print("ERRO: token nao reconhecido (deveria comecar com IGAA ou EAA).")
         sys.exit(1)
+    api.avisar_validade()
     if not 2 <= len(imagens) <= 10:
         print(f"ERRO: carrossel precisa de 2 a 10 imagens (recebi {len(imagens)}).")
         sys.exit(1)

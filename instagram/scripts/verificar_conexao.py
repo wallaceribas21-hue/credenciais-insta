@@ -70,6 +70,7 @@ def main():
     if dados.get("account_type"):
         print(f"  Tipo:   {dados['account_type']}")
     print(f"  ID:     {dados.get('id', IG_ID)}")
+    print(f"  Token:  {api.dias_restantes_texto()}")
     print("\nJa pode publicar:")
     print('  python instagram/scripts/publish_instagram.py --images slides/*.png --caption "sua legenda"\n')
 

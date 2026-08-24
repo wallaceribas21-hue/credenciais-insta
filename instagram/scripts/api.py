@@ -87,3 +87,50 @@ def carregar_credenciais():
     ig_id = os.getenv("INSTAGRAM_BUSINESS_ID")
     fluxo = detectar_fluxo(token)
     return env_path, token, ig_id, fluxo, base_url(fluxo)
+
+
+# ---------------------------------------------------------------------------
+# Validade do token
+#
+# A Meta nao avisa que o token vai vencer. Ela so para de aceitar, no meio de
+# uma publicacao, com um erro que nao parece ser sobre isso. Entao guardamos a
+# data de vencimento no .env e avisamos antes, enquanto renovar ainda e uma
+# chamada so.
+# ---------------------------------------------------------------------------
+
+AVISAR_A_PARTIR_DE = 15  # dias
+
+
+def dias_restantes():
+    """Dias ate o token vencer, ou None se a data nao estiver registrada."""
+    from datetime import date
+
+    bruto = os.getenv("INSTAGRAM_TOKEN_EXPIRA_EM", "").strip()
+    if not bruto:
+        return None
+    try:
+        return (date.fromisoformat(bruto) - date.today()).days
+    except ValueError:
+        return None
+
+
+def dias_restantes_texto():
+    dias = dias_restantes()
+    if dias is None:
+        return "validade desconhecida (renove uma vez para comecar a contar)"
+    if dias < 0:
+        return f"VENCIDO ha {-dias} dias"
+    return f"{dias} dias restantes"
+
+
+def avisar_validade():
+    """Imprime um aviso so quando falta pouco. Aviso que aparece sempre vira
+    paisagem e para de ser lido."""
+    dias = dias_restantes()
+    if dias is None or dias > AVISAR_A_PARTIR_DE:
+        return
+    if dias < 0:
+        print(f"\n  !! TOKEN VENCIDO ha {-dias} dias. Gere um novo: instagram/README.md\n")
+    else:
+        print(f"\n  !! O token vence em {dias} dias. Renove agora, leva 5 segundos:")
+        print("     python instagram/scripts/renovar_token.py\n")
