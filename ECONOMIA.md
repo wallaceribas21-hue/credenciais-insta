@@ -108,3 +108,25 @@ conversa nova
 
 Sem print, sem zip, sem download. A arte aparece no visualizador e você
 lê dali.
+
+---
+
+## Referência antes de construir
+
+O maior desperdício desta conta inteira não foi token, foi direção.
+
+Ele disse no meio do caminho: *"estou vendo diversos vídeos e vejo o
+potencial"*. Aquele vídeo existia desde o começo. Se ele tivesse mandado
+um print dele na primeira mensagem, eu não teria construído um sistema
+de CSS inteiro para depois descobrir que o modelo de imagem fazia melhor
+em um passo.
+
+**Uma imagem de referência no começo custa 1.500 unidades e economiza
+rodadas inteiras.** É o único caso em que mandar imagem é mais barato
+que descrever.
+
+Regra dos dois lados:
+- **Ele:** quando tiver uma referência na cabeça, mostra antes de eu
+  começar. Mesmo que seja "é mais ou menos isso mas não sei explicar".
+- **Eu:** perguntar por referência antes de construir, não depois de
+  entregar. Se ele diz que viu algo, eu peço para ver.
