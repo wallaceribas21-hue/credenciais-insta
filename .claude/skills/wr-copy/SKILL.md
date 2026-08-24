@@ -156,6 +156,10 @@ Segunda frase aqui.
 
 O ritmo vem do tamanho da frase, não do espaço em volta dela.
 
+**Curta.** Ele corta legenda longa. Mire em 600 a 900 caracteres, não em
+2200. A legenda não é o lugar de contar tudo: é o lugar de dar o ângulo
+que o carrossel não deu e mandar pro direct.
+
 ---
 
 ## O APRENDIZADO
