@@ -33,17 +33,114 @@ import sys
 from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
-TEMPLATES = {"wind": AQUI / "template.html", "poster": AQUI / "template-poster.html"}
+TEMPLATES = {"wind": AQUI / "template.html",
+             "poster": AQUI / "template-poster.html",
+             "sistema": AQUI / "template-sistema.html"}
+
+# Altura do quadro por estilo. O sistema usa 4:5, que ocupa um quarto
+# a mais de tela no feed que o quadrado.
+ALTURAS = {"wind": 1080, "poster": 1080, "sistema": 1350}
 FONTES = AQUI.parent / "fontes"
 
 # Titulo curto pode ser grande; titulo longo precisa encolher para caber.
 LAYOUTS = ("capa", "declaracao", "numero", "lista", "fluxo", "comparacao", "fecho")
-FUNDOS = ("creme", "laranja", "preto")
+FUNDOS = ("creme", "laranja", "preto", "branco")
 
 # Ritmo do carrossel: um fundo calmo entre cada fundo forte, para o feed
 # nao ficar nem monotono nem cansativo.
 RITMO = ("creme", "preto", "creme", "laranja", "creme", "preto", "creme", "laranja",
          "creme", "preto")
+
+# ============ A COR COMO SINAL (estilo sistema) ============
+# A cor nao decora, ela diz o que o slide esta fazendo. Quem arrasta
+# aprende isso sem perceber:
+#
+#   PRETO    para o dedo    capa, declaracao, fecho de tensao
+#   BRANCO   explica        lista, fluxo, comparacao, numero
+#   LARANJA  pede acao      o fecho, e so ele
+#
+# Se o laranja aparece toda hora ele deixa de significar "olha aqui".
+FUNCAO_DO_LAYOUT = {
+    "capa": "preto", "declaracao": "preto", "fecho": "laranja",
+    "lista": "branco", "fluxo": "branco", "comparacao": "branco",
+    "numero": "branco",
+}
+
+
+def cores_do_carrossel(slides):
+    """Devolve a cor de cada slide, na ordem.
+
+    Dois pretos seguidos empilham tensao sem alivio no meio, e o carrossel
+    cansa antes do fim. Quando isso acontece, o segundo vira branco.
+    """
+    cores, anterior = [], ""
+    for i, slide in enumerate(slides, start=1):
+        if slide["fundo"]:                       # a copy mandou explicito
+            cor = slide["fundo"]
+        else:
+            layout = slide["layout"] if i > 1 else "capa"
+            cor = FUNCAO_DO_LAYOUT.get(layout, "branco")
+            if cor == "preto" and anterior == "preto":
+                cor = "branco"
+        cores.append(cor)
+        anterior = cor
+    return cores
+
+
+# Caixa do recorte no formato 4:5. O quadro e 270px mais alto que o
+# quadrado, entao a imagem pode crescer sem espremer o texto.
+# No 4:5 a imagem SEMPRE vai para cima e o texto ocupa a largura inteira
+# embaixo. Imagem ao lado do texto espreme o titulo em uma palavra por
+# linha, e e assim que as referencias funcionam: objeto em cima, copy
+# cheia embaixo.
+#
+# Cada layout reserva uma altura diferente no topo, conforme o quanto de
+# texto vem depois. Lista de quatro itens precisa de mais chao que uma
+# declaracao de uma frase.
+FAIXA_SISTEMA = {
+    "capa":       {"alt": 620, "topo": 130},
+    "declaracao": {"alt": 640, "topo": 120},
+    "numero":     {"alt": 470, "topo": 112},
+    "lista":      {"alt": 420, "topo": 112},
+    "fluxo":      {"alt": 470, "topo": 112},
+    "comparacao": {"alt": 520, "topo": 112},
+    "fecho":      {"alt": 430, "topo": 118},
+}
+
+# Onde a imagem senta na faixa. Sempre no mesmo lugar o carrossel vira
+# padrao e o olho para de procurar.
+LADOS_SISTEMA = ("direita", "esquerda", "centro", "direita", "esquerda", "centro")
+
+
+def faixa_do_recorte(layout, medida, numero):
+    """Coloca o recorte numa faixa no topo. Devolve (estilo, None, False).
+
+    Sem limite de largura para o texto: a imagem esta acima dele, nao ao
+    lado, entao o titulo pode ocupar o quadro inteiro.
+    """
+    faixa = FAIXA_SISTEMA.get(layout, FAIXA_SISTEMA["declaracao"])
+    proporcao = (medida[0] / medida[1]) if medida else 1.0
+    altura = faixa["alt"]
+    largura = round(altura * proporcao)
+    # A imagem pode encostar mais na borda que o texto, mas nunca sair:
+    # objeto cortado pela metade parece erro, nao intencao.
+    SANGRIA = 40
+    teto = 1080 - SANGRIA * 2
+    if largura > teto:
+        largura, altura = teto, round(teto / proporcao)
+
+    if layout in ("capa", "fecho"):
+        lado = "centro"
+    else:
+        lado = LADOS_SISTEMA[(numero - 1) % len(LADOS_SISTEMA)]
+    if lado == "centro":
+        pos = f"left:{round((1080 - largura) / 2)}px"
+    elif lado == "esquerda":
+        pos = f"left:{SANGRIA}px"
+    else:
+        pos = f"right:{SANGRIA}px"
+    return (f"width:{largura}px;height:{altura}px;{pos};top:{faixa['topo']}px",
+            None, False)
 
 # Cada slide recebe uma combinacao de elementos graficos diferente, para a
 # arte nao se repetir. As receitas alternam de forma previsivel.
@@ -65,7 +162,7 @@ MARGEM_PALCO = 76   # a margem lateral do texto
 FOLGA = 34          # respiro minimo entre a imagem e a letra
 
 
-def caixa_do_recorte(layout, medida, espelhar=False):
+def caixa_do_recorte(layout, medida, espelhar=False, estilo="poster"):
     """Decide onde o recorte entra, a partir da forma da imagem.
 
     A regra vem do desenho, nao da conveniencia:
@@ -81,7 +178,8 @@ def caixa_do_recorte(layout, medida, espelhar=False):
 
     Devolve (estilo, limite_do_texto, espelhado).
     """
-    caixa = CAIXAS.get(layout, CAIXAS["declaracao"])
+    tabela = CAIXAS_SISTEMA if estilo == "sistema" else CAIXAS
+    caixa = tabela.get(layout, tabela["declaracao"])
     largura, altura = caixa["w"], caixa["h"]
     proporcao = (medida[0] / medida[1]) if medida else 1.0
 
@@ -187,7 +285,14 @@ FAIXAS = {
     "wind":   [(30, 82), (60, 70), (95, 60), (135, 52), (999, 46)],
     "poster": [(24, 118), (48, 96), (78, 80), (115, 66), (999, 56)],
     "poster-capa": [(24, 156), (44, 128), (70, 104), (100, 86), (999, 72)],
+    # A Fjalla e menos condensada que a Anton, entao cabe menos letra por
+    # linha. Em compensacao o quadro 4:5 tem 270px a mais de altura.
+    "sistema": [(24, 116), (48, 98), (78, 84), (115, 72), (999, 62)],
+    "sistema-capa": [(24, 138), (44, 120), (70, 100), (100, 86), (999, 74)],
 }
+
+SISTEMA_CONTEUDO = {"numero": 74, "comparacao": 72, "lista": 68, "fluxo": 68}
+SISTEMA_CONTEUDO_SEM_FOTO = {"numero": 78, "comparacao": 92, "lista": 84, "fluxo": 84}
 
 
 # Slide sem imagem tem meio quadro sobrando. Quem nao tem foto para
@@ -201,6 +306,9 @@ def tamanho_titulo(texto, estilo, capa=False, layout="declaracao", tem_recorte=T
     limpo = re.sub(r"[*_]", "", texto)
     # Layouts com muito conteudo abaixo precisam de titulo menor.
     if layout in ("lista", "fluxo", "comparacao", "numero"):
+        if estilo == "sistema":
+            tabela = SISTEMA_CONTEUDO if tem_recorte else SISTEMA_CONTEUDO_SEM_FOTO
+            return tabela[layout]
         if tem_recorte:
             return {"numero": 58, "comparacao": 56}.get(layout, 52)
         return SEM_FOTO_CONTEUDO[layout]
@@ -434,11 +542,11 @@ def montar_corpo(slide):
     return ""
 
 
-def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
+def montar_html(slide, numero, total, marca, foto_css, recorte, estilo, cor=""):
     modelo = TEMPLATES[estilo].read_text(encoding="utf-8")
     corpo = "".join(f"<p>{marcar(l)}</p>" for l in slide["apoio"])
     layout = slide["layout"] if numero > 1 else "capa"
-    fundo = slide["fundo"] or RITMO[(numero - 1) % len(RITMO)]
+    fundo = cor or slide["fundo"] or RITMO[(numero - 1) % len(RITMO)]
     recorte_css, recorte_medida = recorte
     tem_foto = foto_css != "none"
     tem_recorte = recorte_css != "none"
@@ -448,14 +556,24 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
         "" if tem_foto else "sem-foto",
         "" if tem_recorte else "sem-recorte",
     ]))
+    trocas_tam = tamanho_titulo(slide["titulo"], estilo, numero == 1, layout, tem_recorte)
+    tam = trocas_tam
     if tem_recorte:
         # Slide par joga a imagem para a esquerda. Sempre do mesmo lado o
         # carrossel vira padrao e o olho para de procurar.
-        estilo_recorte, limite, espelhado = caixa_do_recorte(
-            layout, recorte_medida, espelhar=(numero % 2 == 0))
+        if estilo == "sistema":
+            estilo_recorte, limite, espelhado = faixa_do_recorte(
+                layout, recorte_medida, numero)
+        else:
+            estilo_recorte, limite, espelhado = caixa_do_recorte(
+                layout, recorte_medida, espelhar=(numero % 2 == 0), estilo=estilo)
         regras = []
         if limite:
             largura_texto = max(limite, 320)
+            # Titulo grande numa coluna estreita vira uma palavra por linha.
+            # Se a imagem apertou a coluna, o titulo encolhe junto.
+            if estilo == "sistema" and largura_texto < 620:
+                tam = int(trocas_tam * max(largura_texto / 620, 0.74))
             regras.append(f".palco h1,.palco .apoio,.palco .regua"
                           f"{{max-width:{largura_texto}px}}")
             if espelhado:
@@ -472,7 +590,7 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
     # Sem foto, a receita grafica precisa preencher mais o quadro.
     receita = RECEITAS[(numero - 1 + (0 if (tem_foto or tem_recorte) else 3)) % len(RECEITAS)]
     receita = receita.replace("__CARIMBO__", CARIMBO)
-    if estilo == "poster":
+    if estilo in ("poster", "sistema"):
         arrasta = "Arraste &rarr;" if numero < total else "Fim"
     else:
         arrasta = (
@@ -486,7 +604,7 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
         "__NUM__": f"{numero:02d}",
         "__MARCA__": html.escape(marca),
         "__SELO__": f'<div class="selo">{html.escape(slide["selo"])}</div>' if slide["selo"] else "",
-        "__TAM__": str(tamanho_titulo(slide["titulo"], estilo, numero == 1, layout, tem_recorte)),
+        "__TAM__": str(tam),
         "__CLASSES__": classes,
         "__DECORACAO__": receita,
         "__PONTE__": ponte_entre_slides(numero, total),
@@ -494,6 +612,10 @@ def montar_html(slide, numero, total, marca, foto_css, recorte, estilo):
         "__CAIXA_RECORTE__": estilo_recorte,
         "__LIMITE_TEXTO__": limite_css,
         "__NUMERAO__": f'<div class="numerao">{html.escape(slide["numerao"])}</div>' if slide["numerao"] else "",
+        # A regua so faz sentido separando titulo de um bloco de conteudo.
+        # Sozinha embaixo de um titulo ela vira risco solto.
+        "__REGUA__": ('<div class="regua"></div>'
+                      if layout in ("lista", "fluxo", "comparacao") else ""),
         "__CORPO__": montar_corpo(slide),
         "__TITULO__": marcar(slide["titulo"]),
         "__APOIO__": f'<div class="apoio">{corpo}</div>' if corpo else "",
@@ -544,18 +666,23 @@ def main():
             # CHROMIUM_PATH permite usar um Chromium ja instalado no sistema.
             atalho = os.getenv("CHROMIUM_PATH")
             navegador = p.chromium.launch(executable_path=atalho) if atalho else p.chromium.launch()
-            pagina = navegador.new_page(viewport={"width": 1080, "height": 1080})
+            altura = ALTURAS.get(args.estilo, 1080)
+            pagina = navegador.new_page(viewport={"width": 1080, "height": altura})
+            # A cor de cada slide depende do carrossel inteiro, nao so do
+            # slide: a regra de nao repetir preto precisa do anterior.
+            cores = cores_do_carrossel(slides) if args.estilo == "sistema" else [""] * len(slides)
             for i, slide in enumerate(slides, start=1):
                 temp.write_text(montar_html(
                     slide, i, len(slides), args.marca,
                     foto_embutida(mapa_fotos[("foto", i)])[0] if ("foto", i) in mapa_fotos else foto_unica,
                     foto_embutida(recorte, aparar=True) if (recorte := recorte_do_slide(slide, i, mapa_fotos)) else ("none", None),
-                    args.estilo), encoding="utf-8")
+                    args.estilo, cores[i - 1]), encoding="utf-8")
                 pagina.goto(temp.as_uri())
                 pagina.wait_for_timeout(340)  # deixa as fontes carregarem
                 destino = pasta / f"slide-{i:02d}.png"
                 pagina.screenshot(path=str(destino))
-                print(f"  {destino}  [{slide['layout']}]  {re.sub(r'[*_]', '', slide['titulo'])[:38]}")
+                etiqueta = f"[{cores[i-1] or slide['layout']}]"
+                print(f"  {destino}  {etiqueta:<11} {re.sub(r'[*_]', '', slide['titulo'])[:36]}")
             navegador.close()
     except Exception as e:
         print(f"\nERRO ao renderizar: {e}")

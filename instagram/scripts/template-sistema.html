@@ -1,0 +1,230 @@
+<meta charset="utf-8">
+<body class="__CLASSES__">
+<style>
+  /* ============================================================
+     SISTEMA WR — 1080x1350 (4:5)
+
+     A cor nao decora, ela sinaliza. Cada slide tem UMA funcao e a
+     cor diz qual e, sem precisar explicar:
+
+       PRETO    para o dedo. Capa e viradas de chave.
+       BRANCO   explica. Lista, comparacao, passo a passo.
+       LARANJA  pede acao. Um por carrossel, dois no maximo.
+
+     Se o laranja aparece toda hora, ele deixa de significar
+     "olha aqui" e vira so cor de fundo.
+     ============================================================ */
+
+  @font-face { font-family: 'Titulo'; src: url('__FONTES__/FjallaOne-400-latin.woff2') format('woff2'); }
+  @font-face { font-family: 'Titulo'; src: url('__FONTES__/FjallaOne-400-latin-ext.woff2') format('woff2'); unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Texto'; src: url('__FONTES__/Arimo-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Texto'; src: url('__FONTES__/Arimo-400-latin-ext.woff2') format('woff2'); font-weight: 400; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Texto'; src: url('__FONTES__/Arimo-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Texto'; src: url('__FONTES__/Arimo-700-latin-ext.woff2') format('woff2'); font-weight: 700; unicode-range: U+0100-024F; }
+  @font-face { font-family: 'Etiqueta'; src: url('__FONTES__/RobotoMono-400-latin.woff2') format('woff2'); font-weight: 400; }
+  @font-face { font-family: 'Etiqueta'; src: url('__FONTES__/RobotoMono-700-latin.woff2') format('woff2'); font-weight: 700; }
+  @font-face { font-family: 'Etiqueta'; src: url('__FONTES__/RobotoMono-700-latin-ext.woff2') format('woff2'); font-weight: 700; unicode-range: U+0100-024F; }
+
+  :root {
+    --preto:   #0B0B0B;
+    --branco:  #FFFFFF;
+    --laranja: #FF6B1A;
+    --margem:  84px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1080px; height: 1350px; }
+  body {
+    position: relative; overflow: hidden;
+    font-family: 'Texto', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ============ AS TRES FUNCOES ============
+     Cada uma redefine as mesmas quatro variaveis. Todo o resto do
+     CSS le so as variaveis, entao nenhuma regra precisa saber em
+     qual fundo esta. */
+  body.f-preto {
+    background: var(--preto);
+    --frente: #FFFFFF; --apagado: #A8A29A; --realce: var(--laranja); --contra: var(--preto);
+  }
+  body.f-branco {
+    background: var(--branco);
+    --frente: #0B0B0B; --apagado: #8C857C; --realce: var(--laranja); --contra: var(--branco);
+  }
+  body.f-laranja {
+    background: var(--laranja);
+    --frente: #0B0B0B; --apagado: rgba(11,11,11,.60); --realce: #FFFFFF; --contra: var(--laranja);
+  }
+
+  /* ============ IMAGEM ============ */
+  /* Recorte: objeto solto, com a sombra dura da marca. */
+  .recorte {
+    position: absolute; background-repeat: no-repeat;
+    background-size: contain; background-position: center;
+    background-image: __RECORTE__;
+    filter: drop-shadow(18px 16px 0 rgba(0,0,0,.26));
+    __CAIXA_RECORTE__;
+  }
+  body.sem-recorte .recorte { display: none; }
+  body.f-preto .recorte { filter: drop-shadow(18px 16px 0 rgba(0,0,0,.55)); }
+
+  /* Foto sangrando: ocupa o quadro todo, o texto vive dentro dela. */
+  .cenario {
+    position: absolute; inset: 0;
+    background-image: __FOTO__;
+    background-size: cover; background-position: center;
+  }
+  body.sem-foto .cenario { display: none; }
+
+  /* O veu e o que garante que a copy le sobre QUALQUER imagem.
+     Sem ele o texto depende da sorte do que tiver atras. */
+  .veu { position: absolute; left: 0; right: 0; bottom: 0; height: 78%; }
+  body.f-preto  .veu { background: linear-gradient(to top, #0B0B0B 32%, rgba(11,11,11,.88) 58%, rgba(11,11,11,0) 100%); }
+  body.f-branco .veu { background: linear-gradient(to top, #FFFFFF 34%, rgba(255,255,255,.90) 60%, rgba(255,255,255,0) 100%); }
+  body.f-laranja .veu { background: linear-gradient(to top, #FF6B1A 34%, rgba(255,107,26,.90) 60%, rgba(255,107,26,0) 100%); }
+  body.sem-foto .veu { display: none; }
+
+  /* Brilho no preto: da profundidade sem pesar o arquivo. */
+  .brilho {
+    position: absolute; width: 1000px; height: 1000px; border-radius: 50%;
+    top: -340px; right: -300px;
+    background: radial-gradient(circle, rgba(255,107,26,.42) 0%, rgba(255,107,26,0) 62%);
+  }
+  body:not(.f-preto) .brilho { display: none; }
+
+  /* ============ ETIQUETAS ============ */
+  .etiqueta, .rodape {
+    position: absolute; left: var(--margem); right: var(--margem);
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'Etiqueta', monospace; font-size: 19px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--apagado);
+  }
+  .etiqueta { top: 62px; }
+  .rodape { bottom: 46px; }
+  .rodape .cont { color: var(--realce); }
+  body.f-laranja .rodape .cont { color: var(--frente); }
+
+  /* ============ PALCO ============ */
+  .palco {
+    position: absolute; left: var(--margem); right: var(--margem);
+    bottom: 108px;
+  }
+  /* Centralizar o texto so vale quando o quadro esta vazio. Com imagem
+     no topo, o texto centralizado sobe e passa por cima dela. */
+  body.a-centro.sem-recorte.sem-foto .palco { top: 50%; bottom: auto; transform: translateY(-50%); }
+  body.l-fecho .palco { text-align: center; }
+  body.l-fecho:not(.sem-recorte) .palco { top: auto; bottom: 108px; transform: none; }
+
+  .selo {
+    display: inline-block; background: var(--frente); color: var(--contra);
+    padding: 12px 20px 10px; margin-bottom: 26px;
+    font-family: 'Etiqueta', monospace; font-size: 19px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Titulo', sans-serif;
+    font-size: __TAM__px; line-height: 1.02;
+    letter-spacing: -.004em; text-transform: uppercase;
+    color: var(--frente);
+  }
+  h1 .cor  { color: var(--realce); }
+  /* Contorno COM miolo cheio: so o risco some no feed pequeno. */
+  h1 .leve { color: var(--realce); -webkit-text-stroke: 3px var(--contra); paint-order: stroke fill; }
+  h1 .sub  {
+    background-image: linear-gradient(var(--realce), var(--realce));
+    background-size: 100% 8px; background-position: 0 96%; background-repeat: no-repeat;
+  }
+
+  .regua { height: 3px; width: 120px; background: var(--frente); margin: 24px 0 26px; }
+
+  .apoio {
+    font-size: 33px; line-height: 1.32; color: var(--apagado);
+    margin-top: 24px; max-width: 88%; text-wrap: pretty;
+  }
+  body.l-fecho .apoio { max-width: 100%; margin-left: auto; margin-right: auto; }
+  .apoio p + p { margin-top: 10px; }
+  .apoio .cor, .apoio .leve, .apoio .sub { color: var(--frente); font-weight: 700; }
+
+  /* ============ LISTA ============ */
+  .lista .item {
+    display: flex; gap: 24px; align-items: baseline;
+    padding: 20px 0; border-bottom: 1px solid var(--apagado);
+  }
+  .lista .item:last-child { border-bottom: 0; }
+  .lista .marca-item {
+    font-family: 'Etiqueta', monospace; font-size: 18px; font-weight: 700;
+    color: var(--realce); width: 36px; flex-shrink: 0;
+  }
+  body.f-laranja .lista .marca-item { color: var(--frente); }
+  .lista .txt-item { font-size: 35px; line-height: 1.18; color: var(--frente); }
+
+  /* ============ FLUXO ============ */
+  .fluxo .etapa { display: flex; align-items: stretch; }
+  .fluxo .trilho { width: 60px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; }
+  .fluxo .bolha {
+    width: 48px; height: 48px; flex-shrink: 0; border-radius: 50%;
+    background: var(--realce); color: var(--contra);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Etiqueta', monospace; font-size: 18px; font-weight: 700;
+  }
+  body.f-laranja .fluxo .bolha { background: var(--frente); color: var(--contra); }
+  .fluxo .fio-v { flex: 1; width: 3px; background: var(--apagado); }
+  .fluxo .etapa:last-child .fio-v { display: none; }
+  .fluxo .corpo-etapa {
+    padding: 8px 0 28px 24px;
+    font-size: 34px; line-height: 1.18; color: var(--frente);
+  }
+  .fluxo .etapa:last-child .corpo-etapa { padding-bottom: 0; }
+
+  /* ============ COMPARACAO ============ */
+  .versus { display: flex; gap: 20px; }
+  .versus .lado { flex: 1; padding: 26px 24px 30px; border: 3px solid var(--frente); }
+  .versus .depois { background: var(--realce); border-color: var(--realce); }
+  body.f-laranja .versus .depois { background: var(--frente); }
+  .versus .rotulo {
+    font-family: 'Etiqueta', monospace; font-size: 16px; font-weight: 700;
+    letter-spacing: .18em; text-transform: uppercase;
+    color: var(--apagado); margin-bottom: 12px;
+  }
+  .versus .depois .rotulo { color: var(--contra); opacity: .7; }
+  .versus .valor {
+    font-family: 'Titulo', sans-serif; font-size: 46px; line-height: 1.04;
+    text-transform: uppercase; color: var(--frente);
+  }
+  .versus .depois .valor { color: var(--contra); }
+
+  /* ============ NUMERO ============ */
+  .numerao {
+    font-family: 'Titulo', sans-serif; font-size: 300px; line-height: .78;
+    color: var(--realce); margin-bottom: 12px;
+  }
+  body.f-laranja .numerao { color: var(--frente); }
+</style>
+__LIMITE_TEXTO__
+
+<div class="cenario"></div>
+<div class="brilho"></div>
+<div class="recorte"></div>
+<div class="veu"></div>
+
+<div class="etiqueta">
+  <span>__MARCA__</span>
+  <span>__NUM__</span>
+</div>
+
+<div class="palco">
+  __SELO__
+  __NUMERAO__
+  <h1>__TITULO__</h1>
+  __REGUA__
+  __CORPO__
+  __APOIO__
+</div>
+
+<div class="rodape">
+  <span class="cont">__CONTADOR__</span>
+  <span>__ARRASTA__</span>
+</div>
+</body>
