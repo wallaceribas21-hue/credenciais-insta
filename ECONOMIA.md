@@ -84,6 +84,11 @@ Registrado para não repetir:
 3. **Tentar baixar imagem** que a rede daqui não alcança. Testei três
    caminhos antes de aceitar que o zip tem que passar por você.
 4. **Perguntar o que já estava escrito** no PERFIL.md.
+5. **Colar dois comandos de uma vez** no PowerShell. Eles grudam
+   (`--fotos fotosexplorer C:\...`) e o erro parece do script. Um
+   comando, um Enter, espera terminar.
+6. **Nomear arquivo copiando a tabela inteira** que eu escrevi, seta e
+   tudo. Quando eu passar nome de arquivo, passo o nome cru.
 
 ---
 

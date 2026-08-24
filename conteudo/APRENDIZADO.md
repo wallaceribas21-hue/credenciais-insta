@@ -41,6 +41,15 @@ Formato: **só o de capa** (foto sangrando + texto por cima). Viu os três
 e reprovou "texto + 1 imagem" e "texto + 2 imagens".
 Copy: aprovada sem edição nenhuma. Primeira vez que isso acontece.
 Arte: aprovada de primeira, no Higgsfield.
+**Publicado.** Post ID `18175135111439230`.
+
+Editou a legenda duas vezes, e as duas viraram regra:
+1. Tirou as linhas em branco entre parágrafos. Acha horrível o texto
+   esparramado.
+2. Cortou de 1397 para 646 caracteres e trocou o ângulo: a legenda
+   também foi escrita pela IA, e o ponto é fazer reparar no nível do
+   post inteiro. A prova deixou de ser contada e passou a ser a própria
+   coisa que a pessoa está lendo.
 
 ## A virada que vale mais que o resto
 
