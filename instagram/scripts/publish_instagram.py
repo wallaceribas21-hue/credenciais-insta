@@ -77,11 +77,55 @@ def _zerox(nome, dados, tipo):
     return url if url.startswith("http") else None
 
 
+def _uguu(nome, dados, tipo):
+    resp = requests.post(
+        "https://uguu.se/upload",
+        files={"files[]": (nome, dados, tipo)},
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    arquivos = resp.json().get("files", [])
+    url = arquivos[0].get("url", "") if arquivos else ""
+    return url if url.startswith("http") else None
+
+
+def _bashupload(nome, dados, tipo):
+    resp = requests.put(
+        f"https://bashupload.com/{nome}",
+        data=dados,
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    for pedaco in resp.text.split():
+        if pedaco.startswith("https://bashupload.com/"):
+            # ?download=1 devolve o arquivo cru; sem isso vem a pagina HTML.
+            return pedaco + "?download=1"
+    return None
+
+
+def _tempsh(nome, dados, tipo):
+    resp = requests.post(
+        "https://temp.sh/upload",
+        files={"file": (nome, dados, tipo)},
+        headers={"User-Agent": UA},
+        timeout=120,
+    )
+    url = resp.text.strip()
+    return url if url.startswith("http") else None
+
+
+# Sao todos hosts anonimos e gratuitos, entao caem sem aviso: ja vimos os
+# quatro primeiros fora ao mesmo tempo. Por isso a lista e longa. Se um dia
+# nenhum responder, rode:
+#     python instagram/scripts/publish_instagram.py --testar-hosts
 HOSTS = [
     ("catbox", _catbox),
     ("litterbox", _litterbox),
     ("tmpfiles", _tmpfiles),
     ("0x0", _zerox),
+    ("uguu", _uguu),
+    ("bashupload", _bashupload),
+    ("temp.sh", _tempsh),
 ]
 
 # A API de publicacao da Meta aceita SOMENTE JPEG. PNG e recusado com
@@ -228,6 +272,38 @@ def expandir(padroes):
     return arquivos
 
 
+def testar_hosts():
+    """Sobe um PNG minusculo em cada host e diz quais responderam.
+
+    Quando a publicacao falha em todos, isto separa 'a internet dele' de
+    'os hosts cairam', que exigem respostas diferentes.
+    """
+    import base64
+    # 1x1 preto, o menor PNG valido que existe
+    minusculo = base64.b64decode(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk"
+        "+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==")
+    print("\nTestando os hosts de imagem...\n")
+    vivos = []
+    for nome, funcao in HOSTS:
+        try:
+            url = funcao("teste.png", minusculo, "image/png")
+            if url:
+                print(f"  OK       {nome:12s} {url}")
+                vivos.append(nome)
+            else:
+                print(f"  RECUSOU  {nome:12s} respondeu, mas sem link")
+        except Exception as e:
+            print(f"  FALHOU   {nome:12s} {type(e).__name__}")
+    print()
+    if vivos:
+        print(f"{len(vivos)} de {len(HOSTS)} de pe: {', '.join(vivos)}")
+        print("Pode publicar normalmente.")
+    else:
+        print("Nenhum host respondeu.")
+        print("Se a sua internet esta boa, foram eles que cairam: tente mais tarde.")
+
+
 def run(imagens, legenda, dry_run=False):
     if not IG_ID or not TOKEN:
         print(f"ERRO: credenciais ausentes ({ENV_PATH or 'nenhum .env encontrado'}).")
@@ -284,12 +360,23 @@ def run(imagens, legenda, dry_run=False):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Publica um carrossel no Instagram.")
-    parser.add_argument("--images", nargs="+", required=True, help="2 a 10 imagens .png/.jpg")
-    grupo = parser.add_mutually_exclusive_group(required=True)
+    parser.add_argument("--images", nargs="+", help="2 a 10 imagens .png/.jpg/.webp")
+    grupo = parser.add_mutually_exclusive_group()
     grupo.add_argument("--caption", help="legenda do post")
     grupo.add_argument("--caption-file", help="arquivo .txt com a legenda (evita problema de aspas)")
     parser.add_argument("--dry-run", action="store_true", help="valida sem publicar")
+    parser.add_argument("--testar-hosts", action="store_true",
+                        help="testa qual host de imagem esta de pe agora")
     args = parser.parse_args()
+
+    # Diagnostico nao publica nada, entao nao pede legenda nem imagem.
+    if args.testar_hosts:
+        testar_hosts()
+        sys.exit(0)
+    if not args.images:
+        parser.error("informe --images, ou use --testar-hosts sozinho")
+    if not args.caption and not args.caption_file:
+        parser.error("informe --caption ou --caption-file")
 
     if args.caption_file:
         arquivo = Path(args.caption_file)
