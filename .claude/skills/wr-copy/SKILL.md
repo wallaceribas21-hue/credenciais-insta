@@ -138,6 +138,24 @@ Imagens: nomes em `fotos/banco/`
 Legenda em `conteudo/00N-legenda.txt`. Máximo 2200 caracteres. A legenda
 não repete o carrossel: ela conta o que não coube.
 
+**Linha em branco entre parágrafos, nunca.** Ele acha horrível o texto
+esparramado. Uma linha embaixo da outra, coladas:
+
+```
+Primeira frase aqui.
+Segunda frase aqui.
+```
+
+E não assim:
+
+```
+Primeira frase aqui.
+
+Segunda frase aqui.
+```
+
+O ritmo vem do tamanho da frase, não do espaço em volta dela.
+
 ---
 
 ## O APRENDIZADO
