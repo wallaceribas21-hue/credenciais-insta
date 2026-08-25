@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Assessoria WR — verba que volta</title>
-<meta name="description" content="Assessoria de marketing para negócio local: tráfego pago, conteúdo e um relatório por semana. A operação que já cuida de dezenas de contas de anúncio.">
+<meta name="description" content="Assessoria de marketing para negócio local: tráfego pago, conteúdo e um relatório por semana.">
 <meta name="theme-color" content="#000000">
 <meta property="og:title" content="Assessoria WR — verba que volta">
 <meta property="og:description" content="Tráfego pago, conteúdo e um relatório por semana para negócio local.">
@@ -16,26 +16,33 @@
 </head>
 <body>
 
-<header class="nav">
+<div class="progresso" id="progresso" aria-hidden="true"></div>
+
+<!-- a constelação vive atrás da página inteira e muda de forma conforme a rolagem -->
+<div class="ceu" aria-hidden="true"><canvas id="ceu"></canvas></div>
+
+<div class="conteudo">
+
+<header class="nav" id="nav">
   <div class="nav__inner">
     <a class="logo" href="#topo" aria-label="Assessoria WR, ir para o topo">
-      <svg class="logo__mark" viewBox="0 0 18 18" aria-hidden="true">
+      <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">
         <defs>
-          <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#8052ff"/>
-            <stop offset="1" stop-color="#15846e"/>
+          <linearGradient id="brasa" x1="0" y1="0" x2="0.35" y2="1">
+            <stop offset="0" stop-color="#ff8a3d"/>
+            <stop offset="1" stop-color="#e03b12"/>
           </linearGradient>
         </defs>
-        <path d="M9 0 18 18H0Z" fill="url(#mark)"/>
+        <rect width="48" height="48" rx="11" fill="url(#brasa)"/>
+        <path d="M11 13 20 35 24 23 28 35 37 13" fill="none" stroke="#0a0a0a" stroke-width="6.4" stroke-linejoin="miter"/>
       </svg>
       <span class="logo__word">Assessoria WR</span>
     </a>
 
     <nav class="nav__links" id="navLinks">
+      <a class="ghost" href="#operacao">Operação</a>
       <a class="ghost" href="#servicos">Serviços</a>
-      <a class="ghost" href="#metodo">Método</a>
       <a class="ghost" href="#planos">Planos</a>
-      <a class="ghost" href="#duvidas">Dúvidas</a>
       <a class="pill" href="#contato">Pedir diagnóstico</a>
     </nav>
 
@@ -47,312 +54,156 @@
 
 <main id="topo">
 
-  <!-- hero -->
-  <section class="section hero">
+  <!-- ato 1 — a promessa. a constelação sobe como uma curva -->
+  <section class="cena hero" data-forma="curva" style="position:relative">
     <div class="wrap hero__grid">
-      <div class="hero__text">
-        <p class="t-label t-label--amber">Assessoria de marketing</p>
-        <h1 class="t-display">Verba que volta.</h1>
-        <p class="t-body">Anúncio, conteúdo e leitura de dado saem da mesma mesa. Você olha <em>um número por semana</em> e sabe se o mês está de pé.</p>
+      <p class="t-label t-label--ember sobe">Assessoria de marketing</p>
+      <h1 class="t-display revela" data-revelar>Verba que volta.</h1>
+      <p class="t-body sobe sobe--2">Anúncio, conteúdo e leitura de dado saem da mesma mesa. Você olha <em>um número por semana</em> e sabe se o mês está de pé.</p>
+      <div class="hero__pe sobe sobe--3">
         <a class="pill" href="#contato">Pedir diagnóstico</a>
-        <p class="t-caption">Contratos a partir de R$ 1.500 por mês. Sem fidelidade.</p>
+        <span class="t-caption">A partir de R$ 1.500 por mês. Sem fidelidade.</span>
       </div>
-      <div class="hero__stage">
-        <canvas data-constelacao="curva" aria-label="Constelação de partículas formando uma curva de crescimento" role="img"></canvas>
-      </div>
+    </div>
+    <div class="rolar" aria-hidden="true">
+      <span class="rolar__fio"></span>
+      <span class="t-caption">Role</span>
     </div>
   </section>
 
-  <!-- números -->
-  <section class="section">
-    <div class="wrap figures rise">
-      <div class="figure">
-        <p class="figure__n">33</p>
-        <p class="t-label">Páginas administradas</p>
-      </div>
-      <div class="figure">
-        <p class="figure__n">8</p>
-        <p class="t-label">Setores atendidos</p>
-      </div>
-      <div class="figure">
-        <p class="figure__n">1</p>
-        <p class="t-label">Relatório por semana, sempre</p>
-      </div>
+  <!-- ato 2 — a escala. dois números, só os que provam -->
+  <section class="cena" id="operacao" data-forma="dispersa">
+    <div class="wrap numeros">
+      <article class="numero sobe">
+        <p class="t-display numero__v" data-contar="33">0</p>
+        <div class="numero__t">
+          <p class="t-hsm">Páginas administradas</p>
+          <p class="t-body">Contas de clínica, hotelaria, varejo, alimentos, serviço automotivo e barbearia passando pela mesma mesa toda semana.</p>
+        </div>
+      </article>
+
+      <article class="numero sobe">
+        <p class="t-display numero__v" data-contar="8">0</p>
+        <div class="numero__t">
+          <p class="t-hsm">Setores atendidos</p>
+          <p class="t-body">O que funciona numa barbearia raramente funciona num hotel. Rodar os dois ao mesmo tempo é o que ensina a diferença.</p>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- serviços -->
-  <section class="section" id="servicos">
-    <div class="wrap">
-      <div class="opener">
-        <p class="t-label t-label--amber">O que fazemos</p>
-        <h2 class="t-hlg">Três frentes, uma conta só.</h2>
-      </div>
+  <!-- ato 3 — o que fazemos. a marca se monta enquanto os passos avançam -->
+  <section class="palco" id="servicos" data-forma="marca" data-passos="3">
+    <div class="palco__fixo">
+      <div class="palco__grid">
+        <div class="palco__lado">
+          <p class="t-label t-label--ember">O que fazemos</p>
+          <h2 class="t-hlg">Três frentes, uma conta só.</h2>
+          <div class="indice" id="indice" aria-hidden="true"><span></span><span></span><span></span></div>
 
-      <div class="rows">
-        <article class="row rise">
-          <div class="row__head">
+          <div class="passos" id="passos">
+          <article class="passo is-active">
+            <p class="t-label passo__n">01</p>
             <h3 class="t-hsm">Tráfego pago</h3>
-          </div>
-          <div class="row__body">
             <p class="t-body">Meta e Google. Campanha montada para o que o seu negócio vende de verdade, não para o que dá print bonito.</p>
-            <ul class="plain">
-              <li>Estrutura de campanha e público</li>
-              <li>Criativo testado toda semana</li>
-              <li>Pixel, conversão e rastreio</li>
-              <li>Ajuste de verba por resultado</li>
+            <ul class="passo__lista">
+              <li>Estrutura</li><li>Público</li><li>Criativo semanal</li><li>Rastreio</li>
             </ul>
-          </div>
-        </article>
+          </article>
 
-        <article class="row rise">
-          <div class="row__head">
+          <article class="passo">
+            <p class="t-label passo__n">02</p>
             <h3 class="t-hsm">Conteúdo e social</h3>
-          </div>
-          <div class="row__body">
             <p class="t-body">Perfil que sustenta o anúncio. Quem clica no seu link encontra uma página que responde às dúvidas antes de você.</p>
-            <ul class="plain">
-              <li>Calendário mensal de posts</li>
-              <li>Carrossel, reels e stories</li>
-              <li>Roteiro pronto para gravar</li>
-              <li>Resposta de comentário e direct</li>
+            <ul class="passo__lista">
+              <li>Calendário</li><li>Carrossel</li><li>Reels</li><li>Direct</li>
             </ul>
-          </div>
-        </article>
+          </article>
 
-        <article class="row rise">
-          <div class="row__head">
+          <article class="passo">
+            <p class="t-label passo__n">03</p>
             <h3 class="t-hsm">Estratégia e dados</h3>
-          </div>
-          <div class="row__body">
             <p class="t-body">A parte que quase ninguém entrega: alguém olhando o número e dizendo, em português, o que fazer com ele.</p>
-            <ul class="plain">
-              <li>Diagnóstico inicial da conta</li>
-              <li>Meta de custo por lead e por venda</li>
-              <li>Relatório semanal de uma página</li>
-              <li>Reunião mensal de rota</li>
+            <ul class="passo__lista">
+              <li>Diagnóstico</li><li>Meta de custo</li><li>Relatório</li><li>Rota mensal</li>
             </ul>
+          </article>
           </div>
-        </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- o relatório -->
-  <section class="section">
-    <div class="wrap duo duo--flip rise">
-      <div class="hero__stage">
-        <canvas data-constelacao="orbita" aria-label="Constelação de partículas convergindo para um ponto" role="img"></canvas>
-      </div>
-      <div class="stack">
-        <p class="t-label t-label--amber">Toda sexta</p>
-        <h2 class="t-hlg">Você para de adivinhar.</h2>
-        <p class="t-body">Uma página com quatro linhas: quanto entrou de verba, quantos contatos vieram, quanto custou cada um e o que muda na semana seguinte. <em>Sem print solto, sem painel que ninguém abre.</em></p>
-        <a class="ghost amber-link" href="#contato">Ver um relatório de exemplo</a>
-      </div>
+  <!-- ato 4 — o relatório. tudo converge para um ponto -->
+  <section class="cena" data-forma="orbita">
+    <div class="wrap stack">
+      <p class="t-label t-label--ember sobe">Toda sexta</p>
+      <h2 class="t-hlg limite-titulo revela" data-revelar>Você para de adivinhar.</h2>
+      <p class="t-body sobe sobe--2">Uma página com quatro linhas: quanto entrou de verba, quantos contatos vieram, quanto custou cada um e o que muda na semana seguinte. <em>Sem print solto, sem painel que ninguém abre.</em></p>
     </div>
   </section>
 
-  <!-- método -->
-  <section class="section" id="metodo">
+  <!-- ato 5 — a fala do cliente, iluminada palavra a palavra -->
+  <section class="cena" data-forma="onda">
     <div class="wrap">
-      <div class="opener">
-        <p class="t-label t-label--amber">Como começa</p>
-        <h2 class="t-hlg">Duas semanas até a primeira campanha no ar.</h2>
-      </div>
-
-      <div class="rows">
-        <article class="row rise">
-          <div class="row__head">
-            <p class="t-label step__n">Etapa 01</p>
-            <h3 class="t-hsm">Diagnóstico</h3>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Quarenta minutos de conversa e uma olhada na conta que você já tem. Você sai com um parecer, mesmo que não feche.</p>
-          </div>
-        </article>
-
-        <article class="row rise">
-          <div class="row__head">
-            <p class="t-label step__n">Etapa 02</p>
-            <h3 class="t-hsm">Plano</h3>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Meta de custo por contato, verba sugerida e o que precisa existir antes de subir campanha.</p>
-          </div>
-        </article>
-
-        <article class="row rise">
-          <div class="row__head">
-            <p class="t-label step__n">Etapa 03</p>
-            <h3 class="t-hsm">No ar</h3>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Estrutura montada, rastreio conferido, primeiros criativos publicados e leitura diária na primeira semana.</p>
-          </div>
-        </article>
-
-        <article class="row rise">
-          <div class="row__head">
-            <p class="t-label step__n">Etapa 04</p>
-            <h3 class="t-hsm">Rotina</h3>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Relatório toda sexta, criativo novo toda semana e reunião de rota uma vez por mês.</p>
-          </div>
-        </article>
-      </div>
+      <blockquote class="t-h destaque limite-titulo" data-destacar>A gente já tinha gastado muito sem saber para onde ia. A diferença foi ter alguém que explica o número antes de pedir mais verba.</blockquote>
+      <p class="t-label" style="margin-top:36px">Cliente · negócio local</p>
     </div>
   </section>
 
-  <!-- planos -->
-  <section class="section" id="planos">
-    <div class="wrap">
-      <div class="opener">
-        <p class="t-label t-label--amber">Planos</p>
-        <h2 class="t-hlg">Escolha pelo tamanho da operação.</h2>
-      </div>
-
-      <div class="rows">
-        <article class="row rise">
-          <div class="row__head">
-            <h3 class="t-hsm">Essencial</h3>
-            <p class="t-h2xs preco">R$ 1.500 por mês</p>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Para quem está começando a anunciar e precisa de estrutura certa desde o primeiro real. Verba a partir de R$ 1.000.</p>
-            <ul class="plain">
-              <li>Uma plataforma, Meta ou Google</li>
-              <li>Até duas campanhas ativas</li>
-              <li>Criativo novo toda semana</li>
-              <li>Relatório semanal</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="row rise">
-          <div class="row__head">
-            <h3 class="t-hsm">Operação</h3>
-            <p class="t-h2xs preco">R$ 2.900 por mês</p>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Para quem já vende pelo digital e quer previsibilidade de agenda todo mês. Verba a partir de R$ 3.000.</p>
-            <ul class="plain">
-              <li>Meta e Google juntos</li>
-              <li>Campanhas sem limite de estrutura</li>
-              <li>Doze posts e quatro reels por mês</li>
-              <li>Relatório semanal e reunião mensal</li>
-            </ul>
-          </div>
-        </article>
-
-        <article class="row rise">
-          <div class="row__head">
-            <h3 class="t-hsm">Rede</h3>
-            <p class="t-h2xs preco">Sob proposta</p>
-          </div>
-          <div class="row__body">
-            <p class="t-body">Para quem tem mais de uma unidade, mais de uma marca ou verba acima de R$ 15 mil por mês.</p>
-            <ul class="plain">
-              <li>Conta e verba por unidade</li>
-              <li>Comparativo entre praças</li>
-              <li>Conteúdo por unidade</li>
-              <li>Leitura consolidada da rede</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- prova -->
-  <section class="section">
-    <div class="wrap stack-l">
-      <div>
-        <blockquote class="t-h quote" data-slide>“A gente já tinha gastado muito sem saber para onde ia. A diferença foi ter alguém que explica o número antes de pedir mais verba.”</blockquote>
-        <blockquote class="t-h quote" data-slide hidden>“O relatório de sexta virou a reunião da nossa semana. Em três meses a agenda parou de ter buraco no meio do mês.”</blockquote>
-        <blockquote class="t-h quote" data-slide hidden>“Perfil e anúncio passaram a falar a mesma língua. O cliente chega no direct já sabendo o que a gente faz.”</blockquote>
-        <div class="dots" id="dots" role="tablist" aria-label="Depoimentos"></div>
-      </div>
-
-      <div class="stack">
-        <p class="t-label">Contas que passam pela operação</p>
-        <ul class="clients t-h2xs">
-          <li>WIND Company</li>
-          <li>Clínica Ômega</li>
-          <li>Fleury</li>
-          <li>CV Hotéis</li>
-          <li>The Barber Exclusive</li>
-          <li>Ideal Alimentos</li>
-          <li>Berg Pneus</li>
-          <li>Topmake</li>
+  <!-- letreiro -->
+  <section class="cena cena--auto" style="padding-top:0;padding-bottom:0">
+    <div style="width:100%">
+      <div class="wrap" style="padding-bottom:36px"><p class="t-label">Contas que passam pela operação</p></div>
+      <div class="letreiro">
+        <ul class="letreiro__trilho t-hsm" id="trilho">
+          <li>WIND Company</li><li>Clínica Ômega</li><li>Fleury</li><li>CV Hotéis</li>
+          <li>The Barber Exclusive</li><li>Ideal Alimentos</li><li>Berg Pneus</li><li>Topmake</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- dúvidas -->
-  <section class="section" id="duvidas">
-    <div class="wrap duo duo--text">
-      <div class="opener">
-        <p class="t-label t-label--amber">Dúvidas honestas</p>
-        <h2 class="t-hlg">O que perguntam antes de fechar.</h2>
+  <!-- ato 6 — planos, em linha, não em tabela -->
+  <section class="cena" id="planos" data-forma="grade">
+    <div class="wrap stack-l">
+      <div class="stack">
+        <p class="t-label t-label--ember sobe">Planos</p>
+        <h2 class="t-hlg limite-titulo revela" data-revelar>Escolha pelo tamanho da operação.</h2>
       </div>
 
-      <div class="faq">
-        <div class="faq__item">
-          <button class="faq__q t-h2xs" type="button">
-            <svg class="faq__mark" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0 10 6 0 12Z"/></svg>
-            <span>Em quanto tempo eu vejo resultado?</span>
-          </button>
-          <div class="faq__a"><p class="t-body">Contato costuma aparecer na primeira semana. Custo estável, que é o que interessa, leva de trinta a sessenta dias: antes disso a campanha ainda está aprendendo com dado seu.</p></div>
-        </div>
+      <div class="sobe planos">
+        <article class="plano">
+          <h3 class="t-hsm">Essencial</h3>
+          <p class="t-h2xs plano__preco">R$ 1.500 / mês</p>
+          <p class="t-body plano__d">Uma plataforma, até duas campanhas, criativo novo toda semana e relatório de sexta. Verba a partir de R$ 1.000.</p>
+        </article>
 
-        <div class="faq__item">
-          <button class="faq__q t-h2xs" type="button">
-            <svg class="faq__mark" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0 10 6 0 12Z"/></svg>
-            <span>Tem fidelidade?</span>
-          </button>
-          <div class="faq__a"><p class="t-body">Não. O pedido é de noventa dias como janela justa de avaliação, porque abaixo disso não dá para separar resultado de sorte. Querendo sair antes, sai: a conta e os dados são seus.</p></div>
-        </div>
+        <article class="plano">
+          <h3 class="t-hsm">Operação</h3>
+          <p class="t-h2xs plano__preco">R$ 2.900 / mês</p>
+          <p class="t-body plano__d">Meta e Google juntos, conteúdo mensal, relatório semanal e reunião de rota. Verba a partir de R$ 3.000.</p>
+        </article>
 
-        <div class="faq__item">
-          <button class="faq__q t-h2xs" type="button">
-            <svg class="faq__mark" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0 10 6 0 12Z"/></svg>
-            <span>A verba de anúncio está incluída?</span>
-          </button>
-          <div class="faq__a"><p class="t-body">Não. O valor do plano é a gestão. A verba é paga direto na plataforma, no seu cartão, e você vê cada centavo dela no gerenciador.</p></div>
-        </div>
-
-        <div class="faq__item">
-          <button class="faq__q t-h2xs" type="button">
-            <svg class="faq__mark" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0 10 6 0 12Z"/></svg>
-            <span>Quem fica dono da conta?</span>
-          </button>
-          <div class="faq__a"><p class="t-body">Você, sempre. Entramos como parceiro, com acesso que dá para remover a qualquer momento. Nada de campanha rodando em gerenciador que você não controla.</p></div>
-        </div>
-
-        <div class="faq__item">
-          <button class="faq__q t-h2xs" type="button">
-            <svg class="faq__mark" viewBox="0 0 10 12" fill="currentColor" aria-hidden="true"><path d="M0 0 10 6 0 12Z"/></svg>
-            <span>Atendem qualquer segmento?</span>
-          </button>
-          <div class="faq__a"><p class="t-body">Negócio local com atendimento presencial ou venda direta é onde a operação tem repertório: clínica, hotelaria, varejo, alimentação, serviço automotivo e beleza. Fora disso, a gente diz antes de aceitar.</p></div>
-        </div>
+        <article class="plano">
+          <h3 class="t-hsm">Rede</h3>
+          <p class="t-h2xs plano__preco">Sob proposta</p>
+          <p class="t-body plano__d">Conta e verba por unidade, comparativo entre praças e leitura consolidada. Para mais de uma unidade ou marca.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- contato -->
-  <section class="section" id="contato">
-    <div class="wrap duo duo--text">
+  <!-- ato 7 — o convite -->
+  <section class="cena" id="contato" data-forma="ponto">
+    <div class="wrap duo duo--start">
       <div class="stack">
-        <p class="t-label t-label--amber">Diagnóstico gratuito</p>
-        <h2 class="t-hlg">Vamos olhar sua conta.</h2>
-        <p class="t-body">Conte o que você vende e quanto investe hoje. A resposta sai no mesmo dia útil, com um parecer sincero, inclusive quando a resposta é que ainda não é hora de anunciar.</p>
+        <p class="t-label t-label--ember sobe">Diagnóstico gratuito</p>
+        <h2 class="t-hlg revela" data-revelar>Vamos olhar sua conta.</h2>
+        <p class="t-body sobe sobe--2">Conte o que você vende e quanto investe hoje. A resposta sai no mesmo dia útil, com um parecer sincero, inclusive quando a resposta é que ainda não é hora de anunciar.</p>
       </div>
 
-      <form class="form" id="form" novalidate>
+      <form class="form sobe sobe--2" id="form" novalidate>
         <div class="form__pair">
           <input class="input" type="text" name="nome" placeholder="Seu nome" autocomplete="name">
           <input class="input" type="text" name="empresa" placeholder="Empresa" autocomplete="organization">
@@ -375,20 +226,20 @@
     <div class="footer__grid">
       <div class="footer__col">
         <a class="logo" href="#topo" aria-label="Assessoria WR">
-          <svg class="logo__mark" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 0 18 18H0Z" fill="url(#mark)"/></svg>
+          <svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">
+            <rect width="48" height="48" rx="11" fill="url(#brasa)"/>
+            <path d="M11 13 20 35 24 23 28 35 37 13" fill="none" stroke="#0a0a0a" stroke-width="6.4" stroke-linejoin="miter"/>
+          </svg>
           <span class="logo__word">Assessoria WR</span>
         </a>
         <p class="t-caption">Tráfego pago, conteúdo e leitura de dado para negócio local.</p>
       </div>
-
       <div class="footer__col">
         <p class="t-label">Navegar</p>
+        <a class="t-caption" href="#operacao">Operação</a>
         <a class="t-caption" href="#servicos">Serviços</a>
-        <a class="t-caption" href="#metodo">Método</a>
         <a class="t-caption" href="#planos">Planos</a>
-        <a class="t-caption" href="#duvidas">Dúvidas</a>
       </div>
-
       <div class="footer__col">
         <p class="t-label">Falar</p>
         <a class="t-caption" href="#contato">Pedir diagnóstico</a>
@@ -396,13 +247,14 @@
         <a class="t-caption" href="https://instagram.com/wallaceribas_" target="_blank" rel="noopener">Instagram</a>
       </div>
     </div>
-
     <div class="footer__legal">
       <p class="t-caption">Os valores referem-se à gestão e não incluem a verba de mídia, paga diretamente às plataformas. Resultado varia conforme segmento, verba, sazonalidade e capacidade de atendimento do próprio negócio; nenhum número aqui é promessa de retorno. Marcas citadas pertencem aos respectivos titulares e aparecem como referência de contas atendidas.</p>
       <p class="t-caption">© <span id="ano">2026</span> Assessoria WR</p>
     </div>
   </div>
 </footer>
+
+</div>
 
 <script src="assets/app.js"></script>
 </body>
