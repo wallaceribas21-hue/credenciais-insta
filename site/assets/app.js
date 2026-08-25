@@ -339,6 +339,83 @@
   });
 
   /* =========================================================
+     4b. O RELATÓRIO — números contados, barras que sobem,
+         dica ao passar o mouse e uma inclinação de leve
+     ========================================================= */
+
+  function formatar(v, tipo) {
+    if (tipo === 'moeda0') return 'R$ ' + Math.round(v).toLocaleString('pt-BR');
+    if (tipo === 'moeda2') return 'R$ ' + v.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    return Math.round(v).toLocaleString('pt-BR');
+  }
+
+  var relato = document.getElementById('relato');
+
+  if (relato) {
+    var valores = relato.querySelectorAll('[data-valor]');
+
+    function preencher(instantaneo) {
+      valores.forEach(function (el) {
+        var alvo = parseFloat(el.getAttribute('data-valor'));
+        var tipo = el.getAttribute('data-formato');
+        if (instantaneo) { el.textContent = formatar(alvo, tipo); return; }
+        var t0 = performance.now(), dur = 1200;
+        (function passo(t) {
+          var q = limitar((t - t0) / dur, 0, 1);
+          el.textContent = formatar(alvo * (1 - Math.pow(1 - q, 3)), tipo);
+          if (q < 1) requestAnimationFrame(passo);
+        })(t0);
+      });
+    }
+
+    if (reduz || !('IntersectionObserver' in window)) {
+      relato.classList.add('is-in');
+      preencher(true);
+    } else {
+      var olhoRelato = new IntersectionObserver(function (entradas) {
+        if (!entradas[0].isIntersecting) return;
+        olhoRelato.disconnect();
+        relato.classList.add('is-in');
+        preencher(false);
+      }, { threshold: 0.35 });
+      olhoRelato.observe(relato);
+    }
+
+    /* dica por barra */
+    var dica = document.getElementById('dica');
+    var barras = relato.querySelectorAll('.barra');
+
+    barras.forEach(function (b) {
+      function mostrar() {
+        dica.textContent = b.getAttribute('data-dia') + ': ' + b.getAttribute('data-n') + ' contatos';
+        dica.classList.add('is-on');
+        var area = b.closest('.grafico__area').getBoundingClientRect();
+        var r = b.getBoundingClientRect();
+        dica.style.left = (r.left - area.left + r.width / 2) + 'px';
+      }
+      function esconder() { dica.classList.remove('is-on'); }
+      b.addEventListener('mouseenter', mostrar);
+      b.addEventListener('focus', mostrar);
+      b.addEventListener('mouseleave', esconder);
+      b.addEventListener('blur', esconder);
+      b.addEventListener('click', function (e) { e.preventDefault(); });
+    });
+
+    /* inclinação de leve seguindo o ponteiro, só no desktop */
+    var folha = relato.querySelector('.relato__folha');
+    if (!reduz) {
+      relato.addEventListener('mousemove', function (e) {
+        if (celular()) return;
+        var r = relato.getBoundingClientRect();
+        var gx = (e.clientX - r.left) / r.width - 0.5;
+        var gy = (e.clientY - r.top) / r.height - 0.5;
+        folha.style.transform = 'perspective(1100px) rotateY(' + (gx * 4.5) + 'deg) rotateX(' + (-gy * 3.5) + 'deg)';
+      });
+      relato.addEventListener('mouseleave', function () { folha.style.transform = ''; });
+    }
+  }
+
+  /* =========================================================
      5. PALCO FIXO DOS SERVIÇOS
      ========================================================= */
 

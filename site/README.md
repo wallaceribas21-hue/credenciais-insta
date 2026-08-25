@@ -26,7 +26,7 @@ assume conforme você rola:
 | Hero | `curva` | uma fita que sobe: a verba voltando |
 | Números | `dispersa` | a poeira cobre a tela inteira: a escala da carteira |
 | Serviços | `marca` | **a constelação se monta na marca** |
-| Relatório | `orbita` | tudo gira em volta de um centro |
+| Relatório | `dispersa` | a poeira cobre a tela e a folha do relatório flutua por cima |
 | Depoimento | `onda` | a fala do cliente |
 | Planos | `grade` | estrutura, opção, ordem |
 | Fecho | `ponto` | tudo converge num ponto único e assenta |
@@ -49,6 +49,25 @@ Colando aqui o `path` do arquivo real da WIND, a constelação passa a montar a
 logo de verdade e o cabeçalho acompanha.
 
 ---
+
+## O relatório da seção "Você para de adivinhar"
+
+É um **render em HTML**, não uma imagem: fica nítido em qualquer tela, anima na
+entrada e não pesa no carregamento. Mostra exatamente as quatro linhas que a copy
+promete, mais o gráfico de contatos por dia.
+
+Os números são de exemplo, mas **fecham entre si**, que é o que faz parecer real:
+187 contatos somam os sete dias do gráfico; R$ 4.200 dividido por 187 dá os
+R$ 22,46; e os −19% no custo batem com os +23% de contatos sobre a mesma verba.
+Se for trocar por número real, mantenha essa consistência.
+
+Escolhas do gráfico: série única, então **sem legenda** — o título nomeia a série.
+Barras cinza com **uma só em laranja**, a de melhor dia, porque destaque seletivo
+comunica mais que colorir tudo. A linha tracejada é a média da semana anterior,
+rotulada direto, e cada barra responde ao passar o mouse.
+
+A folha inclina de leve seguindo o ponteiro, e a legenda embaixo diz que é
+exemplo — a página não finge que aquele resultado é de um cliente real.
 
 ## Os outros movimentos
 

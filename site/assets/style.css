@@ -297,3 +297,114 @@ textarea.input { resize: vertical; min-height: 56px; }
   .letreiro__trilho { gap: var(--s30); }
   .letreiro__trilho li { gap: var(--s30); }
 }
+
+/* =========================================================
+   O RELATÓRIO
+   Não é interface da página: é a imagem do que o cliente recebe.
+   Por isso ganha superfície e raio de 24px, como a referência
+   permite para imagem, e nenhuma sombra.
+   ========================================================= */
+
+.relato { margin: 0; display: flex; flex-direction: column; gap: var(--s18); }
+
+.relato__folha {
+  background: #0b0b0d;
+  border-radius: 24px;
+  padding: var(--s30);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s24);
+  transform-style: preserve-3d;
+  transition: transform .5s var(--curva);
+}
+
+.relato__topo { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s18); }
+.relato__periodo { font-size: 14px; font-weight: 200; color: var(--mist); margin-top: var(--s6); }
+.relato__selo { font-size: 12px; color: var(--ash); white-space: nowrap; }
+
+.relato__linhas { display: flex; flex-direction: column; }
+.relato__linha {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0 var(--s18);
+  padding: var(--s12) 0;
+}
+.relato__linha + .relato__linha { border-top: 1px solid rgba(255,255,255,.07); }
+.relato__rotulo { font-size: 14px; font-weight: 200; color: var(--mist); }
+.relato__direita { display: flex; align-items: baseline; gap: var(--s12); }
+.relato__valor {
+  font-size: 24px; font-weight: 400; letter-spacing: -0.02em;   /* degrau .t-h2xs da escala */
+  font-variant-numeric: tabular-nums; text-align: right;
+}
+.relato__delta { font-size: 12px; }
+.relato__delta--sobe { color: var(--ember); }
+.relato__delta--neutro { color: var(--ash); }
+
+/* ---- gráfico: série única, sem legenda. O título nomeia a série. ---- */
+
+.grafico { margin: 0; display: flex; flex-direction: column; gap: var(--s12); }
+.grafico__cabeca { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s18); }
+.grafico__titulo { font-size: 12px; color: var(--mist); }
+.grafico__ref-rotulo { font-size: 11px; color: var(--ash); white-space: nowrap; }
+.grafico__area { position: relative; }
+
+.grafico__plot { position: relative; height: 96px; display: flex; align-items: flex-end; gap: 6px; }
+
+.grafico__ref {
+  position: absolute; left: 0; right: 0;
+  bottom: calc((var(--v) / 44) * 96px);
+  border-top: 1px dashed rgba(255,255,255,.24);
+  pointer-events: none; z-index: 1;
+}
+
+.barra {
+  flex: 1; height: 100%; position: relative;
+  background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit;
+}
+.barra > i {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: calc((var(--v) / 44) * 100%);
+  background: rgba(255,255,255,.28);
+  border-radius: 4px 4px 0 0;                 /* ponta de dado arredondada, base ancorada */
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .8s var(--curva), background-color .3s ease;
+}
+.relato.is-in .barra > i { transform: none; }
+.barra--pico > i { background: var(--ember); }
+.barra:hover > i, .barra:focus-visible > i { background: var(--bone); }
+
+.barra:nth-of-type(1) > i { transition-delay: .05s; }
+.barra:nth-of-type(2) > i { transition-delay: .11s; }
+.barra:nth-of-type(3) > i { transition-delay: .17s; }
+.barra:nth-of-type(4) > i { transition-delay: .23s; }
+.barra:nth-of-type(5) > i { transition-delay: .29s; }
+.barra:nth-of-type(6) > i { transition-delay: .35s; }
+.barra:nth-of-type(7) > i { transition-delay: .41s; }
+
+.grafico__dias { display: flex; gap: 6px; margin-top: var(--s6); }
+.grafico__dias span { flex: 1; text-align: center; font-size: 11px; color: var(--ash); }
+
+.dica {
+  position: absolute; top: 14px; left: 0;
+  transform: translate(-50%, -100%);
+  background: #17171a; color: var(--bone);
+  font-size: 12px; white-space: nowrap;
+  padding: 8px 12px; border-radius: 10px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .2s ease;
+  z-index: 2;
+}
+.dica.is-on { opacity: 1; }
+
+/* ---- o que muda ---- */
+
+.relato__acao { display: flex; flex-direction: column; gap: var(--s6); padding-top: var(--s18); border-top: 1px solid rgba(255,255,255,.07); }
+.relato__texto { font-size: 14px; font-weight: 200; line-height: 1.5; color: var(--mist); }
+
+.relato__nota { padding-left: var(--s6); }
+
+@media (max-width: 1000px) {
+  .relato__folha { padding: var(--s24); gap: var(--s24); }
+  .relato__valor { font-size: 24px; }
+}

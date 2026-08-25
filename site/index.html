@@ -134,12 +134,78 @@
     </div>
   </section>
 
-  <!-- ato 4 — o relatório. tudo converge para um ponto -->
-  <section class="cena" data-forma="orbita">
-    <div class="wrap stack">
-      <p class="t-label t-label--ember sobe">Toda sexta</p>
-      <h2 class="t-hlg limite-titulo revela" data-revelar>Você para de adivinhar.</h2>
-      <p class="t-body sobe sobe--2">Uma página com quatro linhas: quanto entrou de verba, quantos contatos vieram, quanto custou cada um e o que muda na semana seguinte. <em>Sem print solto, sem painel que ninguém abre.</em></p>
+  <!-- ato 4 — o relatório. a página que chega toda sexta -->
+  <section class="cena" data-forma="dispersa">
+    <div class="wrap duo duo--start">
+      <div class="stack">
+        <p class="t-label t-label--ember sobe">Toda sexta</p>
+        <h2 class="t-hlg revela" data-revelar>Você para de adivinhar.</h2>
+        <p class="t-body sobe sobe--2">Uma página com quatro linhas: quanto entrou de verba, quantos contatos vieram, quanto custou cada um e o que muda na semana seguinte. <em>Sem print solto, sem painel que ninguém abre.</em></p>
+      </div>
+
+      <figure class="relato sobe sobe--2" id="relato">
+        <div class="relato__folha">
+          <header class="relato__topo">
+            <div>
+              <p class="t-label">Relatório semanal</p>
+              <p class="relato__periodo">11 a 17 de agosto</p>
+            </div>
+            <span class="relato__selo">Sexta, 09h12</span>
+          </header>
+
+          <div class="relato__linhas">
+            <div class="relato__linha">
+              <span class="relato__rotulo">Verba investida</span>
+              <span class="relato__direita">
+                <span class="relato__delta relato__delta--neutro">estável</span>
+                <span class="relato__valor" data-valor="4200" data-formato="moeda0">R$ 0</span>
+              </span>
+            </div>
+            <div class="relato__linha">
+              <span class="relato__rotulo">Contatos recebidos</span>
+              <span class="relato__direita">
+                <span class="relato__delta relato__delta--sobe">+23%</span>
+                <span class="relato__valor" data-valor="187" data-formato="inteiro">0</span>
+              </span>
+            </div>
+            <div class="relato__linha">
+              <span class="relato__rotulo">Custo por contato</span>
+              <span class="relato__direita">
+                <span class="relato__delta relato__delta--sobe">−19%</span>
+                <span class="relato__valor" data-valor="22.46" data-formato="moeda2">R$ 0,00</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- contatos por dia. série única: sem legenda, o título nomeia -->
+          <figure class="grafico">
+            <figcaption class="grafico__cabeca">
+              <span class="grafico__titulo">Contatos por dia</span>
+              <span class="grafico__ref-rotulo">- - -  média da semana passada</span>
+            </figcaption>
+            <div class="grafico__area">
+              <div class="grafico__plot">
+                <div class="grafico__ref" style="--v:22"></div>
+                <button class="barra" style="--v:21" data-dia="Segunda" data-n="21"><i></i></button>
+                <button class="barra" style="--v:28" data-dia="Terça"   data-n="28"><i></i></button>
+                <button class="barra" style="--v:24" data-dia="Quarta"  data-n="24"><i></i></button>
+                <button class="barra" style="--v:33" data-dia="Quinta"  data-n="33"><i></i></button>
+                <button class="barra barra--pico" style="--v:41" data-dia="Sexta" data-n="41"><i></i></button>
+                <button class="barra" style="--v:26" data-dia="Sábado"  data-n="26"><i></i></button>
+                <button class="barra" style="--v:14" data-dia="Domingo" data-n="14"><i></i></button>
+              </div>
+              <div class="grafico__dias"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+              <div class="dica" id="dica" role="status"></div>
+            </div>
+          </figure>
+
+          <div class="relato__acao">
+            <p class="t-label t-label--ember">O que muda na semana que vem</p>
+            <p class="relato__texto">Subir 20% na verba de sexta, que puxou sozinha um quarto dos contatos, e tirar do ar os dois criativos que passaram de R$ 30 por contato.</p>
+          </div>
+        </div>
+        <figcaption class="t-caption relato__nota">Exemplo do relatório que chega toda sexta. Números ilustrativos.</figcaption>
+      </figure>
     </div>
   </section>
 
