@@ -159,7 +159,38 @@ o oposto — editorial, sentence case, laranja contido. Corrigido.
 
 ## 8. Referências analisadas
 
-_(vazio — aguardando prints dos posts que ele curte)_
+### O feed de decodificação de marca — print de 25/08/2026
+
+> Handle lido do print: `@brandsdecoded` (confirmar com ele).
+> **Não abro o Instagram desta sessão:** a rede devolve 403 no CONNECT
+> para `instagram.com`. Testado. O print resolve melhor e mais barato
+> que o link, então o print é o caminho oficial.
+
+Oito capas no grid. O que se repete em todas as oito:
+
+| Camada | O que a conta faz |
+|---|---|
+| **Fundo** | Still cinematográfico sangrando o quadro inteiro. Nunca cor chapada, nunca recorte. |
+| **Véu** | Degradê preto subindo do rodapé até a metade. O texto sempre nasce dentro dele. |
+| **Kicker** | Uma linha pequena, sentence case, cinza claro, **acima** do título. É ela que dá o contexto que o título não dá. |
+| **Título** | Condensada pesada, caixa alta, terço inferior, 3 ou 4 linhas, largura inteira. |
+| **Destaque** | **UMA** expressão do título em laranja. Sempre o sujeito da frase: TIKTOK SHOP, PAGODE, MARKETING, DAVID OGILVY. |
+| **Assinatura** | Rodapé centralizado: bolinha laranja + @handle + selo. Discreta, sempre no mesmo lugar. |
+| **Fórmula do título** | "COMO X VIROU Y", "POR QUE X", "O QUE X EXPLICA SOBRE Y". Decodifica um movimento, não ensina passo a passo. |
+
+**A exceção que confirma a regra:** o card da YSL troca a condensada por
+uma serifada editorial em caixa baixa. Quando o assunto é luxo, a
+tipografia vira o assunto. É variação consciente, não inconsistência.
+
+**O que dá pra puxar sem virar cópia:** a estrutura kicker + título +
+destaque único + assinatura centralizada. Isso é forma, e forma se usa.
+
+**O que não dá pra puxar:** o ângulo de revista. Eles decodificam o
+mercado **de fora**, lendo notícia. O Wallace decodifica **de dentro** de
+33 páginas e dezenas de contas de anúncio. Mesmo formato, autoridade
+diferente. Se ele copiar o ângulo deles, vira mais uma conta que comenta
+o mercado. Se usar a forma deles com o dado da carteira, não tem
+concorrente.
 
 ---
 

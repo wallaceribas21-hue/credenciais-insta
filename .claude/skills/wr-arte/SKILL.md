@@ -82,11 +82,69 @@ O modelo escolhe melhor que você quando entende o porquê.
 
 | formato | quando |
 |---|---|
-| **capa** — foto sangrando, texto por cima no terço de baixo | o padrão dele. Foi o único que aprovou. |
+| **capa editorial** — kicker + título + destaque único, foto sangrando | **o padrão novo.** Vale para o carrossel inteiro, não só a capa. |
+| **capa** — foto sangrando, texto por cima no terço de baixo | a versão anterior, sem kicker. Foi a que ele aprovou no 003. |
 | **texto + 1 imagem** | uma ideia, um objeto |
 | **texto + 2 imagens** | comparação, antes e depois |
 
-Comece sempre pela capa. É o que ele escolheu quando viu os três.
+Comece sempre pela capa editorial. Ele reprovou "texto + 1 imagem" e
+"texto + 2 imagens" quando viu os três lado a lado.
+
+---
+
+## A CAPA EDITORIAL
+
+Veio do feed de decodificação de marca que ele mandou como referência
+(`marca/PERFIL.md`, seção 8). Quatro camadas, sempre nesta ordem de cima
+para baixo:
+
+```
+        [ still cinematográfico sangrando o quadro ]
+        [ degradê preto subindo do rodapé          ]
+   kicker pequeno, cinza claro, sentence case
+   TÍTULO CONDENSADO CAIXA ALTA
+   EM TRÊS LINHAS, UMA DELAS
+   COM UMA EXPRESSÃO EM LARANJA
+        ● @wallaceribas_
+```
+
+Regras que fazem a diferença entre parecer a referência e parecer cópia
+malfeita:
+
+1. **O kicker existe para o título não precisar explicar.** Ele carrega o
+   contexto; o título carrega a tensão. Máximo 9 palavras.
+2. **Uma expressão em laranja por card, e ela é o sujeito da frase.**
+   Duas expressões laranja e o card perde o ponto de foco.
+3. **Título em 3 linhas de 2 a 4 palavras.** Linha de 6 palavras em
+   condensada fica com corpo pequeno e some no feed.
+4. **A assinatura é sempre igual, sempre no mesmo lugar.** É ela que faz
+   oito posts diferentes parecerem uma conta só.
+
+### O bloco 4 do prompt, para este formato
+
+```
+4. TYPE, exactly as written:
+   One small line in light grey neutral grotesque, sentence case,
+   sitting just above the headline:
+   "<kicker exato>"
+   Below it, the headline in heavy condensed uppercase sans-serif,
+   very large, three lines, full width, lower third:
+   "<TITULO EXATO>"
+   with only "<EXPRESSAO>" in vivid orange #FF6B1A.
+   Centered at the very bottom, small: a solid orange circle
+   followed by "@wallaceribas_" in white.
+   Spell every Portuguese word letter by letter exactly as given,
+   accents included. No other text anywhere in the image.
+```
+
+O bloco 2 (THE STORY) continua sendo o que decide se a arte presta.
+O degradê entra ali, não no bloco de tipografia:
+
+```
+   Cinematic still, full bleed, deep shadows, one light source, real
+   texture. A black gradient rises from the bottom edge to the middle
+   of the frame so the type reads clean over any image.
+```
 
 ---
 
