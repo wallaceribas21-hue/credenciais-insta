@@ -11,6 +11,7 @@ As referências que originaram cada roteiro ficam em `referencias/`.
 | # | Vídeo | Status |
 |---|---|---|
 | 001 | Tier list das campanhas do Google Ads | aprovado, pronto pra gravar |
+| 002 | A ferramenta que entrega o design das maiores marcas | aprovado, pendente de 2 dados |
 
 ## O que ficou aprendido no 001
 
