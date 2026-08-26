@@ -1,7 +1,7 @@
-Quero que você atue como um auditor de conteúdo, inspirado no ecossistema
-de vendas que Alfredo Soares descreve em "Todos somos uma marca":
-influência, conteúdo e experiência trabalhando juntos para construir
-audiência, criar demanda, converter venda e reter cliente.
+Quero que você atue como um auditor de conteúdo, usando o ecossistema de
+vendas que Alfredo Soares descreve em "Todos somos uma marca": influência,
+conteúdo e experiência construindo audiência, demanda, conversão e
+retenção.
 
 Vou colar abaixo os meus últimos posts:
 [COLE DE 5 A 10 POSTS: o texto, o tema e o resultado de cada um]
@@ -10,33 +10,41 @@ E o meu contexto:
 [O QUE EU VENDO, PARA QUEM, E QUAL O TICKET MÉDIO]
 
 Sua função NÃO é elogiar nem sugerir tema novo ainda.
-Primeiro classifique cada post em uma das quatro etapas:
 
+Primeiro, para cada post, responda duas coisas:
+
+A PORTA DE ENTRADA
+O post começa DENTRO do meu nicho (técnica, dica, tutorial, bastidor da
+minha área) ou FORA dele (uma notícia, uma decisão de outra empresa, uma
+conversa, um acontecimento)?
+
+O TRABALHO
+Qual dos quatro ele faz:
 1. AUDIÊNCIA: faz gente nova me conhecer.
 2. DEMANDA: faz alguém querer o que eu vendo, mesmo sem eu vender.
 3. CONVERSÃO: torna fácil e óbvio comprar de mim.
 4. RETENÇÃO: faz quem já comprou voltar ou me indicar.
 
 Princípios para julgar:
-- Pessoas e empresas competem pela mesma atenção. Autoridade é canal.
-- Cliente satisfeito é canal de venda, não troféu.
-- Conteúdo que só entretém constrói audiência para outro vender.
-- Experiência é conteúdo: o que o cliente vive vira o que ele conta.
-- Comunidade retém melhor do que desconto.
-- Assunto amplo puxa quem está fora do meu nicho. É a interpretação que
+- Assunto amplo puxa quem está fora do nicho. É a interpretação que
   devolve a pessoa para o meu território.
+- Post que começa ensinando técnica fala com quem já decidiu comprar.
+- Conteúdo que só entretém constrói audiência para outro vender.
+- Cliente satisfeito é canal de venda, não troféu.
+- Experiência é conteúdo: o que o cliente vive vira o que ele conta.
 
 Quero a resposta nesta estrutura:
 
-MAPA DAS 4 ETAPAS
-Uma tabela com cada post e a etapa que ele trabalha. Se um post não
-trabalha nenhuma, escreva isso do lado dele.
+O MAPA
+Uma tabela: post, porta de entrada, trabalho que faz. Se um post não faz
+nenhum dos quatro, escreva isso do lado dele.
 
-A ETAPA QUE FALTA
-Qual das quatro eu quase nunca faço, e o que isso me custa em venda.
+O DESEQUILÍBRIO
+Se quase todos entram pelo nicho, diga isso na primeira linha e explique
+quem eu estou deixando de alcançar.
 
-O DIAGNÓSTICO EM UMA FRASE
-Por que o meu conteúdo não converte hoje, mesmo quando engaja.
+O TRABALHO QUE FALTA
+Qual dos quatro eu quase nunca faço, e o que isso me custa em venda.
 
 ATENÇÃO SEM PEDIDO
 Os posts em que eu chamei atenção e não pedi nada. Para cada um, escreva
@@ -45,23 +53,20 @@ a linha que estava faltando.
 O QUE JÁ FUNCIONA
 O que eu devo continuar fazendo exatamente igual, e por quê.
 
-CLIENTE COMO CANAL
-Uma ideia de conteúdo que transforme quem já comprou em quem traz gente.
-
 OS PRÓXIMOS 5 POSTS
-Cinco posts, e nenhum deles pode começar ensinando técnica.
+Nenhum deles pode começar ensinando técnica.
 Cada um parte de um acontecimento de fora do meu nicho: uma notícia, uma
 decisão de uma empresa grande, uma conversa que eu tive, algo da minha
-rotina de trabalho. Só depois vem a leitura.
-Para cada post me dê: o acontecimento que serve de porta de entrada, a
-leitura que só a minha experiência permite fazer, a etapa das quatro que
-ele resolve, e o que a pessoa deve fazer no fim.
+rotina de trabalho.
+Para cada post: o acontecimento que serve de porta de entrada, a leitura
+que só a minha experiência permite fazer, qual dos quatro trabalhos ele
+resolve, e o que a pessoa deve fazer no fim.
 
 NOTA DE 0 A 10
 audiência, demanda, conversão, retenção.
 
 Só depois disso, me pergunte se eu quero os roteiros completos.
 
-Regra principal: não me elogie. Se todos os meus posts estiverem presos
-na etapa 1, diga isso na primeira linha. E não invente resultado que eu
-não te dei.
+Regra principal: não me elogie. Se todos os meus posts entrarem pelo
+nicho e pararem na etapa 1, diga isso na primeira linha. E não invente
+resultado que eu não te dei.

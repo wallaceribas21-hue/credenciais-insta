@@ -1,37 +1,50 @@
 {layout capa foto:alfredo-soares}
-TRANSFORME *ALFREDO SOARES* NO
-AUDITOR DO SEU CONTEÚDO
-USANDO ESTE PROMPT
-→ AS 4 ETAPAS QUE SEPARAM POST QUE DÁ LIKE DE POST QUE DÁ VENDA
+*ALFREDO SOARES* TEM MAIS DE
+12 MIL POSTS. QUASE NENHUM
+COMEÇA FALANDO DE VENDA.
+→ O MÉTODO POR TRÁS DISSO, E O PROMPT QUE FAZ IGUAL
 ---
 {layout declaracao fundo:claro}
-*Alfredo Soares* tem mais de 12 mil publicações no Instagram e 1,6 milhão de seguidores. Ele não fala de conteúdo por teoria. Fala por volume.
+Mais de 12 mil publicações e 1,6 milhão de seguidores. Fundou a Xtech em 2014, transacionou R$ 547 milhões em três anos e vendeu para a VTEX. Cofundou o G4. Escreveu quatro best-sellers.
 
-Fundou a Xtech em 2014, transacionou R$ 547 milhões em três anos e vendeu para a VTEX. Hoje é cofundador do G4 e autor de quatro best-sellers.
+Ninguém teria mais motivo para passar o dia ensinando técnica de venda.
 
-Em um deles o subtítulo entrega o mapa: construa seu ecossistema de vendas por meio de influência, conteúdo e experiência. Audiência, demanda, conversão e retenção são quatro trabalhos diferentes, e quase todo mundo só faz o primeiro.
+E é exatamente o que ele quase não faz.
 ---
-{layout lista fundo:preto foto:mesa-reuniao}
-A força desse prompt está em julgar o seu conteúdo pelas quatro etapas, e não pelo engajamento. Ele mostra em qual delas você está preso.
+{layout declaracao fundo:preto foto:jornal-manha}
+O ponto de partida dele quase nunca é o próprio nicho.
 
-__O prompt lê os seus últimos posts e aponta:__
+É uma notícia. A decisão de uma empresa grande. Uma conversa com outro empresário. Algo que aconteceu na semana.
 
-- Em qual das 4 etapas cada post trabalha
-- A etapa que você nunca faz
-- Onde você pediu atenção e não pediu nada
-- O que já está funcionando e você quase parou
-- Como fazer quem já comprou virar canal
-- Os 5 próximos posts, com a função de cada um
+A venda entra depois, na *interpretação*. E é aí que está o truque: o assunto amplo puxa quem está fora, e a leitura devolve a pessoa para o território dele.
+---
+{layout comparacao fundo:claro}
+Isso não é estilo. É a diferença entre duas coisas que todo mundo trata como uma só.
+
+*Alcance* é fazer gente parar.
+*Demanda* é fazer gente querer.
+
+Post que começa ensinando técnica fala com quem já decidiu comprar. Post que começa no mundo e volta para a técnica alcança quem ainda nem sabia que tinha o problema.
+---
+{layout lista fundo:preto}
+No livro dele o mapa está no subtítulo: um ecossistema de vendas feito de influência, conteúdo e experiência.
+
+__Quatro trabalhos diferentes, e não um só:__
+
+- Audiência: fazer gente nova te conhecer
+- Demanda: fazer alguém querer o que você vende
+- Conversão: tornar fácil e óbvio comprar
+- Retenção: fazer quem comprou voltar ou indicar
+
+Conteúdo que só entretém resolve o primeiro e entrega os outros três para o concorrente.
 ---
 {layout prompt fundo:claro}
 Use esse prompt:
 [o bloco vem de conteudo/005-prompt.txt]
 ---
-{layout fecho}
-Eu cuido de *33 páginas* e vejo isso todo dia.
+{layout fecho fundo:laranja}
+O prompt faz duas perguntas que quase ninguém se faz.
 
-Post bom de audiência e ruim de demanda parece sucesso no relatório e some no caixa.
+De onde os seus últimos dez posts partiram. E qual dos quatro trabalhos cada um fez.
 
-Rodei esse prompt no meu próprio perfil antes de postar. Levei um tapa.
-
-Salva e roda no seu.
+Salva antes de sumir do seu feed.
