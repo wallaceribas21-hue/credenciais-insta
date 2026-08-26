@@ -3,19 +3,14 @@ AOS 17 VENDIA CARTÃO DE VISITA
 PARA TAXISTA DA TIJUCA.
 DEPOIS VENDEU A EMPRESA
 POR R$ *14 MILHÕES*.
-→ ALFREDO SOARES E A HABILIDADE QUE NASCEU ALI
+→ ALFREDO SOARES E A VANTAGEM QUE NINGUÉM VIU
 ---
 {layout declaracao fundo:claro estilo:serif foto:cartoes-graficos}
-A primeira empresa se chamava *Ideia Carioca*. Ele, um sócio e um curso de design.
+A primeira se chamava *Ideia Carioca*. Depois veio o Marketing Shop, uma agência que fazia de arte gráfica a site para empresa pequena.
 
-Depois veio o Marketing Shop, uma agência que fazia de arte gráfica a site para empresa pequena.
----
-{layout declaracao fundo:preto foto:encruzilhada-2014}
-Em 2014 ele teve que escolher.
+Em 2014 a agência virou plataforma de loja virtual. Nasceu a Xtech.
 
-Manter a agência, que dava lucro. Ou virar plataforma de loja virtual, que era só aposta.
-
-__Virou a Xtech. R$ 547 milhões transacionados em três anos, comprada pela VTEX.__
+__R$ 547 milhões transacionados em três anos, comprada pela VTEX.__
 ---
 {layout declaracao fundo:claro foto:sala-tecnologia}
 Mas repara na vantagem que ninguém viu.
@@ -25,9 +20,9 @@ Os concorrentes dele eram empresas de tecnologia. Ele era publicitário, e tinha
 __Quem entende o cliente ganha de quem entende o produto.__
 ---
 {layout declaracao fundo:preto foto:alfredo-palco-2}
-Um produto mediano com marketing bom vende muito mais que um produto bom sem marketing.
+E marketing é a única parte do negócio que não tem teto de gente.
 
-E marketing é a única parte do negócio que não tem teto de gente: um vendedor bom atende dezenas por dia, um anúncio bem feito alcança milhares na mesma tarde.
+Um vendedor bom atende dezenas de pessoas por dia. Um anúncio bem feito alcança milhares na mesma tarde.
 
 __Escalar não é trabalhar mais. É ser visto por mais gente ao mesmo tempo.__
 ---
