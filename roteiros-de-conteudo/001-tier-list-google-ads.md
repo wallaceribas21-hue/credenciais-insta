@@ -1,7 +1,7 @@
 # 001 — Tier list das campanhas do Google Ads
 
 **Status:** aprovado no chat, pronto pra gravar
-**Referência:** `referencias/001-tier-list-google-ads.md`
+**Referência:** `referencias/copy/001-tier-list-google-ads.md`
 **Pilar:** 4 (ensino técnico) ancorado no 1 (cases reais)
 **Público:** B (jovem que quer virar gestor), com resvalo em A
 **Duração:** 2 min 30 na versão cheia. Versão curta de 75s no fim do arquivo.

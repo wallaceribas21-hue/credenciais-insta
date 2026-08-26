@@ -60,3 +60,26 @@ existem no seu PC. Enquanto elas nao estiverem no repositorio, eu nao
 consigo conferir os slides 01, 04, 06 e 07 sem te pedir print.
 
 Manda elas uma vez e essa dependencia acaba pra sempre.
+
+## Nada vai pro repositório sem passar por ele
+
+Regra dele, sem exceção:
+
+> Antes de criar arquivo, pasta ou commit, eu escrevo o conteúdo no chat.
+> Ele lê, aprova ou corrige. Só depois eu salvo.
+
+Vale pra tudo: roteiro, anotação, README, correção de arquivo que já
+existe. Se eu for mexer no repositório, ele vê antes.
+
+## A fala é dele
+
+Eu não invento fala. Quando ele manda uma copy, eu transcrevo e organizo,
+não reescrevo. Quando eu achar que alguma linha pode melhorar, eu sugiro
+no chat e espero ele decidir.
+
+Aconteceu três vezes de eu escrever no lugar dele e ele reprovar. Nas
+três, o que sobreviveu foi o texto dele.
+
+Ele fala assim: frase curta, veredito seco ("funciona", "não é a
+indicada"), ressalva emendada com **porém**, condição prática ("muito bom
+se tiver tudo certo"). Sem metáfora, sem frase de efeito.
