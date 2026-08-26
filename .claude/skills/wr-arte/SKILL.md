@@ -195,3 +195,43 @@ Se uma errar: refaça **só aquela**, não o lote.
 **Não baixe as imagens para verificar.** A rede daqui não alcança o CDN
 do Higgsfield e os hosts de arquivo caem. Mostrar no widget e pedir a
 leitura dele custa quase nada e é mais confiável.
+
+
+---
+
+## FOTO REAL DE PESSOA VIVA: descoberto no 010
+
+O modelo **consegue** preservar rosto real, mas so quando o prompt para de
+ser um pedido de geracao e vira um pedido de diagramacao. A frase que
+virou a chave:
+
+```
+This is a LAYOUT task, not an image generation task.
+
+Treat the reference photograph as a finished photograph that must be
+PLACED, never redrawn. Reproduce it exactly: same man, same face, same
+features, same expression, same clothes, same background, same lighting,
+same colours. Do not redraw him, do not beautify, do not change his face
+in any way. If the person changes, the task has failed.
+```
+
+Antes disso, com "use the person from the reference and keep his face",
+o modelo devolveu **um estranho**. Com a instrucao acima, preservou.
+
+### O que decide se preserva ou nao: a resolucao da foto
+
+| foto | resultado |
+| --- | --- |
+| fotos de palco, boa resolucao, um rosto grande no quadro | **preservou** |
+| montagem dividida com dois rostos pequenos, uma metade em baixa resolucao | **falhou feio**, virou outra pessoa |
+
+Regra pratica: **um rosto por foto, grande no quadro, boa resolucao.**
+Montagem antes e depois nao passa. Se a historia pedir antes e depois,
+faca com dois slides, nao com uma imagem dividida.
+
+### E o CDN continua bloqueado
+
+Nao da pra baixar nem a foto que ele subiu nem o resultado gerado. Entao
+eu nao consigo conferir arte sozinho, e a leitura das palavras continua
+sendo dele. Se um dia ele subir as fotos no proprio repositorio, a
+tipografia passa a ser CSS e esse problema acaba.
