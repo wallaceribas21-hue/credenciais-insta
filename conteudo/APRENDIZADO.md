@@ -72,3 +72,58 @@ Mesma ferramenta, mesmo custo. Resultado incomparável.
   **Mostrar sempre vale mais que explicar.**
 - Ele pede economia de token em quase toda mensagem. Entregar direto
   vale mais que entregar completo.
+
+---
+
+## A fórmula do post de prompt (investigada, não deduzida)
+
+Wallace mandou investigar de onde a `@brandsdecoded__` tirou o prompt do
+Ogilvy. Resposta: **eles não inventaram nada.**
+
+O memorando é real. David Ogilvy mandou "How to Write" para todos os
+funcionários da Ogilvy & Mather em **7 de setembro de 1982**, com 10
+regras. Está documentado no Open Culture, no Farnam Street e em uma
+dezena de outros lugares. As 10 regras numeradas dentro do prompt deles
+são tradução quase literal das regras originais:
+
+| No prompt deles | Regra original |
+|---|---|
+| escreva como uma pessoa fala | 2. write the way you talk |
+| palavras e frases curtas | 2. short words, short sentences |
+| elimine jargões | 3. never use jargon words |
+| verifique citações | 5. check your quotations |
+| trechos que melhoram na segunda leitura | 6. read it aloud the next morning |
+| deixe claro o que o leitor faz depois | 7. make it crystal clear |
+| diga quando escrever não é o formato | 10. if you want ACTION, don't write |
+
+**O que eles construíram foi o invólucro**, não o conteúdo: a estrutura
+de saída (DIAGNÓSTICO GERAL, PROBLEMAS CRÍTICOS, O QUE JÁ FUNCIONA,
+CORTE, CLAREZA DA AÇÃO, NOTA FINAL) e a regra final que preserva a voz
+de quem escreveu.
+
+### A regra que fica
+
+> **Documento real + invólucro de execução.**
+> A autoridade vem de um artefato verificável que existe fora do post.
+> A utilidade vem da estrutura que a gente escreve por cima.
+> Princípio inventado e atribuído a alguém não é nenhum dos dois: é
+> palpite com nome famoso em cima, e derruba o post se alguém checar.
+
+**Eu quebrei essa regra na primeira versão do 005.** Escrevi sete
+princípios "no jeito do Alfredo Soares" e atribuí a ele. Nenhum saía de
+documento nenhum. Wallace percebeu antes de publicar.
+
+A correção veio do próprio Alfredo: o livro **"Todos somos uma marca"**
+(Editora Gente, 2023) tem no subtítulo o framework inteiro, e ele é
+exatamente sobre conteúdo que vende. Quatro etapas declaradas na obra:
+**audiência, demanda, conversão, retenção**, por meio de **influência,
+conteúdo e experiência**. Documento real, verificável, e sobre o assunto
+certo.
+
+### Cuidado com cargo atual
+
+Bio de palestrante e página de livraria envelhecem. Encontrei "presidente
+da Loja Integrada" em várias fontes, mas a mais específica dava agosto de
+**2018**. Não dá pra afirmar cargo atual daqui. A copy usa só o que é
+datado e checável: Xtech em 2014, R$ 547 milhões em três anos, venda para
+a VTEX em 2017, cofundação do G4 em 2019, três livros.
