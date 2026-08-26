@@ -6,36 +6,31 @@ POR R$ *14 MILHÕES*.
 → ALFREDO SOARES E A HABILIDADE QUE NASCEU ALI
 ---
 {layout declaracao fundo:claro estilo:serif foto:cartoes-graficos}
-A empresa se chamava *Ideia Carioca*. Ele, um sócio e um curso de design.
+A primeira empresa se chamava *Ideia Carioca*. Ele, um sócio e um curso de design.
 
-Anos depois veio a Xtech: R$ 547 milhões transacionados em três anos, comprada pela VTEX.
+Depois veio o Marketing Shop, uma agência que fazia de arte gráfica a site para empresa pequena.
 ---
-{layout declaracao fundo:preto foto:rua-tijuca}
-E olha onde ele vendeu.
+{layout declaracao fundo:preto foto:encruzilhada-2014}
+Em 2014 ele teve que escolher.
 
-Não foi para o mercado. Foi para o taxista do ponto, o comerciante da esquina, o professor dele, os amigos.
+Manter a agência, que dava lucro. Ou virar plataforma de loja virtual, que era só aposta.
 
-__O bairro onde ele cresceu.__
+__Virou a Xtech. R$ 547 milhões transacionados em três anos, comprada pela VTEX.__
 ---
-{layout lista fundo:claro foto:caderno-lista}
-Quando o produto é igual ao de todo mundo, o que sobra é quem já confia em você.
+{layout declaracao fundo:claro foto:sala-tecnologia}
+Mas repara na vantagem que ninguém viu.
 
-__No seu negócio isso é uma lista, não uma teoria:__
+Os concorrentes dele eram empresas de tecnologia. Ele era publicitário, e tinha passado anos fazendo o marketing daquele mesmo dono de loja.
 
-- Quem já comprou de você
-- Quem te conhece e nunca comprou
-- Quem te indicaria de graça
+__Quem entende o cliente ganha de quem entende o produto.__
 ---
-{layout declaracao fundo:preto foto:anuncio-caro}
-Quase ninguém faz essa lista. Dá trabalho e não parece marketing.
-
-Anúncio é mais fácil: você paga e alguém aparece.
-
-__Só que você paga de novo todo mês, e a lista não.__
+{layout prompt fundo:claro}
+Cole nas instruções da sua IA:
+[o bloco vem de conteudo/010-prompt.txt]
 ---
 {layout fecho fundo:laranja foto:conversa-direct}
-Toda empresa tem essa lista parada.
+Você já tem essa informação. Ela está nas perguntas que seu cliente te faz todo dia.
 
-Se quiser saber por onde a sua começa, me chama no direct.
+Se quiser que eu olhe as suas com você, me chama no direct.
 
-Eu faço o diagnóstico e te digo o primeiro nome a ligar.
+Faço o diagnóstico e te digo o que dá pra mudar essa semana.
