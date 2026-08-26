@@ -101,24 +101,45 @@ para baixo:
 ```
         [ still cinematográfico sangrando o quadro ]
         [ degradê preto subindo do rodapé          ]
-   kicker pequeno, cinza claro, sentence case
+              ● @wallaceribas_
    TÍTULO CONDENSADO CAIXA ALTA
    EM TRÊS LINHAS, UMA DELAS
    COM UMA EXPRESSÃO EM LARANJA
-        ● @wallaceribas_
+   ▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬
+   → A LINHA DE APOIO, CAIXA ALTA MENOR
 ```
+
+A ordem importa e eu já errei ela uma vez: **a assinatura fica ACIMA do
+título** e **a linha de apoio fica ABAIXO**, dentro de uma barra preta
+chapada aberta por uma seta laranja. Não é kicker em cima.
 
 Regras que fazem a diferença entre parecer a referência e parecer cópia
 malfeita:
 
-1. **O kicker existe para o título não precisar explicar.** Ele carrega o
-   contexto; o título carrega a tensão. Máximo 9 palavras.
+1. **A barra preta é o segundo gancho.** O título abre a lacuna, a barra
+   diz o que a pessoa leva se arrastar. Máximo 10 palavras.
 2. **Uma expressão em laranja por card, e ela é o sujeito da frase.**
    Duas expressões laranja e o card perde o ponto de foco.
 3. **Título em 3 linhas de 2 a 4 palavras.** Linha de 6 palavras em
    condensada fica com corpo pequeno e some no feed.
 4. **A assinatura é sempre igual, sempre no mesmo lugar.** É ela que faz
    oito posts diferentes parecerem uma conta só.
+
+### Rosto de pessoa viva: não gere
+
+Se o carrossel citar um empresário vivo, **não peça o rosto dele ao
+modelo.** Isso é fabricar foto de pessoa real, e ainda por cima o modelo
+erra a semelhança. Peça a foto por direct (é o jeito mais garantido de a
+pessoa ver o post), use foto de imprensa com crédito, ou construa o card
+sem rosto nenhum.
+
+### Slide de texto denso: não é trabalho do modelo
+
+Bloco de prompt, lista longa, qualquer coisa acima de umas 15 palavras:
+faz no `criar_slides.py`. Modelo de imagem desenha forma de letra. Em 40
+linhas ele erra em alguma, e uma letra errada dentro de um prompt quebra
+o prompt. Carrossel bom costuma ser híbrido: foto no Higgsfield, texto
+denso em CSS.
 
 ### O bloco 4 do prompt, para este formato
 

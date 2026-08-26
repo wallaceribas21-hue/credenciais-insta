@@ -1,0 +1,37 @@
+{layout capa foto:rodrigo-noll}
+TRANSFORME *RODRIGO NOLL* NO SEU
+CONSULTOR DE INDICAÇÃO PARTICULAR
+USANDO ESTE PROMPT
+→ O MÉTODO DE 3 ETAPAS QUE FAZ CLIENTE TRAZER CLIENTE SEM DESCONTO
+---
+{layout declaracao fundo:claro}
+Rodrigo Noll fundou a *Base Viral*, a primeira empresa do Brasil dedicada só a programas de indicação, e criou o Método VPI depois de mapear o que se repetia nos programas que davam certo.
+
+O método tem três etapas: o incentivo que o cliente recebe, o gatilho que libera esse incentivo, e a comunicação que faz o pedido chegar na hora certa.
+
+A regra que ele mais defende é a que mais gente quebra: indicação não se compra com desconto. Desconto ensina o cliente a esperar promoção, não a trazer gente.
+---
+{layout lista fundo:preto foto:reuniao}
+A força desse prompt está em fazer a IA desenhar o programa antes de escrever qualquer mensagem, do jeito que um consultor faria na primeira reunião.
+
+__O prompt analisa o seu negócio e devolve:__
+
+- Quem já indica você de graça hoje
+- O momento exato da jornada em que se pede
+- Três incentivos que não são desconto
+- O gatilho que libera a recompensa
+- A mensagem do pedido, pronta
+- Os três números que dizem se funcionou
+---
+{layout prompt fundo:claro}
+Use esse prompt:
+[o bloco vem de conteudo/004-prompt.txt]
+---
+{layout fecho}
+Eu rodo *33 páginas* de negócio local. Clínica, hotel, barbearia, loja.
+
+Na maioria delas a maior fonte de cliente novo é indicação. E quase nenhuma tem um programa pra isso.
+
+É dinheiro que já está dentro de casa e ninguém foi buscar.
+
+Salva e roda hoje no seu negócio.

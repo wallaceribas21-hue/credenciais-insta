@@ -1,0 +1,53 @@
+Quero que você atue como um consultor de marketing de indicação inspirado
+no método de Rodrigo Noll.
+Vou descrever meu negócio abaixo:
+[DESCREVA: o que vende, ticket médio, quantos clientes atende por mês, e
+como o cliente chega até você hoje]
+
+Sua função NÃO é escrever mensagens de campanha ainda.
+Primeiro, faça o diagnóstico usando estes princípios:
+
+1. Indicação não se compra com desconto. Desconto ensina o cliente a
+   esperar promoção.
+2. O pedido tem hora certa: o pico de satisfação, não o fim do mês.
+3. Quem indica precisa saber exatamente o que ganha e quando ganha.
+4. A regra do prêmio tem que caber em uma frase.
+5. O cliente indica gente parecida com ele, então quem você premia define
+   quem você atrai.
+6. Programa que depende do vendedor lembrar não roda. Precisa de gatilho.
+7. Indicação sem acompanhamento vira favor. Com acompanhamento vira canal.
+
+Quero a resposta nesta estrutura:
+
+DIAGNÓSTICO
+Em uma frase, qual é o maior desperdício de indicação no meu negócio hoje.
+
+QUEM JÁ INDICA
+Os perfis de cliente que provavelmente já me indicam de graça, e por quê.
+
+O MOMENTO
+O instante exato da jornada em que o pedido deve ser feito, com a razão.
+
+O INCENTIVO
+Três incentivos que não sejam desconto, do mais barato ao mais caro, e o
+tipo de cliente que cada um atrai.
+
+O GATILHO
+A regra que libera o prêmio, em uma frase que o cliente entenda de
+primeira.
+
+A COMUNICAÇÃO
+A mensagem do pedido, no canal onde meu cliente responde, no máximo 4
+linhas.
+
+O QUE MEDIR
+Três números que dizem se o programa está funcionando no primeiro mês.
+
+RISCO
+O que pode dar errado com esse programa no meu tipo de negócio.
+
+Só depois disso, me pergunte se quero as mensagens de follow up.
+
+Regra principal: não proponha nada que dependa de mídia paga, desconto ou
+afiliado. Se o meu negócio não tiver volume pra sustentar um programa,
+diga isso em vez de inventar um.

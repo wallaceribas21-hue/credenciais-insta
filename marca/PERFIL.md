@@ -159,38 +159,80 @@ o oposto — editorial, sentence case, laranja contido. Corrigido.
 
 ## 8. Referências analisadas
 
-### O feed de decodificação de marca — print de 25/08/2026
+### @brandsdecoded__ — grid + o carrossel do Ogilvy aberto (25/08/2026)
 
-> Handle lido do print: `@brandsdecoded` (confirmar com ele).
 > **Não abro o Instagram desta sessão:** a rede devolve 403 no CONNECT
-> para `instagram.com`. Testado. O print resolve melhor e mais barato
-> que o link, então o print é o caminho oficial.
+> para `instagram.com`. Testado. Print é o caminho oficial, e é mais
+> barato que o link de qualquer jeito.
+>
+> Métricas do post do Ogilvy, 4 dias no ar: **873 curtidas, 757
+> comentários, 538 compartilhamentos, 5 reposts.** Comentário quase
+> empatando com curtida é o número que interessa.
+>
+> ⚠️ As artes são geradas: a marca d'água **"Powered by Content Machine"**
+> aparece no topo de todos os cards, e o retrato do slide 3 é uma pose que
+> não existe em foto histórica. É pipeline de IA, não estúdio.
 
-Oito capas no grid. O que se repete em todas as oito:
+#### Anatomia da capa (corrigida — eu tinha invertido)
 
-| Camada | O que a conta faz |
+De cima para baixo, na ordem real:
+
+| Posição | O que tem |
 |---|---|
-| **Fundo** | Still cinematográfico sangrando o quadro inteiro. Nunca cor chapada, nunca recorte. |
-| **Véu** | Degradê preto subindo do rodapé até a metade. O texto sempre nasce dentro dele. |
-| **Kicker** | Uma linha pequena, sentence case, cinza claro, **acima** do título. É ela que dá o contexto que o título não dá. |
-| **Título** | Condensada pesada, caixa alta, terço inferior, 3 ou 4 linhas, largura inteira. |
-| **Destaque** | **UMA** expressão do título em laranja. Sempre o sujeito da frase: TIKTOK SHOP, PAGODE, MARKETING, DAVID OGILVY. |
-| **Assinatura** | Rodapé centralizado: bolinha laranja + @handle + selo. Discreta, sempre no mesmo lugar. |
-| **Fórmula do título** | "COMO X VIROU Y", "POR QUE X", "O QUE X EXPLICA SOBRE Y". Decodifica um movimento, não ensina passo a passo. |
+| Topo esquerdo | marca d'água da ferramenta, cinza, minúscula |
+| Topo direito | @handle repetido, minúsculo |
+| Quadro | retrato colorizado sangrando, o personagem olhando pra câmera |
+| **Acima do título** | **a assinatura: bolinha laranja + @handle + selo azul, centralizada** |
+| Título | condensada pesada caixa alta, 3 linhas, largura inteira, uma expressão em laranja |
+| **Rodapé** | **barra preta com seta laranja `→` + uma linha em caixa alta menor** |
 
-**A exceção que confirma a regra:** o card da YSL troca a condensada por
-uma serifada editorial em caixa baixa. Quando o assunto é luxo, a
-tipografia vira o assunto. É variação consciente, não inconsistência.
+A assinatura fica **acima** do título, não no rodapé. E a linha de apoio
+fica **abaixo** do título, dentro de uma barra preta chapada, aberta por
+uma seta laranja. Era o contrário do que eu tinha escrito.
 
-**O que dá pra puxar sem virar cópia:** a estrutura kicker + título +
-destaque único + assinatura centralizada. Isso é forma, e forma se usa.
+#### Anatomia do carrossel (5 slides)
 
-**O que não dá pra puxar:** o ângulo de revista. Eles decodificam o
-mercado **de fora**, lendo notícia. O Wallace decodifica **de dentro** de
-33 páginas e dezenas de contas de anúncio. Mesmo formato, autoridade
-diferente. Se ele copiar o ângulo deles, vira mais uma conta que comenta
-o mercado. Se usar a forma deles com o dado da carteira, não tem
-concorrente.
+| # | Fundo | Tipografia | Trabalho |
+|---|---|---|---|
+| 1 | retrato sangrando | condensada caps + barra preta | o gancho |
+| 2 | **bege claro** | **serifada editorial grande**, caixa baixa, nome em laranja | quem é o personagem e por que ele importa |
+| 3 | foto no topo, **bloco preto** embaixo | sans branca + lista com setas `→` | o que a ferramenta faz |
+| 4 | bege claro | sans bold + **caixa monoespaçada** | **o prompt inteiro, de graça** |
+| 5 | não capturado | — | provável CTA |
+
+**A lição que vale mais que o layout:** o slide 4 entrega a ferramenta
+completa, sem pedir comentário, sem link na bio, sem e-mail. E mesmo
+assim deu 757 comentários. Reter a entrega não é o que gera conversa;
+entregar coisa boa demais é.
+
+**A troca de fundo é o ritmo.** Preto, bege, preto, bege. Igual à regra
+de alternância que já está no `SISTEMA.md`, só que com bege no lugar do
+branco.
+
+#### O que dá e o que não dá pra puxar
+
+**Dá:** a estrutura de 5 slides, a alternância de fundo, a assinatura
+acima do título, a barra preta com seta, e a entrega da ferramenta
+inteira no slide 4.
+
+**Não dá:** o ângulo de revista. Eles decodificam o mercado **de fora**,
+lendo notícia sobre gente morta ou gigante. O Wallace decodifica **de
+dentro** de 33 páginas e dezenas de contas de anúncio. Se copiar o
+ângulo, vira mais uma conta que comenta o mercado. Se usar a forma com o
+dado da carteira, não tem concorrente.
+
+#### Restrição nova: personagem vivo
+
+Ogilvy morreu em 1999 e o rosto dele é material histórico. Se o
+personagem for **um empresário vivo**, gerar o rosto dele em modelo de
+imagem é fabricar foto de pessoa real. Não fazemos isso. Os caminhos
+honestos são três, nesta ordem de preferência:
+
+1. **Pedir a foto por direct**, explicando o post. Custa uma mensagem e
+   é o jeito mais garantido de a pessoa ver o carrossel.
+2. **Foto de imprensa dele**, com crédito visível no card.
+3. **Não mostrar o rosto**: uma cena que carrega o conceito, e o nome só
+   na tipografia.
 
 ---
 
