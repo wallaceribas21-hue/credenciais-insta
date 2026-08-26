@@ -1,0 +1,49 @@
+# Stories 010 — a evolução da arte
+# Formato 9:16. Texto por cima do print de cada versão.
+# Tom: só o processo. Sem moral da história, sem ensinamento.
+
+---
+STORY 1 — abertura
+fundo: preto, só texto
+
+a arte desse post
+teve *3 versões*
+
+---
+STORY 2 — a v1
+imagem: a capa com a rua e o táxi, sem rosto nenhum
+
+*v1*
+cena inventada do zero
+
+pedi pra IA criar o cenário
+e ela criou até um cara
+que não existe
+
+---
+STORY 3 — a v2
+imagem: o slide com a foto real no topo e o bloco de texto embaixo
+
+*v2*
+foto real, texto embaixo
+
+essa já dava pra publicar
+
+---
+STORY 4 — a v3
+imagem: o slide com a tipografia gigante laranja
+
+*v3*
+a tipografia tomou conta
+
+essa foi
+
+---
+STORY 5 — fecho
+fundo: laranja, só texto
+
+3 versões
+1 escolhida
+
+o resto vai pro lixo
+e tá tudo certo
