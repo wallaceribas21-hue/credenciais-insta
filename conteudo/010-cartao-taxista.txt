@@ -24,13 +24,9 @@ Os concorrentes dele eram empresas de tecnologia. Ele era publicitário, e tinha
 
 __Quem entende o cliente ganha de quem entende o produto.__
 ---
-{layout prompt fundo:claro}
-Cole nas instruções da sua IA:
-[o bloco vem de conteudo/010-prompt.txt]
----
 {layout fecho fundo:laranja foto:conversa-direct}
-Você já tem essa informação. Ela está nas perguntas que seu cliente te faz todo dia.
+Você já tem essa informação. Ela está nas perguntas que o seu cliente te faz todo dia.
 
-Se quiser que eu olhe as suas com você, me chama no direct.
+*Deixei nos comentários* o prompt que transforma isso em decisão.
 
-Faço o diagnóstico e te digo o que dá pra mudar essa semana.
+E se quiser que eu olhe as suas com você, me chama no direct.
