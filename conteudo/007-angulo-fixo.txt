@@ -9,32 +9,40 @@ Em 2026, Alfredo Soares publicou uma análise sobre a Growth Supplements, que fa
 
 A empresa não é dele. O número não é dele. O texto é.
 
-E isso não é falta de assunto próprio. É o método inteiro em uma linha: o assunto vem de fora, a leitura vem de dentro.
+Ele não inventou assunto. Pegou o assunto do mundo e leu do jeito dele.
+
+__Agora imagina essa mesma notícia caindo no colo de três pessoas:__
+
+- O contador lê e enxerga margem
+- O designer lê e enxerga embalagem
+- O vendedor lê e enxerga o processo de venda
+
+Mesma notícia. Três posts completamente diferentes. Nenhum dos três precisou pensar em tema.
 ---
-{layout lista fundo:preto foto:alfredo-microfone}
-Agora repare no que *não muda*.
+{layout declaracao fundo:preto foto:alfredo-microfone}
+Então a pergunta que trava você não é *sobre o que eu falo*.
 
-Bora Vender, 2019. Todos somos uma marca, 2023. Todos somos vendedores, lançado este mês com Allan Barros.
+É *de onde eu olho*.
 
-Sete anos, quatro livros, e a ótica é sempre a mesma: tudo lido pela lente de quem vende.
+E a diferença entre as duas é o dia inteiro: a primeira volta toda manhã, em branco. A segunda você responde uma vez e não mexe mais.
 
-__O assunto dele muda toda semana. O ângulo não muda desde 2019.__
+Alfredo respondeu a dele em 2019 e nunca mais mudou. Bora Vender, Todos somos uma marca, Todos somos vendedores.
 
-E é exatamente aí que quase todo mundo trava. Tenta escolher o assunto e o ângulo ao mesmo tempo, todo dia, do zero.
+Sete anos, três títulos, o mesmo lugar de onde ele olha: quem vende.
 
-Ângulo não é nicho. Nicho fecha o assunto. Ângulo abre.
+__Você está tentando responder as duas ao mesmo tempo, todo dia, do zero. Por isso cansa.__
 ---
 {layout prompt fundo:claro}
 Use esse prompt:
 [o bloco vem de conteudo/007-prompt.txt]
 ---
 {layout fecho fundo:laranja}
-O teste é externo e dói um pouco.
+Tem um teste que dói um pouco.
 
-Se quem já te conhece ainda precisa perguntar o que você faz, o problema nunca foi frequência.
+Se quem já te conhece ainda precisa perguntar o que você faz, o problema nunca foi quantidade de post.
 
-Você tem assunto de sobra. O mundo publica assunto novo todo dia, de graça.
+Assunto você tem de sobra. O mundo publica assunto novo todo dia, de graça.
 
-O que falta é uma lente fixa.
+O que falta é você ter decidido de onde olha.
 
-Salva o prompt. Decide o ângulo uma vez.
+Salva o prompt. Decide uma vez.

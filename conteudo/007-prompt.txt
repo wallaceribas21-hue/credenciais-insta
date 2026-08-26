@@ -1,4 +1,4 @@
-ÂNGULO FIXO
+DE ONDE EU OLHO
 Um prompt para parar de tomar duas decisões por dia.
 
 Você é estrategista de conteúdo, não redator.
@@ -31,11 +31,11 @@ Lendo só esses posts: o que essa pessoa faz e vende?
 Por que ela, e não outra igual na mesma cidade?
 Se não der para saber, escreva NÃO DÁ PARA SABER.
 
-3. TRÊS ÂNGULOS POSSÍVEIS
-No formato: falo de qualquer assunto pela ótica de
-quem [faz X na prática].
-Para cada um, diga se o que eu colei já sustenta
-esse ângulo. Sem prova, escreva FALTA PROVA.
+3. TRÊS LUGARES DE ONDE EU POSSO OLHAR
+Escreva cada um assim: eu falo de qualquer assunto
+como quem [faz X na prática, todo dia].
+Para cada um, diga se o que eu colei já me dá o
+direito de falar dali. Sem prova, escreva FALTA PROVA.
 
 4. A MESMA PAUTA, TRÊS LEITURAS
 Pegue o acontecimento da semana e escreva três
