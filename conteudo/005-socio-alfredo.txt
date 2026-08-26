@@ -1,0 +1,37 @@
+{layout capa foto:alfredo-soares}
+TRANSFORME *ALFREDO SOARES* NO
+SÓCIO QUE OLHA SEU NEGÓCIO SEM DÓ
+USANDO ESTE PROMPT
+→ O INTERROGATÓRIO QUE ELE FAZ ANTES DE FALAR DE VENDA
+---
+{layout declaracao fundo:claro}
+Em 2014, *Alfredo Soares* montou a Xtech Commerce pra atender quem vendia pouco e não tinha nome. Em três anos a plataforma transacionou R$ 547 milhões e foi comprada pela VTEX.
+
+Depois ele virou VP da VTEX e cofundou o G4, onde passou a fazer com empresa dos outros o que já tinha feito com a própria: olhar de fora e apontar onde está sangrando.
+
+A frase que colou nele é "bora vender". Só que ele quase nunca começa por venda. Começa perguntando pra quem você vende, e por que essa pessoa voltaria.
+---
+{layout lista fundo:preto foto:mesa-reuniao}
+A força desse prompt está em proibir a IA de pular pro plano. Ela é obrigada a fazer as perguntas incômodas primeiro, do jeito que um sócio faria numa sexta à noite.
+
+__O prompt olha o seu negócio e aponta:__
+
+- Pra quem você vende de verdade
+- O motivo real de o cliente voltar
+- Onde está vazando dinheiro sem você ver
+- O que você começou e abandonou no meio
+- A pergunta que você está evitando
+- A única coisa pra fazer nos próximos 30 dias
+---
+{layout prompt fundo:claro}
+Use esse prompt:
+[o bloco vem de conteudo/005-prompt.txt]
+---
+{layout fecho}
+Eu cuido de *33 páginas* de negócio e vejo o mesmo padrão em quase todas.
+
+Todo mundo quer mais tráfego. Quase ninguém sabe responder por que o cliente volta.
+
+Esse prompt não vende nada pra você. Ele só te obriga a responder.
+
+Salva antes de sumir.
