@@ -127,3 +127,75 @@ da Loja Integrada" em várias fontes, mas a mais específica dava agosto de
 **2018**. Não dá pra afirmar cargo atual daqui. A copy usa só o que é
 datado e checável: Xtech em 2014, R$ 547 milhões em três anos, venda para
 a VTEX em 2017, cofundação do G4 em 2019, três livros.
+
+---
+
+## Segunda ref: a mesma conta postou sobre o Alfredo (print de 26/08)
+
+Carrossel de 6 slides, "O empresário que posta 12x por dia e fatura 500
+milhões. estratégia genial ou tiro no pé?".
+
+### O número que interessa
+
+| | post do Ogilvy | post do Alfredo |
+|---|---|---|
+| curtidas | **873** | **352** |
+| formato | entregou o prompt pronto | só decodificou a estratégia |
+
+Menos da metade das curtidas. O recorte não deixa ler o número de
+comentários do post do Alfredo, então não dá pra comparar essa coluna,
+mas a diferença de curtida na mesma conta e no mesmo mês já diz o
+suficiente:
+
+> **Decodificar rende menos que entregar a ferramenta.** O post que dá
+> uma coisa pra pessoa usar hoje ganha do post que explica o que outra
+> pessoa faz.
+
+Isso confirma o caminho do 005: o prompt fica.
+
+### As duas capas da conta, e quando cada uma entra
+
+Eu tinha lido isso errado como "serifada quando o assunto é luxo". Não é.
+
+| tipo de post | tipografia da capa |
+|---|---|
+| **ferramenta** (Ogilvy + prompt) | condensada, caixa alta, urgente |
+| **ensaio / análise** (Alfredo, YSL) | serifada editorial, caixa baixa |
+
+Ogilvy é pessoa e usou condensada; Alfredo é pessoa e usou serifada. O
+que separa não é o assunto, é a **promessa**. Utilitário grita, ensaio
+sussurra. O 005 é ferramenta, então condensada está certo.
+
+### O mecanismo que eles decodificaram, e que vale ouro
+
+A leitura deles do método do Alfredo: ele **amplia a fonte de pautas**.
+Rotina, negócios, conversas, notícias e acontecimentos do mercado viram
+ponto de partida. Depois ele **interpreta o acontecimento pela ótica de
+quem vende e opera empresas**.
+
+> "Assuntos amplos permitem entrar em conversas maiores do que 'como
+> vender melhor'. Mas a interpretação quase sempre devolve o público
+> para seus territórios."
+
+E a frase que fecha: **não precisa começar todo conteúdo ensinando uma
+técnica de vendas.**
+
+Isso entrou no prompt do 005. A seção OS PRÓXIMOS 5 POSTS agora proíbe
+começar por técnica e exige que cada post parta de um acontecimento de
+fora do nicho, com a leitura vindo depois. O prompt deixou de só auditar
+o passado e passou a gerar pauta.
+
+### A prova certa para o nosso ângulo
+
+Meu slide 2 provava o Alfredo com venda (Xtech, VTEX, R$ 547 milhões).
+Mas o nosso carrossel é sobre conteúdo, e para isso a prova é outra:
+**mais de 12 mil publicações e 1,6 milhão de seguidores.** Volume próprio
+mata a pergunta "por que eu ouviria ele sobre isso". Corrigido.
+
+### Cargo: resolvido pela bio dele
+
+A bio do @alfredosoares diz: pai da Antônia, autor de 4 best-sellers,
+cofundador do @g4.business, sócio na VTEX, Loja Integrada e CRM Bônus.
+Então não é "presidente da Loja Integrada" hoje, é **sócio**. A copy usa
+cofundador do G4 e autor de quatro best-sellers, que é o que a fonte
+dele mesmo afirma.

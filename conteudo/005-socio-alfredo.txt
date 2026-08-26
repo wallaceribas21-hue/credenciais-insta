@@ -5,11 +5,11 @@ USANDO ESTE PROMPT
 → AS 4 ETAPAS QUE SEPARAM POST QUE DÁ LIKE DE POST QUE DÁ VENDA
 ---
 {layout declaracao fundo:claro}
-Em 2023, *Alfredo Soares* publicou um livro cujo subtítulo é praticamente um mapa: construa seu ecossistema de vendas por meio de influência, conteúdo e experiência.
+*Alfredo Soares* tem mais de 12 mil publicações no Instagram e 1,6 milhão de seguidores. Ele não fala de conteúdo por teoria. Fala por volume.
 
-A tese é que audiência, demanda, conversão e retenção são quatro trabalhos diferentes. E que quase todo mundo produz conteúdo que faz só o primeiro.
+Fundou a Xtech em 2014, transacionou R$ 547 milhões em três anos e vendeu para a VTEX. Hoje é cofundador do G4 e autor de quatro best-sellers.
 
-Ele fundou a Xtech em 2014, transacionou R$ 547 milhões em três anos, vendeu para a VTEX em 2017 e cofundou o G4. Não é teoria de quem só posta.
+Em um deles o subtítulo entrega o mapa: construa seu ecossistema de vendas por meio de influência, conteúdo e experiência. Audiência, demanda, conversão e retenção são quatro trabalhos diferentes, e quase todo mundo só faz o primeiro.
 ---
 {layout lista fundo:preto foto:mesa-reuniao}
 A força desse prompt está em julgar o seu conteúdo pelas quatro etapas, e não pelo engajamento. Ele mostra em qual delas você está preso.

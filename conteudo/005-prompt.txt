@@ -23,6 +23,8 @@ Princípios para julgar:
 - Conteúdo que só entretém constrói audiência para outro vender.
 - Experiência é conteúdo: o que o cliente vive vira o que ele conta.
 - Comunidade retém melhor do que desconto.
+- Assunto amplo puxa quem está fora do meu nicho. É a interpretação que
+  devolve a pessoa para o meu território.
 
 Quero a resposta nesta estrutura:
 
@@ -47,8 +49,13 @@ CLIENTE COMO CANAL
 Uma ideia de conteúdo que transforme quem já comprou em quem traz gente.
 
 OS PRÓXIMOS 5 POSTS
-Cinco posts. Cada um com a etapa que resolve, o gancho, e o que a pessoa
-deve fazer no fim.
+Cinco posts, e nenhum deles pode começar ensinando técnica.
+Cada um parte de um acontecimento de fora do meu nicho: uma notícia, uma
+decisão de uma empresa grande, uma conversa que eu tive, algo da minha
+rotina de trabalho. Só depois vem a leitura.
+Para cada post me dê: o acontecimento que serve de porta de entrada, a
+leitura que só a minha experiência permite fazer, a etapa das quatro que
+ele resolve, e o que a pessoa deve fazer no fim.
 
 NOTA DE 0 A 10
 audiência, demanda, conversão, retenção.
