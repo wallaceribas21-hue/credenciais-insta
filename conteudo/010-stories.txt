@@ -1,27 +1,42 @@
-# Stories 010 — a evolução da arte
+# Stories 010 — o pedido e a evolução da arte
 # Formato 9:16. Texto por cima do print de cada versão.
 # Tom: só o processo. Sem moral da história, sem ensinamento.
 
 ---
-STORY 1 — abertura
+STORY 1 — o pedido
 fundo: preto, só texto
 
-a arte desse post
-teve *3 versões*
+pedi pra IA:
+
+acha um fato curioso
+de um cara de sucesso
+e monta um carrossel
 
 ---
-STORY 2 — a v1
+STORY 2 — o que veio
+imagem: a capa final
+
+ela voltou com essa
+
+aos 17 anos o *Alfredo Soares*
+vendia cartão de visita
+pra taxista da Tijuca
+
+---
+STORY 3 — a v1
 imagem: a capa com a rua e o táxi, sem rosto nenhum
 
-*v1*
-cena inventada do zero
+mas a arte
+não veio pronta
 
-pedi pra IA criar o cenário
-e ela criou até um cara
+*v1*
+cenário inventado do zero
+
+ela criou até um cara
 que não existe
 
 ---
-STORY 3 — a v2
+STORY 4 — a v2
 imagem: o slide com a foto real no topo e o bloco de texto embaixo
 
 *v2*
@@ -30,7 +45,7 @@ foto real, texto embaixo
 essa já dava pra publicar
 
 ---
-STORY 4 — a v3
+STORY 5 — a v3
 imagem: o slide com a tipografia gigante laranja
 
 *v3*
@@ -39,11 +54,9 @@ a tipografia tomou conta
 essa foi
 
 ---
-STORY 5 — fecho
+STORY 6 — fecho
 fundo: laranja, só texto
 
-3 versões
-1 escolhida
+não veio de primeira
 
-o resto vai pro lixo
-e tá tudo certo
+veio de teste
