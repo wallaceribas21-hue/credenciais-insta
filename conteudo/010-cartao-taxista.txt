@@ -27,6 +27,6 @@ __Quem entende o cliente ganha de quem entende o produto.__
 {layout fecho fundo:laranja foto:conversa-direct}
 Você já tem essa informação. Ela está nas perguntas que o seu cliente te faz todo dia.
 
-*Deixei nos comentários* o prompt que transforma isso em decisão.
+Eu montei um prompt que transforma isso em decisão.
 
-E se quiser que eu olhe as suas com você, me chama no direct.
+*Comenta PROMPT* que eu te mando.
