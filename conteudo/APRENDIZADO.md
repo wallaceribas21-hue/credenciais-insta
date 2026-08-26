@@ -242,3 +242,61 @@ cima ele chama de vazio, e ja chamou antes.
 As fotos do Alfredo em palco foram liberadas por ele para producao de
 conteudo positiva, e ele autorizou alterar em IA. Entao a foto real entra
 como **base** e o Higgsfield trabalha por cima, em vez de inventar rosto.
+
+---
+
+## 010 — aprovado de primeira depois de nove tentativas
+
+"ficou incrivel, boa demais". Vale entender o que fez esse funcionar,
+porque foram nove versoes ate chegar nele.
+
+### O erro que se repetiu nove vezes
+
+**Eu tratava cada correcao dele como motivo pra recomecar do zero.**
+Ele apontava um slide e eu trocava o carrossel inteiro: personagem,
+tese, formato. A frase que resolveu foi dele:
+
+> "irmao vc nao precisa mudar a historia, estamos apenas modelando"
+
+**Regra nova: correcao mexe so na peca apontada.** Se eu achar que
+precisa mexer em mais, pergunto antes em vez de reescrever.
+
+### O que a historia precisava, e que faltava em todas as versoes
+
+A trajetoria estava certa desde o comeco. Faltava a **diferenciacao
+real**, e ela nao estava em nenhuma frase dele, estava na trajetoria:
+
+**Alfredo e publicitario.** Antes da Xtech ele tinha o Marketing Shop,
+uma agencia que fazia de arte grafica a site para empresa pequena. Em
+2014 trocou a agencia, que dava lucro, pela plataforma. Os concorrentes
+dele eram empresas de tecnologia; ele era o unico que ja tinha passado
+anos fazendo o marketing daquele mesmo dono de loja.
+
+> Quem entende o cliente ganha de quem entende o produto.
+
+Diferenciacao boa nao e uma frase que a pessoa disse. E uma coisa que
+aconteceu e que ninguem tinha ligado.
+
+### As perguntas aceleram
+
+Ele disse: *"eu gosto bastante do trabalho com perguntas suas pois
+acredito que te deixe mais assertivo"*. Confirmado na pratica. As tres
+perguntas antes do 010 cortaram mais caminho que as nove versoes
+anteriores juntas.
+
+**Perguntar antes de escrever, sempre.** E perguntar sobre decisao, nao
+sobre aprovacao.
+
+### O formato que ficou de pe
+
+| slide | funcao |
+| --- | --- |
+| 1 | capa: fato estranho + o numero que paga o fato, nome na barra |
+| 2 | contexto curto |
+| 3 | a escolha, com tensao |
+| 4 | a sacada, terminando na frase que a pessoa leva |
+| 5 | o prompt inteiro |
+| 6 | CTA de diagnostico |
+
+Prompt e CTA juntos foi escolha dele: o prompt rende salvamento, o CTA
+abre o direct. Nenhum slide passa de 42 palavras.
