@@ -1,0 +1,47 @@
+{layout capa foto:memorando-1982 estilo:serif}
+O conselho que viralizou semana passada foi escrito em *1982*.
+→ FUI ATRÁS DE ONDE SAIU AQUELE PROMPT QUE VOCÊ SALVOU
+---
+{layout declaracao fundo:claro estilo:serif}
+Um carrossel ensinando a transformar David Ogilvy no seu revisor de texto passou de 870 curtidas e 750 comentários.
+
+O prompt estava inteiro no slide 4. De graça, sem pedir comentário, sem link na bio, sem nada em troca.
+
+Eu quis saber de onde ele tinha saído.
+---
+{layout declaracao fundo:preto foto:maquina-escrever}
+Saiu de um memorando de *7 de setembro de 1982*.
+
+Naquele dia David Ogilvy mandou para todos os funcionários da agência dele um bilhete de duas páginas chamado How to Write, com dez regras.
+
+Está publicado há décadas, em jornal, em blog, em livro. Qualquer pessoa podia ter achado. Uma achou.
+---
+{layout comparacao fundo:claro}
+As dez regras do prompt são o memorando traduzido. Lado a lado:
+
+- _"write the way you talk"_ virou *escreva como uma pessoa fala*
+- _"never use jargon words"_ virou *elimine jargões*
+- _"check your quotations"_ virou *verifique dados e citações*
+- _"make it crystal clear what you want"_ virou *deixe evidente o que o leitor deve fazer*
+
+Não tem uma única ideia nova ali dentro.
+---
+{layout declaracao fundo:preto}
+E é exatamente por isso que funcionou.
+
+O que eles criaram não foi o conselho. Foi o *invólucro*: a ordem da resposta, o formato do diagnóstico, a nota no fim, a regra de não descaracterizar o texto.
+
+A mesma conta postou outro carrossel no mesmo mês, dessa vez só analisando a estratégia de um empresário. Análise boa, arte igual, sem ferramenta no meio.
+
+Teve *menos da metade* das curtidas.
+---
+{layout fecho fundo:laranja}
+Então a conta é essa:
+
+- Ache um documento real. Carta, memorando, manual, transcrição, lei.
+- Confira se é verdade. É isso que separa referência de invenção.
+- Escreva o invólucro: a ordem, o formato, o que não pode ser feito.
+- Entregue inteiro. Reter a ferramenta não gera conversa. Entregar gera.
+
+A autoridade que você ainda não tem já foi escrita por alguém.
+Está num arquivo, esperando alguém traduzir.
