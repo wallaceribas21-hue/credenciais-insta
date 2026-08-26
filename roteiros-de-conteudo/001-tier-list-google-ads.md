@@ -27,7 +27,7 @@ O vídeo começa com ele já ranqueando.
 
 **E abre no Performance Max, não no pior colocado.** Ninguém discute
 público frio. Abertura fria em opinião consensual desperdiça a abertura.
-O PMax no B é onde metade dos gestores quer brigar, e briga no segundo
+O PMax no C é onde metade dos gestores quer brigar, e briga no segundo
 zero é o que segura o dedo.
 
 **A apresentação não some, ela atrasa.** No segundo 0 ninguém deve
@@ -47,7 +47,7 @@ O que sustenta cada letra, e onde ele fica exposto no comentário.
 | **Pesquisa** (S) | Captura demanda que já existe | Intenção declarada no momento exato | Teto de volume. Cidade pequena, palavra com 200 buscas/mês, acabou |
 | **Perfil da Empresa** (A) | Campanha Inteligente saindo do Perfil | Pra clínica, barbearia e hotel entrega muito barato | Controle quase zero. Gestor grande torce o nariz |
 | **Campanha de teste** (A) | Não é tipo de campanha, é prática | Descobrir custa menos que adivinhar | Alguém vai comentar que não é campanha. Ele fala antes, dentro do roteiro |
-| **Performance Max** (B) | Espalha em pesquisa, display, YouTube, Gmail e Discover | Precisa de histórico de conversão pra funcionar | Nada. Aqui o argumento é forte |
+| **Performance Max** (C) | Espalha em pesquisa, display, YouTube, Gmail e Discover | Precisa de histórico de conversão pra funcionar | Nada. Aqui o argumento é forte |
 | **Demand Gen** (C) | Hoje chama Demand Gen, **não Discovery** | Cria vontade, não fecha venda | O nome. Discovery virou Demand Gen em 2024, falar o nome velho o data |
 | **Concorrente** (D) | Lance no nome do outro | Funciona, mas índice de qualidade baixo encarece | Nada, o D já é honesto |
 | **Genérica** (D) | Correspondência ampla | O relatório de termos revela ouro | Nada |
@@ -69,7 +69,7 @@ Quadro S a E na tela, vazio. Sem apresentação.
 
 > "Performance Max não é S tier."
 
-*(card cai no B, sozinho no quadro)*
+*(card cai no C, sozinho no quadro)*
 
 > "Ela pega sua verba e espalha em pesquisa, display, YouTube, Gmail e
 > Discover, e te devolve um relatório que não diz onde funcionou. E tem uma
@@ -148,7 +148,7 @@ Quadro S a E na tela, vazio. Sem apresentação.
 ## 2:28 — CTA
 
 > "Comenta qual você subiria ou desceria. E se você discorda do Performance Max
-> no B, comenta ele, que eu respondo um por um."
+> no C, comenta ele, que eu respondo um por um."
 
 ---
 
@@ -156,7 +156,7 @@ Quadro S a E na tela, vazio. Sem apresentação.
 
 | # | Campanha | Nota |
 |---|---|---|
-| 1 | Performance Max | B (abertura fria) |
+| 1 | Performance Max | C (abertura fria) |
 | — | *moldura* | — |
 | 2 | Conversão em público frio | E |
 | 3 | Palavra-chave genérica | D |
