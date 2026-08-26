@@ -1,33 +1,37 @@
-{layout capa foto:alfredo-palco estilo:anton}
+{layout capa cena:rua-taxi-cartoes estilo:anton}
 AOS 17 VENDIA CARTÃO DE VISITA
 PARA TAXISTA DA TIJUCA.
 DEPOIS VENDEU A EMPRESA
 POR R$ *14 MILHÕES*.
 → ALFREDO SOARES E A VANTAGEM QUE NINGUÉM VIU
 ---
-{layout declaracao fundo:claro estilo:serif foto:cartoes-graficos}
+{layout declaracao fundo:claro estilo:serif cena:grafica-cartoes}
 A primeira se chamava *Ideia Carioca*. Depois veio o Marketing Shop, uma agência que fazia de arte gráfica a site para empresa pequena.
 
-Em 2014 a agência virou plataforma de loja virtual. Nasceu a Xtech.
+Repara que ele não começou pela tecnologia. Começou atendendo: ouvindo reclamação de dono de loja, entregando peça, refazendo o que não agradou.
 
-__R$ 547 milhões transacionados em três anos, comprada pela VTEX.__
+Em 2014 essa agência virou plataforma de loja virtual. Nasceu a Xtech, que transacionou *R$ 547 milhões* em três anos e foi comprada pela VTEX.
 ---
-{layout declaracao fundo:claro foto:sala-tecnologia}
+{layout declaracao fundo:claro cena:sala-servidores}
 Mas repara na vantagem que ninguém viu.
 
-Os concorrentes dele eram empresas de tecnologia. Ele era publicitário, e tinha passado anos fazendo o marketing daquele mesmo dono de loja.
+Os concorrentes dele eram empresas de tecnologia. Gente boa de código, resolvendo o problema pelo lado do produto.
+
+Ele já tinha passado anos do outro lado do balcão. Sabia do que aquele dono de loja reclamava, o que ele não entendia e em que ponto ele desistia.
 
 __Quem entende o cliente ganha de quem entende o produto.__
 ---
-{layout declaracao fundo:preto foto:alfredo-palco-2}
-E marketing é a única parte do negócio que não tem teto de gente.
+{layout declaracao fundo:preto cena:multidao-alcance}
+E é aqui que dói: *um produto mediano com marketing bom vende muito mais que um produto bom sem marketing.*
 
-Um vendedor bom atende dezenas de pessoas por dia. Um anúncio bem feito alcança milhares na mesma tarde.
+Isso acontece porque marketing é a única parte do negócio que não tem teto de gente. Um vendedor bom atende dezenas de pessoas por dia. Um anúncio bem feito alcança milhares na mesma tarde.
 
 __Escalar não é trabalhar mais. É ser visto por mais gente ao mesmo tempo.__
 ---
-{layout fecho fundo:laranja foto:conversa-direct}
-Você já tem essa informação. Ela está nas perguntas que o seu cliente te faz todo dia.
+{layout fecho fundo:laranja cena:mesa-anotacoes}
+E você provavelmente já tem essa informação guardada.
+
+Ela está nas perguntas que o seu cliente te faz todo dia, na reclamação que se repete e naquilo que você explica toda vez para todo mundo. Isso não é conversa, é matéria prima.
 
 Eu faço esse diagnóstico com dono de negócio: a gente olha o que os seus clientes já te dizem e transforma em decisão.
 
