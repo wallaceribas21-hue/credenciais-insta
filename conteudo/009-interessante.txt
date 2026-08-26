@@ -1,0 +1,37 @@
+{layout capa foto:alfredo-palco estilo:anton}
+*INTERESSANTE* E INTERESSEIRO
+SÃO A MESMA PALAVRA
+ATÉ A OITAVA LETRA
+→ A RÉGUA QUE ALFREDO SOARES USA PRA DECIDIR CONTEÚDO. PROMPT NO SLIDE 5
+---
+{layout declaracao fundo:claro estilo:serif foto:duas-portas}
+*Interessante* é quando quem lê ganha alguma coisa.
+
+*Interesseiro* é quando quem ganha é você.
+
+Oito letras iguais. Resultado oposto.
+---
+{layout declaracao fundo:preto foto:alfredo-microfone}
+Alfredo Soares usa isso como filtro antes de publicar.
+
+E dá pra sentir de fora:
+
+__conteúdo interesseiro pede. conteúdo interessante entrega, e aí quem pede é a pessoa.__
+---
+{layout comparacao fundo:claro foto:dois-cards}
+O mesmo post, dos dois jeitos.
+
+*Interesseiro:* 5 erros que você comete e que eu corrijo na minha consultoria.
+
+*Interessante:* 5 erros que você comete. O terceiro você resolve hoje, sozinho.
+---
+{layout prompt fundo:claro}
+Cole nas instruções da sua IA:
+[o bloco vem de conteudo/009-prompt.txt]
+---
+{layout fecho fundo:laranja foto:regua}
+Abre o seu último post agora.
+
+Alguém que nunca vai te contratar ganharia alguma coisa lendo ele?
+
+Se a resposta for não, você escreveu um anúncio.
