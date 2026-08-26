@@ -1,0 +1,42 @@
+{layout capa foto:alfredo-palco estilo:anton}
+AOS 17 ANOS, *ALFREDO SOARES*
+VENDIA CARTÃO DE VISITA
+PARA TAXISTA DA TIJUCA
+→ A HABILIDADE QUE NASCEU ALI, E O PROMPT QUE INSTALA ELA NA SUA IA
+---
+{layout declaracao fundo:claro estilo:serif}
+A primeira empresa dele se chamava Ideia Carioca. Ele tinha 17 anos, um sócio chamado Reinaldo, e um curso de design nas costas.
+
+Vendiam cartão de visita para taxista e comerciante pequeno da Tijuca, na Zona Norte do Rio. Durou quase dois anos.
+
+Anos depois, o mesmo cara construiu uma plataforma que transacionou R$ 547 milhões em três anos e foi comprada pela VTEX.
+
+__Agora para e pensa no que é vender cartão de visita.__
+
+O papel é o mesmo. A gráfica é a mesma. O preço é o mesmo. Não existe uma linha no produto que ele pudesse apontar e dizer: olha, o meu é melhor.
+
+Quem vende isso não tem onde se esconder.
+---
+{layout declaracao fundo:preto foto:alfredo-microfone}
+Essa é a habilidade que quase ninguém treina, porque quase todo mundo tem um produto pra usar de muleta.
+
+Só que olha a verdade incômoda: *a maioria dos negócios está exatamente nessa situação e não admite.*
+
+A barbearia da esquina corta o mesmo cabelo. A clínica usa o mesmo aparelho. O gestor de tráfego roda o mesmo anúncio, na mesma plataforma, com o mesmo botão.
+
+__Se o seu produto sozinho não fecha a venda, o problema não é o produto. É que ninguém nunca te ensinou a vender sem ele.__
+
+O prompt do próximo slide instala essa habilidade na sua IA. Não é pergunta que você faz uma vez. É uma coisa que ela passa a fazer sempre.
+---
+{layout prompt fundo:claro}
+Cole nas instruções da sua IA:
+[o bloco vem de conteudo/008-prompt.txt]
+---
+{layout fecho fundo:laranja}
+Tem um teste dentro do prompt que dói.
+
+Ele reescreve a sua oferta trocando o seu nome pelo do concorrente. Se continuar fazendo sentido, ela nunca foi sua.
+
+A maioria não passa.
+
+Salva, cola nas instruções, e roda com o que você vende hoje.
