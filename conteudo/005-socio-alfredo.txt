@@ -1,37 +1,37 @@
 {layout capa foto:alfredo-soares}
 TRANSFORME *ALFREDO SOARES* NO
-SÓCIO QUE OLHA SEU NEGÓCIO SEM DÓ
+AUDITOR DO SEU CONTEÚDO
 USANDO ESTE PROMPT
-→ O INTERROGATÓRIO QUE ELE FAZ ANTES DE FALAR DE VENDA
+→ AS 4 ETAPAS QUE SEPARAM POST QUE DÁ LIKE DE POST QUE DÁ VENDA
 ---
 {layout declaracao fundo:claro}
-Em 2014, *Alfredo Soares* montou a Xtech Commerce pra atender quem vendia pouco e não tinha nome. Em três anos a plataforma transacionou R$ 547 milhões e foi comprada pela VTEX.
+Em 2023, *Alfredo Soares* publicou um livro cujo subtítulo é praticamente um mapa: construa seu ecossistema de vendas por meio de influência, conteúdo e experiência.
 
-Depois ele virou VP da VTEX e cofundou o G4, onde passou a fazer com empresa dos outros o que já tinha feito com a própria: olhar de fora e apontar onde está sangrando.
+A tese é que audiência, demanda, conversão e retenção são quatro trabalhos diferentes. E que quase todo mundo produz conteúdo que faz só o primeiro.
 
-A frase que colou nele é "bora vender". Só que ele quase nunca começa por venda. Começa perguntando pra quem você vende, e por que essa pessoa voltaria.
+Ele fundou a Xtech em 2014, transacionou R$ 547 milhões em três anos, vendeu para a VTEX em 2017 e cofundou o G4. Não é teoria de quem só posta.
 ---
 {layout lista fundo:preto foto:mesa-reuniao}
-A força desse prompt está em proibir a IA de pular pro plano. Ela é obrigada a fazer as perguntas incômodas primeiro, do jeito que um sócio faria numa sexta à noite.
+A força desse prompt está em julgar o seu conteúdo pelas quatro etapas, e não pelo engajamento. Ele mostra em qual delas você está preso.
 
-__O prompt olha o seu negócio e aponta:__
+__O prompt lê os seus últimos posts e aponta:__
 
-- Pra quem você vende de verdade
-- O motivo real de o cliente voltar
-- Onde está vazando dinheiro sem você ver
-- O que você começou e abandonou no meio
-- A pergunta que você está evitando
-- A única coisa pra fazer nos próximos 30 dias
+- Em qual das 4 etapas cada post trabalha
+- A etapa que você nunca faz
+- Onde você pediu atenção e não pediu nada
+- O que já está funcionando e você quase parou
+- Como fazer quem já comprou virar canal
+- Os 5 próximos posts, com a função de cada um
 ---
 {layout prompt fundo:claro}
 Use esse prompt:
 [o bloco vem de conteudo/005-prompt.txt]
 ---
 {layout fecho}
-Eu cuido de *33 páginas* de negócio e vejo o mesmo padrão em quase todas.
+Eu cuido de *33 páginas* e vejo isso todo dia.
 
-Todo mundo quer mais tráfego. Quase ninguém sabe responder por que o cliente volta.
+Post bom de audiência e ruim de demanda parece sucesso no relatório e some no caixa.
 
-Esse prompt não vende nada pra você. Ele só te obriga a responder.
+Rodei esse prompt no meu próprio perfil antes de postar. Levei um tapa.
 
-Salva antes de sumir.
+Salva e roda no seu.
