@@ -80,3 +80,66 @@ Duas familias:
    direcoes diferentes matam o efeito de colagem.
 3. **Texto centralizado so em quadro vazio.** Com imagem no topo, o
    texto centralizado sobe e passa por cima dela.
+
+
+---
+
+# Estilo REVISTA — a linha nova
+
+Vem da referencia de decodificacao de marca. Convive com o sistema
+antigo, nao substitui: o sistema serve carrossel didatico, a revista
+serve carrossel de analise com ferramenta no fim.
+
+## As cores nao mudam
+
+Preto `#0B0B0B`, laranja `#FF6B1A`, branco. A identidade e dele e ja
+carrega duas empresas anteriores. **Muda a tipografia, nunca a cor.**
+
+Detalhe que a gente ganhou de graca: as fotos de palco do Alfredo sao
+azuis, luz de evento. Azul e laranja sao complementares. Tipografia
+laranja sobre palco azul e o contraste mais forte que existe, e nao
+custa nada porque ja esta na foto.
+
+## A tipografia, agora
+
+| papel | fonte | por que |
+| --- | --- | --- |
+| Capa de ferramenta | **Anton** | condensada pesada, caixa alta. E a que a referencia usa quando promete uma ferramenta. |
+| Capa e slide de ensaio | **Newsreader** | serifada editorial, caixa baixa. Desenhada para tela, com italico. Baixada em `instagram/fontes/`. |
+| Corpo | **Arimo** | metricas da Helvetica. Neutra, profissional, nao startup. |
+| Prompt e etiqueta | **JetBrains Mono** | o bloco de prompt precisa de monoespacada de verdade. |
+
+### A volta do Anton, e por que isso nao e contradicao
+
+O `PERFIL.md` registra que eu propus Anton no comeco e ele foi
+reprovado, porque a referencia da epoca era a Wind: editorial, sentence
+case, laranja contido. Continua verdade para aquela referencia.
+
+A referencia agora e outra e o objetivo do slide e outro. Capa de
+ferramenta grita, capa de ensaio sussurra. Anton volta **so na capa de
+ferramenta**. Nos slides de texto quem manda e Newsreader e Arimo.
+
+Se um dia os dois estilos aparecerem no mesmo carrossel, e erro.
+
+## O rosto: resolvido, e sem gerar nada
+
+Ele mandou fotos reais do Alfredo em palco. Entao **nao se gera rosto de
+pessoa viva**, se usa a foto que existe. Isso encerra a duvida que estava
+aberta desde o 005.
+
+O caminho tecnico: as fotos estao no chat, nao no disco daqui. Quando a
+arte comecar, subir pelo widget do Higgsfield (`media_upload_widget`) e
+usar como referencia de imagem, nunca pedir ao modelo que desenhe o rosto.
+
+## Como se fala com o Higgsfield nesta linha
+
+Regra dele, e esta certa: **o modelo desenha, a gente nao diagrama.**
+O prompt conta a historia da cena e trava so quatro coisas:
+
+1. o texto, letra por letra, com acento
+2. as cores da marca
+3. onde a tipografia mora (terco de baixo, largura inteira)
+4. "no other text anywhere in the image"
+
+Enquadramento, luz, angulo, profundidade e composicao ficam com ele.
+Coordenada em prompt de imagem devolve arte morta.
