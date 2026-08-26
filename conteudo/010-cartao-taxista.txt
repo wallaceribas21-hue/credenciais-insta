@@ -1,0 +1,41 @@
+{layout capa foto:alfredo-palco estilo:anton}
+AOS 17 VENDIA CARTÃO DE VISITA
+PARA TAXISTA DA TIJUCA.
+DEPOIS VENDEU A EMPRESA
+POR R$ *14 MILHÕES*.
+→ ALFREDO SOARES E A HABILIDADE QUE NASCEU ALI
+---
+{layout declaracao fundo:claro estilo:serif foto:cartoes-graficos}
+A empresa se chamava *Ideia Carioca*. Ele, um sócio e um curso de design.
+
+Anos depois veio a Xtech: R$ 547 milhões transacionados em três anos, comprada pela VTEX.
+---
+{layout declaracao fundo:preto foto:rua-tijuca}
+E olha onde ele vendeu.
+
+Não foi para o mercado. Foi para o taxista do ponto, o comerciante da esquina, o professor dele, os amigos.
+
+__O bairro onde ele cresceu.__
+---
+{layout lista fundo:claro foto:caderno-lista}
+Quando o produto é igual ao de todo mundo, o que sobra é quem já confia em você.
+
+__No seu negócio isso é uma lista, não uma teoria:__
+
+- Quem já comprou de você
+- Quem te conhece e nunca comprou
+- Quem te indicaria de graça
+---
+{layout declaracao fundo:preto foto:anuncio-caro}
+Quase ninguém faz essa lista. Dá trabalho e não parece marketing.
+
+Anúncio é mais fácil: você paga e alguém aparece.
+
+__Só que você paga de novo todo mês, e a lista não.__
+---
+{layout fecho fundo:laranja foto:conversa-direct}
+Toda empresa tem essa lista parada.
+
+Se quiser saber por onde a sua começa, me chama no direct.
+
+Eu faço o diagnóstico e te digo o primeiro nome a ligar.
