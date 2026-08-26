@@ -1,0 +1,40 @@
+{layout capa foto:alfredo-palco estilo:anton}
+R$ *2 BILHÕES*
+DE OUTRA EMPRESA
+VIRARAM CONTEÚDO DELE
+→ ALFREDO SOARES E O NÚMERO DOS OUTROS. PROMPT NO SLIDE 4
+---
+{layout declaracao fundo:claro estilo:serif}
+Em 2026, Alfredo Soares publicou uma análise sobre a Growth Supplements, que faturou mais de R$ 2 bilhões vendendo suplemento pela internet.
+
+A empresa não é dele. O número não é dele. O texto é.
+
+E isso não é falta de assunto próprio. É o método inteiro em uma linha: o assunto vem de fora, a leitura vem de dentro.
+---
+{layout lista fundo:preto foto:alfredo-microfone}
+Agora repare no que *não muda*.
+
+Bora Vender, 2019. Todos somos uma marca, 2023. Todos somos vendedores, lançado este mês com Allan Barros.
+
+Sete anos, quatro livros, e a ótica é sempre a mesma: tudo lido pela lente de quem vende.
+
+__O assunto dele muda toda semana. O ângulo não muda desde 2019.__
+
+E é exatamente aí que quase todo mundo trava. Tenta escolher o assunto e o ângulo ao mesmo tempo, todo dia, do zero.
+
+Ângulo não é nicho. Nicho fecha o assunto. Ângulo abre.
+---
+{layout prompt fundo:claro}
+Use esse prompt:
+[o bloco vem de conteudo/007-prompt.txt]
+---
+{layout fecho fundo:laranja}
+O teste é externo e dói um pouco.
+
+Se quem já te conhece ainda precisa perguntar o que você faz, o problema nunca foi frequência.
+
+Você tem assunto de sobra. O mundo publica assunto novo todo dia, de graça.
+
+O que falta é uma lente fixa.
+
+Salva o prompt. Decide o ângulo uma vez.
