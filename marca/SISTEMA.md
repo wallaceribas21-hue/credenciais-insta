@@ -143,3 +143,45 @@ O prompt conta a historia da cena e trava so quatro coisas:
 
 Enquadramento, luz, angulo, profundidade e composicao ficam com ele.
 Coordenada em prompt de imagem devolve arte morta.
+
+
+---
+
+# O layout aprovado (26/08/2026)
+
+Ele viu seis artes e apontou uma: *"esse em especifico foi o loyout que
+mais gostei"*. Vira o padrao do estilo revista.
+
+```
+   [ foto sangrando, 55% da altura, sem veu ]
+   [ luz quente laranja nascendo dentro da  ]
+   [ propria cena, nao aplicada por cima    ]
+  ------------------------------------------
+   fundo bege muito claro, quase branco
+
+   Texto corrido em sans geometrica, com
+   **peso misto dentro do mesmo paragrafo**.
+
+   A FRASE FINAL, GRANDE E EM LARANJA,
+   OCUPANDO DUAS LINHAS.
+```
+
+Por que funciona, e o que nao pode mudar:
+
+1. **A divisao e limpa e alta.** A foto fica no topo com corte reto, sem
+   degrade e sem veu. O texto tem o proprio campo. Nada se sobrepoe, e por
+   isso tudo le de primeira, que e a reclamacao numero um dele.
+2. **O peso misto e o recurso, nao a cor.** Dentro do mesmo paragrafo,
+   parte em regular e parte em bold. Isso da hierarquia sem precisar de
+   segunda cor e vem direto da referencia da Wind.
+3. **Um laranja por slide, e ele e a conclusao.** O laranja nao decora e
+   nao destaca palavra solta: ele carrega a frase que a pessoa leva. Se o
+   laranja aparecer em dois lugares, o slide perde o ponto de foco.
+4. **O laranja da foto e o laranja do texto sao o mesmo.** Na arte
+   aprovada existe um brilho quente na mao dele que rima com a cor da
+   frase. Isso amarra imagem e tipografia sem ninguem perceber.
+5. **Bege quase branco, nunca branco puro.** Branco puro brilha demais no
+   feed escuro e cansa. O quente do bege segura a leitura.
+
+Fonte do corpo: **Montserrat**, que ja esta no repositorio, nos pesos 400
+e 700 na mesma frase.
