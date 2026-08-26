@@ -199,3 +199,46 @@ cofundador do @g4.business, sócio na VTEX, Loja Integrada e CRM Bônus.
 Então não é "presidente da Loja Integrada" hoje, é **sócio**. A copy usa
 cofundador do G4 e autor de quatro best-sellers, que é o que a fonte
 dele mesmo afirma.
+
+---
+
+## 008 — a regra de tamanho que eu vinha quebrando
+
+Ele leu o carrossel e disse que so entendeu os slides 4 e 5. Os dois que
+tinham **uma ideia so cada**. Os slides 2 e 3, que eu tinha escrito com
+tres ou quatro paragrafos, nao passaram.
+
+O diagnostico dele veio na mesma mensagem: *"ta muito grande os textos,
+mesmo que possa ser mais escrito nao pode ficar tao poluido com so
+texto"*.
+
+> **Slide de carrossel aguenta uma ideia, nao tres.**
+> Se voce precisa de tres, sao tres slides.
+
+Numeros que passam a valer:
+
+| slide | teto |
+| --- | --- |
+| capa | 12 palavras no titulo, mais a barra |
+| corpo | **entre 20 e 35 palavras** |
+| fecho | 25 palavras |
+
+O 008 foi de 5 slides pesados para 6 slides leves. Nenhum passa de 34
+palavras. A copy encolheu quase pela metade e nao perdeu nenhuma ideia,
+porque o que saiu era ligacao entre ideias, e ligacao quem faz e o
+arrasto do dedo, nao o texto.
+
+**Eu vinha escrevendo ensaio e chamando de carrossel.** O erro apareceu
+em todas as versoes anteriores e ele reclamou de legibilidade tres vezes
+antes de eu ouvir. O `APRENDIZADO` ja dizia na primeira linha: *ele
+reclama de legibilidade antes de qualquer outra coisa*.
+
+## E a imagem nao e enfeite, e metade do slide
+
+Regra nova dele: **toda arte tem imagem, inclusive as de texto.** Imagem
+de fundo, complementar, nao decorativa. Slide de cor chapada com texto em
+cima ele chama de vazio, e ja chamou antes.
+
+As fotos do Alfredo em palco foram liberadas por ele para producao de
+conteudo positiva, e ele autorizou alterar em IA. Entao a foto real entra
+como **base** e o Higgsfield trabalha por cima, em vez de inventar rosto.
