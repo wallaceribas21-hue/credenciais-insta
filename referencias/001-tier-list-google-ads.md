@@ -24,28 +24,28 @@ Discordância vira comentário, e comentário é o que o perfil precisa medir.
 
 ---
 
-## Transcrição do caderno
+## Transcrição do caderno, com as notas dele
 
-Ordem exata em que ele escreveu, sem reordenar:
+Ordem exata em que ele escreveu, sem reordenar. A coluna "sobre ela" é o
+material que ele usa pra fazer o mini comentário na hora de colocar a letra.
 
-| # | Estratégia | Tier | Observação dele |
+| # | Campanha | Nota | Sobre ela |
 |---|---|---|---|
-| 1 | Conversão em público frio | E | |
-| 2 | Remarketing | S | **TOP 1**, "melhores / padrão" |
-| 3 | Pesquisa por palavra-chave | S | **TOP 2**, "melhores / padrão" |
-| 4 | Performance Max | B | "polêmico", "X-tudo" |
-| 5 | Campanha de teste | A | |
-| 6 | Palavra-chave genérica | D/E | "não é a indicada, porém às vezes traz palavras que performam bem" |
-| 7 | Campanhas via Google Meu Negócio | A | "muito bom se tiver tudo no Google [texto cortado na margem da folha]" |
-| 8 | Discovery / Geração de demanda | C | |
-| 9 | Busca por palavra-chave de concorrente | D | "funciona" |
+| 1 | Conversão em público frio | **E** | É quando você pede conversão pra quem nunca te viu. No Google isso não funciona bem, porque aqui a pessoa já chega procurando. Gasta muito e converte pouco. |
+| 2 | Remarketing | **S** top 1 | Aparece pra quem já entrou no seu site. É a mais barata e a que mais converte, porque a pessoa já te conhece. Porém depende de outra campanha trazer gente primeiro. |
+| 3 | Pesquisa por palavra-chave | **S** top 2 | A pessoa digita o que você vende e seu anúncio aparece. É a de melhor intenção. O limite dela é o volume de busca da sua cidade. |
+| 4 | Performance Max | **C** | Ela faz tudo sozinha e decide onde gastar: pesquisa, display, YouTube, Gmail. Vai bem se a conta já tiver conversão registrada. Se for conta nova, ela gasta e não te mostra onde. |
+| 5 | Campanha de teste | **A** | Verba baixa só pra descobrir o que funciona antes de botar dinheiro de verdade. Não é um tipo de campanha do Google, é uma prática. |
+| 6 | Palavra-chave genérica | **D** | Não é a mais indicada, porém de vez em quando traz uma palavra que performa bem. Você olha o relatório de termos, pega a boa e sobe numa campanha própria. |
+| 7 | Via Google Meu Negócio | **A** | Sai do Perfil da Empresa. Entrega muito bem se o perfil estiver completo: foto, avaliação, horário. Pela metade não adianta. |
+| 8 | Discovery / geração de demanda | **C** | Hoje o Google chama de Demand Gen. Cria vontade em quem não estava procurando. Não adianta cobrar venda direta dela. |
+| 9 | Busca no nome do concorrente | **D** | Você dá lance no nome do concorrente. Funciona, porém sai caro, porque o Google entende que seu anúncio não é o que a pessoa procurou. E ele pode fazer o mesmo com você. |
 
-**Marcação solta na folha:** uma chave agrupa Remarketing + Pesquisa por
-palavra-chave como "melhores / padrão", e abaixo dela sai uma seta escrita
-"a mais barata". Pela posição, a seta parece apontar para o grupo, não para
-um item só. **Confirmar com ele qual das duas é a mais barata.**
+**Decisões dele em cima do caderno:**
 
----
+- A genérica estava anotada como "D/E". Ele ficou na dúvida e escolheu **D**.
+- Performance Max estava anotada como **B**. Ele desceu para **C**.
+- A seta "a mais barata" da folha aponta para o **remarketing**.
 
 ## O que precisa ser trocado
 

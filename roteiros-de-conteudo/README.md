@@ -10,7 +10,7 @@ As referências que originaram cada roteiro ficam em `referencias/`.
 
 | # | Vídeo | Status |
 |---|---|---|
-| 001 | Tier list das campanhas do Google Ads | aprovado, pronto pra gravar |
+| 001 | Tier list das campanhas do Google Ads | **concluído** |
 | 002 | A ferramenta que entrega o design das maiores marcas | aprovado, pendente de 2 dados |
 | 003 | 5 ideias de vídeo para donos de restaurante | conteúdo definido, falta CTA |
 | 004 | Formatos de vídeo por etapa do funil | conteúdo definido, faltam gancho e corte |
