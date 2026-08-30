@@ -1,0 +1,123 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Logo W 3D — 4K 9:16</title>
+<style>
+html,body{margin:0;padding:0;width:2160px;height:3840px;overflow:hidden;background:#000;}
+svg{display:block;}
+</style></head>
+<body>
+<svg width="2160" height="3840" viewBox="0 0 2160 3840" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- backdrop: same warm orange-to-dark palette as the original reference -->
+    <linearGradient id="bgLin" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FF9A3D"/>
+      <stop offset="30%" stop-color="#F0620F"/>
+      <stop offset="62%" stop-color="#7A280A"/>
+      <stop offset="100%" stop-color="#100704"/>
+    </linearGradient>
+    <radialGradient id="bgSpot" cx="52%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#FFC377" stop-opacity="0.95"/>
+      <stop offset="45%" stop-color="#FF7A22" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="42%" r="78%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="75%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </radialGradient>
+    <radialGradient id="floorPool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd9a8" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- 3D face material: near-black with a faint lift so the emboss reads -->
+    <linearGradient id="glyphFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1c1c1e"/>
+      <stop offset="1" stop-color="#050506"/>
+    </linearGradient>
+
+    <!-- edge-only bevel: light top-left, dark bottom-right -->
+    <filter id="bevel" x="-30%" y="-30%" width="160%" height="160%">
+      <feOffset in="SourceAlpha" dx="6" dy="7" result="offBR"/>
+      <feComposite in="SourceAlpha" in2="offBR" operator="out" result="edgeTL"/>
+      <feGaussianBlur in="edgeTL" stdDeviation="2.6" result="edgeTLb"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.55" result="wh"/>
+      <feComposite in="wh" in2="edgeTLb" operator="in" result="lite"/>
+      <feOffset in="SourceAlpha" dx="-6" dy="-7" result="offTL"/>
+      <feComposite in="SourceAlpha" in2="offTL" operator="out" result="edgeBR"/>
+      <feGaussianBlur in="edgeBR" stdDeviation="2.6" result="edgeBRb"/>
+      <feFlood flood-color="#000000" flood-opacity="0.5" result="bk"/>
+      <feComposite in="bk" in2="edgeBRb" operator="in" result="dark"/>
+      <feMerge result="bands"><feMergeNode in="dark"/><feMergeNode in="lite"/></feMerge>
+      <feComposite in="bands" in2="SourceAlpha" operator="in" result="bandsIn"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="bandsIn"/></feMerge>
+    </filter>
+
+    <!-- studio sheen across the glyph -->
+    <linearGradient id="sheen" gradientUnits="userSpaceOnUse" x1="280" y1="200" x2="720" y2="620">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.20"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.04"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- ===== glyph geometry (design space 1000x1000) ===== -->
+    <path id="tick" d="M 336,320 L 446,282 L 402,542 L 372,530 Z"/>
+    <path id="swoosh" d="
+      M 566,254
+      C 561,254 555,257 550,262
+      C 528,304 500,364 476,428
+      C 454,488 438,538 430,580
+      C 460,602 500,606 538,592
+      C 584,574 622,538 648,496
+      C 660,476 666,458 666,442
+      C 650,466 628,490 600,510
+      C 574,528 546,538 522,536
+      C 542,498 564,448 582,394
+      C 598,346 604,298 596,268
+      C 590,262 578,255 566,254
+      Z"/>
+    <clipPath id="glyphClip"><use href="#tick"/><use href="#swoosh"/></clipPath>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="2160" height="3840" fill="url(#bgLin)"/>
+  <rect width="2160" height="3840" fill="url(#bgSpot)"/>
+  <ellipse cx="1080" cy="2680" rx="820" ry="200" fill="url(#floorPool)"/>
+
+  <!-- large soft cast shadow -->
+  <g transform="translate(1085,1972) scale(2.6) translate(-500,-410)" opacity="0.42" style="filter:blur(30px)">
+    <use href="#tick" fill="#000"/>
+    <use href="#swoosh" fill="#000"/>
+  </g>
+  <!-- contact shadow -->
+  <ellipse cx="1080" cy="2210" rx="430" ry="46" fill="#000" opacity="0.4" style="filter:blur(22px)"/>
+
+  <!-- ================= glyph, centered, straight front view ================= -->
+  <g transform="translate(1080,1940) scale(2.55) translate(-500,-410)">
+
+    <!-- clean extrusion: stacked slices straight down, no perspective -->
+    <g fill="#050506">
+      <use href="#tick" transform="translate(0,11)"/><use href="#tick" transform="translate(0,9.6)"/>
+      <use href="#tick" transform="translate(0,8.2)"/><use href="#tick" transform="translate(0,6.8)"/>
+      <use href="#tick" transform="translate(0,5.4)"/><use href="#tick" transform="translate(0,4)"/>
+      <use href="#tick" transform="translate(0,2.6)"/>
+      <use href="#swoosh" transform="translate(0,11)"/><use href="#swoosh" transform="translate(0,9.6)"/>
+      <use href="#swoosh" transform="translate(0,8.2)"/><use href="#swoosh" transform="translate(0,6.8)"/>
+      <use href="#swoosh" transform="translate(0,5.4)"/><use href="#swoosh" transform="translate(0,4)"/>
+      <use href="#swoosh" transform="translate(0,2.6)"/>
+    </g>
+
+    <!-- top face with embossed edges -->
+    <use href="#tick" fill="url(#glyphFace)" filter="url(#bevel)"/>
+    <use href="#swoosh" fill="url(#glyphFace)" filter="url(#bevel)"/>
+
+    <!-- studio sheen, clipped to glyph silhouette -->
+    <g clip-path="url(#glyphClip)">
+      <rect x="250" y="180" width="550" height="500" fill="url(#sheen)"/>
+    </g>
+  </g>
+
+  <!-- vignette -->
+  <rect width="2160" height="3840" fill="url(#vignette)"/>
+</svg>
+</body></html>
