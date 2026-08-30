@@ -1,0 +1,141 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Logo 3D — 4K 9:16</title>
+<style>
+@font-face { font-family:'ArchivoBlack'; src:url('archivo-black.ttf') format('truetype'); }
+html,body{margin:0;padding:0;width:2160px;height:3840px;overflow:hidden;background:#000;}
+svg{display:block;}
+.screen{mix-blend-mode:screen;}
+</style></head>
+<body>
+<svg width="2160" height="3840" viewBox="0 0 2160 3840" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- studio backdrop -->
+    <radialGradient id="bgGrad" cx="50%" cy="42%" r="78%">
+      <stop offset="0%" stop-color="#1b1d26"/>
+      <stop offset="50%" stop-color="#111218"/>
+      <stop offset="100%" stop-color="#060708"/>
+    </radialGradient>
+    <radialGradient id="spot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#aab3cf" stop-opacity="0.20"/>
+      <stop offset="60%" stop-color="#6b7390" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="80%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </radialGradient>
+    <!-- floor light pool -->
+    <radialGradient id="floorPool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8d96b5" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- subtle material gradients (kept close to original colors) -->
+    <linearGradient id="redFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#EB2A31"/>
+      <stop offset="1" stop-color="#DF2026"/>
+    </linearGradient>
+    <linearGradient id="navyFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#26248A"/>
+      <stop offset="1" stop-color="#1B1969"/>
+    </linearGradient>
+    <linearGradient id="wordFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#252288"/>
+      <stop offset="1" stop-color="#1C1A6D"/>
+    </linearGradient>
+    <linearGradient id="discFace" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EDEFF4"/>
+    </linearGradient>
+
+    <!-- emboss bevel: soft specular highlight from upper-left, kept inside the shape -->
+    <filter id="bevel" x="-20%" y="-20%" width="140%" height="140%">
+      <!-- light inner edge, top-left -->
+      <feOffset in="SourceAlpha" dx="5" dy="6" result="offBR"/>
+      <feComposite in="SourceAlpha" in2="offBR" operator="out" result="edgeTL"/>
+      <feGaussianBlur in="edgeTL" stdDeviation="2.2" result="edgeTLb"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.5" result="wh"/>
+      <feComposite in="wh" in2="edgeTLb" operator="in" result="lite"/>
+      <!-- dark inner edge, bottom-right -->
+      <feOffset in="SourceAlpha" dx="-5" dy="-6" result="offTL"/>
+      <feComposite in="SourceAlpha" in2="offTL" operator="out" result="edgeBR"/>
+      <feGaussianBlur in="edgeBR" stdDeviation="2.2" result="edgeBRb"/>
+      <feFlood flood-color="#000000" flood-opacity="0.38" result="bk"/>
+      <feComposite in="bk" in2="edgeBRb" operator="in" result="dark"/>
+      <!-- keep both bands inside the shape -->
+      <feMerge result="bands"><feMergeNode in="dark"/><feMergeNode in="lite"/></feMerge>
+      <feComposite in="bands" in2="SourceAlpha" operator="in" result="bandsIn"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="bandsIn"/></feMerge>
+    </filter>
+
+    <!-- sheen across the face -->
+    <linearGradient id="sheen" gradientUnits="userSpaceOnUse" x1="380" y1="240" x2="1280" y2="1030">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="0.45" stop-color="#ffffff" stop-opacity="0.02"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- ===== logo geometry (design space: circle c=827,620 r=400) ===== -->
+    <circle id="shpDisc" cx="827" cy="620" r="400"/>
+    <path id="shpRed"  d="M445,500 C660,578 1000,448 1194,462 A400,400 0 0 0 445,500 Z"/>
+    <path id="shpNavy" d="M462,795 C660,815 1010,655 1209,738 A400,400 0 0 1 462,795 Z"/>
+    <clipPath id="logoClip">
+      <use href="#shpDisc"/>
+      <text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2">PEPSI</text>
+    </clipPath>
+
+    <!-- one flat copy of the whole logo, used for extrusion slices -->
+    <g id="logoFlat">
+      <use href="#shpDisc" fill="#c7cad4"/>
+      <use href="#shpRed" fill="#7e1216"/>
+      <text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2" fill="#0e0d3f">PEPSI</text>
+      <use href="#shpNavy" fill="#0e0d3f"/>
+    </g>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="2160" height="3840" fill="url(#bgGrad)"/>
+  <ellipse cx="1080" cy="1750" rx="1250" ry="1400" fill="url(#spot)"/>
+  <ellipse cx="1080" cy="2720" rx="900" ry="220" fill="url(#floorPool)"/>
+
+  <!-- large soft shadow cast on backdrop -->
+  <g transform="translate(1080,1785) scale(2.07) translate(-824.5,-620)" opacity="0.5" style="filter:blur(38px)">
+    <use href="#shpDisc" fill="#000"/>
+    <rect x="386" y="505" width="880" height="228" fill="#000"/>
+  </g>
+  <!-- contact shadow -->
+  <ellipse cx="1080" cy="2640" rx="760" ry="70" fill="#000" opacity="0.55" style="filter:blur(30px)"/>
+
+  <g id="logoPlace" transform="translate(1080,1750) scale(2.07) translate(-824.5,-620)">
+    <!-- clean extrusion: stacked darkened slices, straight down, no perspective -->
+    <g>
+      <use href="#logoFlat" transform="translate(0,13)"/>
+      <use href="#logoFlat" transform="translate(0,11.5)"/>
+      <use href="#logoFlat" transform="translate(0,10)"/>
+      <use href="#logoFlat" transform="translate(0,8.5)"/>
+      <use href="#logoFlat" transform="translate(0,7)"/>
+      <use href="#logoFlat" transform="translate(0,5.5)"/>
+      <use href="#logoFlat" transform="translate(0,4)"/>
+      <use href="#logoFlat" transform="translate(0,2.5)"/>
+    </g>
+
+    <!-- top face with embossed details -->
+    <g>
+      <use href="#shpDisc" fill="url(#discFace)" filter="url(#bevel)"/>
+      <use href="#shpRed" fill="url(#redFace)" filter="url(#bevel)"/>
+      <text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2" fill="url(#wordFace)" filter="url(#bevel)">PEPSI</text>
+      <use href="#shpNavy" fill="url(#navyFace)" filter="url(#bevel)"/>
+    </g>
+
+    <!-- studio sheen, clipped to the logo silhouette -->
+    <g clip-path="url(#logoClip)">
+      <rect x="300" y="180" width="1100" height="900" fill="url(#sheen)"/>
+    </g>
+  </g>
+
+  <!-- vignette -->
+  <rect width="2160" height="3840" fill="url(#vignette)"/>
+</svg>
+</body></html>
