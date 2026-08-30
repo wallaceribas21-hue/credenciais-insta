@@ -1,0 +1,185 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>Logo Reveal — 9:16</title>
+<style>
+@font-face { font-family:'ArchivoBlack'; src:url('archivo-black.ttf') format('truetype'); }
+html,body{margin:0;padding:0;width:1080px;height:1920px;overflow:hidden;background:#000;}
+svg{display:block;}
+.screen{mix-blend-mode:screen;}
+</style></head>
+<body>
+<svg id="stage" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- background -->
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#15171f"/>
+      <stop offset="55%" stop-color="#0d0e13"/>
+      <stop offset="100%" stop-color="#050607"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="46%" r="72%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="78%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.5"/>
+    </radialGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#dbe4ff" stop-opacity="0.85"/>
+      <stop offset="45%" stop-color="#8fa3d9" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <!-- reveal mask gradient: userSpace so we can move stops -->
+    <linearGradient id="revealGrad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <mask id="revealMask">
+      <rect x="-200" y="0" width="1600" height="1920" fill="url(#revealGrad)"/>
+    </mask>
+    <!-- specular band -->
+    <linearGradient id="bandGrad" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bandGrad2" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <!-- top-light for subtle 3D depth, applied over the logo, clipped to silhouette -->
+    <linearGradient id="topLight" gradientUnits="userSpaceOnUse" x1="0" y1="200" x2="0" y2="1030">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.16"/>
+      <stop offset="0.35" stop-color="#ffffff" stop-opacity="0.05"/>
+      <stop offset="0.7" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0.10"/>
+    </linearGradient>
+    <!-- reflection fade mask -->
+    <linearGradient id="reflFade" gradientUnits="userSpaceOnUse" x1="0" y1="1310" x2="0" y2="1610">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.5"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="reflMask"><rect x="0" y="1290" width="1080" height="400" fill="url(#reflFade)"/></mask>
+
+    <!-- ===== logo geometry (design space: circle c=827,620 r=400) ===== -->
+    <circle id="shpDisc" cx="827" cy="620" r="400"/>
+    <path id="shpRed"  d="M445,500 C660,578 1000,448 1194,462 A400,400 0 0 0 445,500 Z"/>
+    <path id="shpNavy" d="M462,795 C660,815 1010,655 1209,738 A400,400 0 0 1 462,795 Z"/>
+    <clipPath id="logoClip">
+      <use href="#shpDisc"/>
+      <use href="#shpNavy"/>
+      <text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2">PEPSI</text>
+    </clipPath>
+  </defs>
+
+  <!-- background -->
+  <rect width="1080" height="1920" fill="url(#bgGrad)"/>
+  <ellipse id="backGlow" class="screen" cx="540" cy="880" rx="640" ry="700" fill="url(#glowGrad)" opacity="0" style="filter:blur(30px)"/>
+  <rect width="1080" height="1920" fill="url(#vignette)"/>
+
+  <!-- floor shadow -->
+  <ellipse id="floorShadow" cx="540" cy="1345" rx="360" ry="42" fill="#000000" opacity="0" style="filter:blur(26px)"/>
+
+  <!-- ================= logo (page placement) ================= -->
+  <!-- outer transform maps design space -> page -->
+  <g id="logoPlace" transform="translate(540,880) scale(1.035) translate(-824.5,-620)">
+
+    <!-- ghost layer: barely visible logo -->
+    <g id="ghost" opacity="0.07" style="filter:grayscale(0.55) brightness(1.35) blur(1.2px)">
+      <use href="#shpDisc" fill="#FFFFFF"/>
+      <g id="ghRed"><use href="#shpRed" fill="#E5242B"/></g>
+      <g id="ghWord"><text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2" fill="#201E7A">PEPSI</text></g>
+      <g id="ghNavy"><use href="#shpNavy" fill="#201E7A"/></g>
+    </g>
+
+    <!-- full-color layer, revealed by sweeping mask -->
+    <g id="colorLogo" mask="url(#revealMask)" style="filter:drop-shadow(0px 14px 30px rgba(0,0,0,0.45))">
+      <use href="#shpDisc" fill="#FFFFFF"/>
+      <g id="pRed"><use href="#shpRed" fill="#E5242B"/></g>
+      <g id="pWord"><text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2" fill="#201E7A">PEPSI</text></g>
+      <g id="pNavy"><use href="#shpNavy" fill="#201E7A"/></g>
+      <!-- subtle 3D top-light shading, clipped to logo silhouette -->
+      <g clip-path="url(#logoClip)">
+        <rect x="300" y="180" width="1100" height="900" fill="url(#topLight)"/>
+      </g>
+    </g>
+
+    <!-- specular sweep bands, clipped to silhouette -->
+    <g clip-path="url(#logoClip)">
+      <g id="band1" class="screen" opacity="0" style="filter:blur(34px)">
+        <rect id="band1r" x="-2000" y="120" width="380" height="1000" fill="url(#bandGrad)" transform="skewX(-14)"/>
+      </g>
+      <g id="band2" class="screen" opacity="0" style="filter:blur(26px)">
+        <rect id="band2r" x="-2000" y="120" width="260" height="1000" fill="url(#bandGrad2)" transform="skewX(-14)"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- reflection (mirrored, faded) -->
+  <g id="reflection" opacity="0" mask="url(#reflMask)">
+    <g transform="translate(540,1300) scale(1.006,-1.006) translate(-540,-880)">
+      <g transform="translate(540,880) scale(1.035) translate(-824.5,-620)">
+        <use href="#shpDisc" fill="#FFFFFF"/>
+        <use href="#shpRed" fill="#E5242B"/>
+        <text x="827" y="717" text-anchor="middle" font-family="ArchivoBlack" font-size="272" letter-spacing="2" fill="#201E7A">PEPSI</text>
+        <use href="#shpNavy" fill="#201E7A"/>
+      </g>
+    </g>
+  </g>
+
+<script>
+const $ = id => document.getElementById(id);
+const clamp01 = v => Math.max(0, Math.min(1, v));
+const lerp = (a,b,p) => a + (b-a)*p;
+// eased progress within [t0,t1]
+const seg = (t,t0,t1,ease) => ease(clamp01((t-t0)/(t1-t0)));
+const easeOutQuint = p => 1 - Math.pow(1-p,5);
+const easeInOutSine = p => -(Math.cos(Math.PI*p)-1)/2;
+const easeOutCubic = p => 1 - Math.pow(1-p,3);
+const smooth = p => p*p*(3-2*p);
+
+// page-x -> design-x inside logoPlace: design = (page-540)/1.035 + 824.5
+const toDesign = x => (x-540)/1.035 + 824.5;
+
+function seek(t){
+  // ---------- ghost fade-in ----------
+  $('ghost').setAttribute('opacity', (0.05 + 0.05*seg(t,0,1.0,smooth)).toFixed(4));
+
+  // ---------- reveal sweep (page coords front from -60 to 1240) ----------
+  const pR = seg(t, 1.1, 4.3, easeInOutSine);
+  const frontPage = lerp(-60, 1240, pR);
+  const front = toDesign(frontPage);
+  const g = document.getElementById('revealGrad');
+  g.setAttribute('x1', (front-300).toFixed(1));
+  g.setAttribute('x2', (front+30).toFixed(1));
+
+  // specular band follows the front, fades in/out at travel edges
+  const bandOp = pR<=0?0 : pR>=1?0 : Math.min(1,(pR/0.12),( (1-pR)/0.15 ))*0.45;
+  $('band1').setAttribute('opacity', Math.max(0,bandOp).toFixed(4));
+  $('band1r').setAttribute('x', (front-190 + 0.25* (620)).toFixed(1)); // skew comp approx
+  // ---------- assembly (staggered, subtle translate only) ----------
+  const aR = seg(t, 1.1, 3.1, easeOutQuint);
+  const aW = seg(t, 1.6, 3.6, easeOutQuint);
+  const aN = seg(t, 2.1, 4.1, easeOutQuint);
+  const set = (ids, tx, ty) => ids.forEach(id => $(id).setAttribute('transform', `translate(${tx.toFixed(2)},${ty.toFixed(2)})`));
+  set(['pRed','ghRed'],   0, lerp(-46,0,aR));
+  set(['pWord','ghWord'], lerp(-30,0,aW), 0);
+  set(['pNavy','ghNavy'], 0, lerp(46,0,aN));
+
+  // ---------- settle: depth shadow + reflection ----------
+  $('floorShadow').setAttribute('opacity', (0.42*seg(t,4.3,5.7,smooth) + 0.10*seg(t,7.0,8.3,smooth)).toFixed(4));
+  $('reflection').setAttribute('opacity', (0.09*seg(t,4.5,6.0,smooth)).toFixed(4));
+
+  // ---------- final polish sweep ----------
+  const p2 = seg(t, 5.8, 7.1, easeInOutSine);
+  const front2 = toDesign(lerp(-80, 1260, p2));
+  const band2Op = p2<=0?0 : p2>=1?0 : Math.min(1,(p2/0.15),((1-p2)/0.15))*0.6;
+  $('band2').setAttribute('opacity', Math.max(0,band2Op).toFixed(4));
+  $('band2r').setAttribute('x', (front2-130 + 0.25*620).toFixed(1));
+
+  // ---------- soft glow ----------
+  $('backGlow').setAttribute('opacity', (0.34*seg(t,6.9,8.3,smooth)).toFixed(4));
+}
+window.seek = seek;
+seek(0);
+</script>
+</svg>
+</body></html>
