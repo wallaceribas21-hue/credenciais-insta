@@ -1,0 +1,225 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<title>WD Logo Reveal — 9:16</title>
+<style>
+html,body{margin:0;padding:0;width:1080px;height:1920px;overflow:hidden;background:#000;}
+svg{display:block;}
+.screen{mix-blend-mode:screen;}
+</style></head>
+<body>
+<svg id="stage" width="1080" height="1920" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- dark, elegant studio backdrop -->
+    <radialGradient id="bgGrad" cx="50%" cy="42%" r="78%">
+      <stop offset="0%" stop-color="#1a1c24"/>
+      <stop offset="55%" stop-color="#0e0f14"/>
+      <stop offset="100%" stop-color="#050506"/>
+    </radialGradient>
+    <radialGradient id="vignette" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="78%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </radialGradient>
+    <radialGradient id="floorPool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#aab3cf" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#eef1ff" stop-opacity="0.8"/>
+      <stop offset="45%" stop-color="#9aa4c9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- edge-only emboss bevel, works on the image's own alpha -->
+    <filter id="bevel" x="-30%" y="-30%" width="160%" height="160%">
+      <feOffset in="SourceAlpha" dx="4.5" dy="5.5" result="offBR"/>
+      <feComposite in="SourceAlpha" in2="offBR" operator="out" result="edgeTL"/>
+      <feGaussianBlur in="edgeTL" stdDeviation="2" result="edgeTLb"/>
+      <feFlood flood-color="#ffffff" flood-opacity="0.65" result="wh"/>
+      <feComposite in="wh" in2="edgeTLb" operator="in" result="lite"/>
+      <feOffset in="SourceAlpha" dx="-4.5" dy="-5.5" result="offTL"/>
+      <feComposite in="SourceAlpha" in2="offTL" operator="out" result="edgeBR"/>
+      <feGaussianBlur in="edgeBR" stdDeviation="2" result="edgeBRb"/>
+      <feFlood flood-color="#000000" flood-opacity="0.45" result="bk"/>
+      <feComposite in="bk" in2="edgeBRb" operator="in" result="dark"/>
+      <feMerge result="bands"><feMergeNode in="dark"/><feMergeNode in="lite"/></feMerge>
+      <feComposite in="bands" in2="SourceAlpha" operator="in" result="bandsIn"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="bandsIn"/></feMerge>
+    </filter>
+
+    <!-- fills the image's silhouette with a flat dark tone, for extrusion slices -->
+    <filter id="darkFill" x="-20%" y="-20%" width="140%" height="140%">
+      <feFlood flood-color="#141416"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+    <filter id="darkFill2" x="-20%" y="-20%" width="140%" height="140%">
+      <feFlood flood-color="#08080a"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+
+    <!-- reveal sweep mask -->
+    <linearGradient id="revealGrad" gradientUnits="userSpaceOnUse" x1="-400" y1="0" x2="-100" y2="0">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#000000"/>
+    </linearGradient>
+    <mask id="revealMask"><rect x="-200" y="0" width="1600" height="1920" fill="url(#revealGrad)"/></mask>
+
+    <!-- moving specular bands -->
+    <linearGradient id="bandGrad" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="bandGrad2" gradientUnits="objectBoundingBox" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="0.5" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- reflection fade -->
+    <linearGradient id="reflFade" gradientUnits="userSpaceOnUse" x1="0" y1="1140" x2="0" y2="1400">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="reflMask"><rect x="0" y="1120" width="1080" height="320" fill="url(#reflFade)"/></mask>
+
+    <!-- ===== source image (its own native pixels, untouched) ===== -->
+    <!-- intrinsic 1600x2000, glyph bbox x:423-1232 y:827-1187 -->
+    <image id="wdImg" href="wd-logo.png" x="0" y="0" width="1600" height="2000" preserveAspectRatio="xMidYMid meet"/>
+
+    <!-- left/right split clips for the assembly effect (cut at the thinnest point of the stroke, x=798) -->
+    <clipPath id="clipLeft"><rect x="0" y="0" width="804" height="2000"/></clipPath>
+    <clipPath id="clipRight"><rect x="792" y="0" width="808" height="2000"/></clipPath>
+    <clipPath id="fullClip"><rect x="0" y="0" width="1600" height="2000"/></clipPath>
+  </defs>
+
+  <!-- backdrop -->
+  <rect width="1080" height="1920" fill="url(#bgGrad)"/>
+  <ellipse id="backGlow" class="screen" cx="540" cy="880" rx="620" ry="480" fill="url(#glowGrad)" opacity="0" style="filter:blur(30px)"/>
+  <ellipse cx="540" cy="1170" rx="480" ry="90" fill="url(#floorPool)"/>
+
+  <!-- shadows -->
+  <g id="bigShadow" transform="translate(540,895) scale(0.939) translate(-827.5,-1007)" opacity="0" style="filter:blur(20px)">
+    <use href="#wdImg" filter="url(#darkFill2)"/>
+  </g>
+  <ellipse id="contactShadow" cx="540" cy="1120" rx="330" ry="30" fill="#000" opacity="0" style="filter:blur(16px)"/>
+
+  <!-- ================= logo, centered, straight front view ================= -->
+  <g id="logoPlace" transform="translate(540,880) scale(0.939) translate(-827.5,-1007)">
+
+    <!-- ghost: barely visible, fully assembled, establishes presence early -->
+    <g id="ghost" opacity="0.06" style="filter:grayscale(0.4) blur(1.4px)">
+      <use href="#wdImg"/>
+    </g>
+
+    <!-- full-strength logo, revealed by sweeping mask -->
+    <g id="colorLogo" mask="url(#revealMask)">
+      <!-- clean extrusion: stacked dark slices straight down, no perspective.
+           Filter runs on the FULL unclipped image first (so edge detection
+           only sees real glyph edges), then clip-path crops the already
+           -filtered result to each half — this avoids a false seam line
+           at the split boundary. -->
+      <g id="extL" clip-path="url(#clipLeft)"><g filter="url(#darkFill)">
+        <use href="#wdImg" transform="translate(0,10)"/>
+        <use href="#wdImg" transform="translate(0,8.5)"/>
+        <use href="#wdImg" transform="translate(0,7)"/>
+        <use href="#wdImg" transform="translate(0,5.5)"/>
+        <use href="#wdImg" transform="translate(0,4)"/>
+        <use href="#wdImg" transform="translate(0,2.5)"/>
+      </g></g>
+      <g id="extR" clip-path="url(#clipRight)"><g filter="url(#darkFill)">
+        <use href="#wdImg" transform="translate(0,10)"/>
+        <use href="#wdImg" transform="translate(0,8.5)"/>
+        <use href="#wdImg" transform="translate(0,7)"/>
+        <use href="#wdImg" transform="translate(0,5.5)"/>
+        <use href="#wdImg" transform="translate(0,4)"/>
+        <use href="#wdImg" transform="translate(0,2.5)"/>
+      </g></g>
+
+      <!-- top face: the real logo pixels, with embossed edge lighting computed
+           on the full silhouette, cropped to each half only after filtering -->
+      <g id="faceL" clip-path="url(#clipLeft)"><g filter="url(#bevel)"><use href="#wdImg"/></g></g>
+      <g id="faceR" clip-path="url(#clipRight)"><g filter="url(#bevel)"><use href="#wdImg"/></g></g>
+    </g>
+
+    <!-- moving specular sweep bands, clipped to the glyph silhouette -->
+    <g clip-path="url(#fullClip)">
+      <g clip-path="url(#fullClip)">
+        <mask id="glyphAlphaMask"><use href="#wdImg"/></mask>
+        <g mask="url(#glyphAlphaMask)">
+          <g id="band1" class="screen" opacity="0" style="filter:blur(50px)">
+            <rect id="band1r" x="-2000" y="600" width="500" height="1200" fill="url(#bandGrad)" transform="skewX(-14)"/>
+          </g>
+          <g id="band2" class="screen" opacity="0" style="filter:blur(38px)">
+            <rect id="band2r" x="-2000" y="600" width="340" height="1200" fill="url(#bandGrad2)" transform="skewX(-14)"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- reflection -->
+  <g id="reflection" opacity="0" mask="url(#reflMask)">
+    <g transform="translate(540,1131) scale(1,-1) translate(-540,-880)">
+      <g transform="translate(540,880) scale(0.939) translate(-827.5,-1007)">
+        <use href="#wdImg"/>
+      </g>
+    </g>
+  </g>
+
+  <!-- vignette -->
+  <rect width="1080" height="1920" fill="url(#vignette)"/>
+
+<script>
+const $ = id => document.getElementById(id);
+const clamp01 = v => Math.max(0, Math.min(1, v));
+const lerp = (a,b,p) => a + (b-a)*p;
+const seg = (t,t0,t1,ease) => ease(clamp01((t-t0)/(t1-t0)));
+const easeOutQuint = p => 1 - Math.pow(1-p,5);
+const easeInOutSine = p => -(Math.cos(Math.PI*p)-1)/2;
+const smooth = p => p*p*(3-2*p);
+
+// page-x -> design-x inside logoPlace: design = (page-540)/0.939 + 827.5
+const toDesign = x => (x-540)/0.939 + 827.5;
+
+function seek(t){
+  // ghost fade-in
+  $('ghost').setAttribute('opacity', (0.045 + 0.035*seg(t,0,1.0,smooth)).toFixed(4));
+
+  // reveal sweep
+  const pR = seg(t, 1.1, 4.3, easeInOutSine);
+  const front = toDesign(lerp(-60, 1240, pR));
+  const g = $('revealGrad');
+  g.setAttribute('x1', (front-340).toFixed(1));
+  g.setAttribute('x2', (front+34).toFixed(1));
+
+  const bandOp = pR<=0?0 : pR>=1?0 : Math.min(1,(pR/0.12),((1-pR)/0.15))*0.5;
+  $('band1').setAttribute('opacity', Math.max(0,bandOp).toFixed(4));
+  $('band1r').setAttribute('x', (front-220 + 0.25*1440).toFixed(1));
+
+  // assembly: left half settles from lower-left, right half from upper-right
+  const aL = seg(t, 1.1, 3.3, easeOutQuint);
+  const aR = seg(t, 1.7, 3.9, easeOutQuint);
+  const set = (ids, tx, ty) => ids.forEach(id => $(id).setAttribute('transform', `translate(${tx.toFixed(2)},${ty.toFixed(2)})`));
+  set(['extL','faceL'], lerp(-52,0,aL), lerp(30,0,aL));
+  set(['extR','faceR'], lerp(52,0,aR),  lerp(-30,0,aR));
+
+  // settle: shadows + reflection
+  $('bigShadow').setAttribute('opacity', (0.46*seg(t,4.3,5.7,smooth)).toFixed(4));
+  $('contactShadow').setAttribute('opacity', (0.4*seg(t,4.3,5.7,smooth) + 0.10*seg(t,7.0,8.3,smooth)).toFixed(4));
+  $('reflection').setAttribute('opacity', (0.10*seg(t,4.5,6.0,smooth)).toFixed(4));
+
+  // final polish sweep
+  const p2 = seg(t, 5.8, 7.1, easeInOutSine);
+  const front2 = toDesign(lerp(-80, 1260, p2));
+  const band2Op = p2<=0?0 : p2>=1?0 : Math.min(1,(p2/0.15),((1-p2)/0.15))*0.65;
+  $('band2').setAttribute('opacity', Math.max(0,band2Op).toFixed(4));
+  $('band2r').setAttribute('x', (front2-150 + 0.25*1440).toFixed(1));
+
+  // soft glow
+  $('backGlow').setAttribute('opacity', (0.32*seg(t,6.9,8.3,smooth)).toFixed(4));
+}
+window.seek = seek;
+seek(0);
+</script>
+</svg>
+</body></html>
